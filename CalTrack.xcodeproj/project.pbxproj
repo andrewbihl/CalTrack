@@ -126,7 +126,7 @@
 				TargetAttributes = {
 					2F737A161EDA3302006628BF = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 7X792YNE2M;
+						DevelopmentTeam = 4EU7KH7ZUS;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -341,10 +341,10 @@
 			baseConfigurationReference = D8EDB87EA409300049CCA0E1 /* Pods-CalTrack.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7X792YNE2M;
+				DEVELOPMENT_TEAM = 4EU7KH7ZUS;
 				INFOPLIST_FILE = CalTrack/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.andrewbihl.CalTrack;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pauca.CalTrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -355,10 +355,10 @@
 			baseConfigurationReference = 326761B2A9492146E1CCE6F2 /* Pods-CalTrack.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7X792YNE2M;
+				DEVELOPMENT_TEAM = 4EU7KH7ZUS;
 				INFOPLIST_FILE = CalTrack/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.andrewbihl.CalTrack;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pauca.CalTrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -383,6 +383,7 @@
 				2F737A2D1EDA3302006628BF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
