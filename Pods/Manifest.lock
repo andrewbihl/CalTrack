@@ -1,0 +1,77 @@
+PODS:
+  - Alamofire (4.4.0)
+  - GoogleMaps (2.2.0):
+    - GoogleMaps/Maps (= 2.2.0)
+  - GoogleMaps/Base (2.2.0)
+  - GoogleMaps/Maps (2.2.0):
+    - GoogleMaps/Base
+  - GooglePlaces (2.2.0):
+    - GoogleMaps/Base (= 2.2.0)
+  - Instructions (0.5.0):
+    - Instructions/Core (= 0.5.0)
+  - Instructions/Core (0.5.0)
+  - KeychainAccess (3.0.2)
+  - NVActivityIndicatorView (3.6.1)
+  - Realm (2.7.0):
+    - Realm/Headers (= 2.7.0)
+  - Realm/Headers (2.7.0)
+  - RealmSwift (2.7.0):
+    - Realm (= 2.7.0)
+  - SwiftyJSON (3.1.4)
+  - Whisper (5.0.0)
+
+DEPENDENCIES:
+  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`)
+  - GoogleMaps
+  - GooglePlaces
+  - Instructions (from `https://github.com/ephread/Instructions.git`)
+  - KeychainAccess (from `https://github.com/kishikawakatsumi/KeychainAccess.git`)
+  - NVActivityIndicatorView
+  - RealmSwift
+  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
+  - Whisper (from `https://github.com/hyperoslo/Whisper.git`)
+
+EXTERNAL SOURCES:
+  Alamofire:
+    :git: https://github.com/Alamofire/Alamofire.git
+  Instructions:
+    :git: https://github.com/ephread/Instructions.git
+  KeychainAccess:
+    :git: https://github.com/kishikawakatsumi/KeychainAccess.git
+  SwiftyJSON:
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+  Whisper:
+    :git: https://github.com/hyperoslo/Whisper.git
+
+CHECKOUT OPTIONS:
+  Alamofire:
+    :commit: c8700ac7ea6b7efa7200e2920bf528e88b4dbee6
+    :git: https://github.com/Alamofire/Alamofire.git
+  Instructions:
+    :commit: e8b448d108908d9bb47f5d1b00f57fcc0d77e6f3
+    :git: https://github.com/ephread/Instructions.git
+  KeychainAccess:
+    :commit: 6e3d9679fd49c7ae8869454e76edf1306983c62c
+    :git: https://github.com/kishikawakatsumi/KeychainAccess.git
+  SwiftyJSON:
+    :commit: 4a62eb3a37e1e694a7f83d50093e803f966055ba
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+  Whisper:
+    :commit: 42bf8480ad317b4ca2979a3bfc5f75281fda72b7
+    :git: https://github.com/hyperoslo/Whisper.git
+
+SPEC CHECKSUMS:
+  Alamofire: 4c2bf7fa03c4a626163606de0a417568c270575e
+  GoogleMaps: 104c418d61ab8a05dff06ed0784c25ea9d37da45
+  GooglePlaces: bca867d5e9da15384c794b945e4226848bc6e9d9
+  Instructions: 6976f674ce788aefec475be6f18500572f1645d4
+  KeychainAccess: 53275d79a7449d8adb71302c2e5a7cf6ecead088
+  NVActivityIndicatorView: 9f52a7f84bf5c6a798722c450fe3c198e01c56ed
+  Realm: 07e5d3a9e0e41d65fd5f9f05150ed6295d0f093b
+  RealmSwift: 6d06425d3900c86473c4f323bf6949b43fca22bc
+  SwiftyJSON: 05cf0e98a950e2ba343735264f5a96b81e755d00
+  Whisper: 39b833d0f279912a7f38a19c4ba603435514a550
+
+PODFILE CHECKSUM: d19174eab82bd25596381832c6ac98571946a53c
+
+COCOAPODS: 1.2.0.beta.3
