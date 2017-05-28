@@ -87,12 +87,13 @@ public enum StopName: Int {
     
     static var count: Int { return StopName.tamien.hashValue + 1}
     
-    static func getStopLocations(headingNorth: Bool) -> [StopName] {
+    static func getStops(headingNorth: Bool) -> [StopName] {
         let stops = StopName.allValues.filter { (stopName) -> Bool in
             return (stopName.rawValue % 2 == 0) ? headingNorth : !headingNorth
         }
         return stops
     }
+    
 }
 
 
@@ -133,6 +134,37 @@ public extension StopName {
     
 }
 
+/*
+extension Sequence where Iterator.Element: StopName {
+    
+    static var getStopLocations: [CLLocationCoordinate2D] {
+        
+        let stops = self.map { (stopName) -> CLLocationCoordinate2D in
+            return stopName.stopCoordinates
+        }
+        return stops
+        }
+
+ } */
+
+
 extension CLLocationCoordinate2D {
     public static let defaultCoordinates = CLLocationCoordinate2DMake(defaultLatitude, defaultLongitude)
+    
+    /*
+    func getClosestStop(with location: CLLocationCoordinate2D) -> StopName {
+        let stopLocations = StopName.allValues.getStopLocations
+    } */
+    
+}
+
+extension Calendar {
+    
+    static var dateInMinutes: Int {
+        let date = Date()
+        let hour = self.current.component(.hour, from: date)
+        let minute = self.current.component(.minute, from: date)
+        
+        return 60 * hour + minute
+    }
 }
