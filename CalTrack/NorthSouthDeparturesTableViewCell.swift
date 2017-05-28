@@ -42,8 +42,6 @@ class NorthSouthDeparturesTableViewCell: UITableViewCell {
         let minuteDifference = minute - Calendar.current.component(.minute, from: Date())
         timeLabel.text = "\(hour):\(minute)"
         timeRemainingLabel.text = "Leaves in \(String(minuteDifference)) minutes"
-//        timeLabel.text = String(timeInMinutes)
-//        timeRemainingLabel.text = "Leaves in " + String(timeInMinutes - Calendar.dateInMinutes) + " minutes"
         }
 
 }

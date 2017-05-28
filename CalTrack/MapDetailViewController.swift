@@ -18,6 +18,12 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     private var northStop : Stop?
     private var southStop : Stop?
     
+    public var isExpanded = false {
+        didSet {
+            self.tableView.isScrollEnabled = isExpanded
+        }
+    }
+    
     private var updateTimer : Timer?
     
     override func viewDidLoad() {
@@ -59,7 +65,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
+        return tableView.frame.height
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
