@@ -33,7 +33,13 @@ class DataServer {
     ///
     /// - Parameter headingNorth: If true, get stops with trains heading north toward San Francisco. Otherwise, get stops heading south to San Jose.
     public func getStopLocations(headingNorth: Bool) -> [CLLocationCoordinate2D] {
-        return [CLLocationCoordinate2DMake(0, 0)]
+        var stops = [CLLocationCoordinate2D]()
+        for i in 0..<stopIDs.count {
+            if (i % 2 == 0) == headingNorth {
+                stops.append(CLLocationCoordinate2DMake(stopLatitudes[i], stopLongitudes[i]))
+            }
+        }
+        return stops
     }
     
     public func getStops()->[Int:CLLocationCoordinate2D] {
