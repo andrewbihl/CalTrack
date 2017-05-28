@@ -42,7 +42,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.view.backgroundColor = UIColor.gray
+        self.view.backgroundColor = appColor2
         self.view.layer.borderWidth = 3
         self.view.layer.borderColor = BORDER_COLOR
         self.northboundLabel.layer.borderWidth = BORDER_WIDTH
