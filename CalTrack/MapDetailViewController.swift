@@ -12,6 +12,19 @@ protocol InformingDelegate {
     func valueChanged() -> Stop
 }
 
+protocol MapDetailAnimationManager {
+    
+    /// Respond to the user swiping on the view
+    ///
+    /// - Returns: Return true if the view was moved/animated as a result of the swipe.
+    func userSwipedUp(vc: MapDetailViewController)->Bool;
+    
+    /// Respond to the user swiping on the view
+    ///
+    /// - Returns: Return true if the view was moved/animated as a result of the swipe.
+    func userSwipedDown(vc: MapDetailViewController)->Bool;
+}
+
 class MapDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var delegate: InformingDelegate?
     
@@ -40,11 +53,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     private let BORDER_WIDTH : CGFloat = 1.5
     private let BORDER_COLOR : CGColor = appColor1.cgColor
     
-    public var isExpanded = false {
-        didSet {
-            self.tableView.isScrollEnabled = isExpanded
-        }
-    }
+    public var isExpanded = false
     
     required init?(coder aDecoder: NSCoder) {
         northStop = defaultNorthStop
@@ -102,6 +111,26 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
 
+    
+    @IBAction func userSwipedUp(_ sender: UISwipeGestureRecognizer) {
+        if let parentVC = self.parent as? MapDetailAnimationManager {
+            let changedFrame = parentVC.userSwipedUp(vc: self)
+            if changedFrame {
+                isExpanded = !isExpanded
+            }
+        }
+    }
+
+    @IBAction func userSwipedDown(_ sender: UISwipeGestureRecognizer) {
+        if let parentVC = self.parent as? MapDetailAnimationManager {
+            let changedFrame = parentVC.userSwipedDown(vc: self)
+            if changedFrame {
+                isExpanded = !isExpanded
+            }
+        }
+    }
+    
+    
     // MARK: - Table View Functions
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -121,7 +150,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         if (!isExpanded) {
             return tableView.frame.height
         }
-        return 44
+        return tableView.frame.height / CGFloat(self.tableView(tableView, numberOfRowsInSection: indexPath.section))
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -138,8 +167,11 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func beginUpdateTimer(intervalInSeconds: Int){
         updateTimer = Timer(timeInterval: TimeInterval(intervalInSeconds), repeats: true, block: { (timer) in
+            print("Updating table.")
             self.tableView.reloadData()
+            self.beginUpdateTimer(intervalInSeconds: intervalInSeconds)
         });
+        updateTimer?.fire()
     }
     
     
