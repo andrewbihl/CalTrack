@@ -48,6 +48,8 @@ class MapViewController: UIViewController {
         // Add the map to the view, hide it until we've got a location update.
         view = mapView
        // mapView.isHidden = true
+        
+        self.addTrainStops()
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,25 +57,14 @@ class MapViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func loadView() {
-        // Create a GMSCameraPosition that tells the map to display the
-        // coordinate -33.86,151.20 at zoom level 6.
-        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
-        mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-        view = mapView
-        
-        // Creates a marker in the center of the map.
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
-        marker.title = "Sydney"
-        marker.snippet = "Australia"
-        marker.map = mapView
-        
-        
-    }
     
-    func updateMapView() {
-        
+    func addTrainStops() {
+        let stops = DataServer.sharedInstance.getAllStops()
+        for stop in stops {
+            let marker = GMSMarker(position: stop.value)
+            
+            marker.map = mapView
+        }
     }
 
     /*
@@ -103,15 +94,10 @@ extension MapViewController: CLLocationManagerDelegate {
         if mapView.isHidden {
             mapView.isHidden = false
             mapView.camera = camera
-        } else {
+        }  else {
             mapView.animate(to: camera)
         }
-            /*
-            let queue = DispatchQueue.global(qos: .background)
-            
-            queue.async {
-                
-            } */
+
     }
     
     // Handle authorization for the location manager.
