@@ -22,19 +22,19 @@
                             <rect key="frame" x="0.0" y="0.0" width="432" height="29"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Origin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y0k-S3-JXI">
-                                    <rect key="frame" x="0.0" y="0.0" width="195.5" height="29"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="196" height="29"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="to" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zrR-s4-kcM">
-                                    <rect key="frame" x="205.5" y="0.0" width="21" height="29"/>
+                                    <rect key="frame" x="206" y="0.0" width="21" height="29"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Destination" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aou-La-uo0">
-                                    <rect key="frame" x="236.5" y="0.0" width="195.5" height="29"/>
+                                    <rect key="frame" x="237" y="0.0" width="195" height="29"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -64,7 +64,10 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="view" destination="-1" id="ga4-f7-sQs"/>
+                <outlet property="contentView" destination="-1" id="S4H-rQ-iAc"/>
+                <outlet property="destinationLabel" destination="Aou-La-uo0" id="yIe-eR-aQR"/>
+                <outlet property="estimatedTravelTimeLabel" destination="aj3-Ra-TuG" id="tbu-oQ-yw4"/>
+                <outlet property="originLabel" destination="y0k-S3-JXI" id="Mdf-y3-RBX"/>
             </connections>
             <point key="canvasLocation" x="31" y="57"/>
         </view>
