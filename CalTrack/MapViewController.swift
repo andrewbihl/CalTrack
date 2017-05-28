@@ -136,6 +136,26 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         return true
     }
     
+    func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
+        if let coord = mapView.myLocation?.coordinate {
+        let camera = GMSCameraPosition.camera(withLatitude: coord.latitude,
+                                              longitude: coord.longitude,
+                                              zoom: zoomLevel)
+        
+        if mapView.isHidden {
+            mapView.isHidden = false
+            mapView.camera = camera
+        }  else {
+            
+            mapView.animate(to: camera)
+        }
+        }
+        
+        detailVC?.closestStopChanged()
+        
+        return true
+    }
+    
     }
 
 extension MapViewController: CLLocationManagerDelegate {
@@ -154,9 +174,11 @@ extension MapViewController: CLLocationManagerDelegate {
         if mapView.isHidden {
             mapView.isHidden = false
             mapView.camera = camera
+             detailVC?.closestStopChanged()
         }  else {
             if !tapActive {
             mapView.animate(to: camera)
+                 detailVC?.closestStopChanged()
             }
         }
         
