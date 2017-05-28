@@ -27,7 +27,7 @@ class NorthSouthDeparturesTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    public func setDepartureTime(time:Date, north:Bool) {
+    public func setDepartureTime(time: Date, north:Bool) {
         var timeLabel : UILabel
         var timeRemainingLabel : UILabel
         if north {
@@ -37,22 +37,39 @@ class NorthSouthDeparturesTableViewCell: UITableViewCell {
             timeLabel = self.southDepartureTimeLabel
             timeRemainingLabel = self.southTimeToDepartureLabel
         }
+        
+        timeLabel.text = time.timeOfDepartureText
+        timeRemainingLabel.text = time.timeRemainingText
 
-        let hour = Calendar.current.component(.hour, from: time)
-        let minute = Calendar.current.component(.minute, from: time)
-        let minuteDifference = minute - Calendar.current.component(.minute, from: Date())
-        let hourDifference = hour - Calendar.current.component(.hour, from: Date())
+}
+
+}
+
+extension Date {
+    var timeRemainingText: String {
+        
+        var minuteDifference = Calendar.current.component(.minute, from: self) - Calendar.current.component(.minute, from: Date())
+        var hourDifference = Calendar.current.component(.hour, from: self) - Calendar.current.component(.hour, from: Date())
+        
+        if minuteDifference < 0 {
+            minuteDifference += 60
+            hourDifference -= 1
+        }
+        if hourDifference == 0 {
+            return "Leaves in \(String(minuteDifference)) minutes"
+        }
+        else {
+            return "Leaves in \(String(hourDifference)) h \(String(minuteDifference)) m"
+        }
+    }
+    
+    var timeOfDepartureText: String {
+        let hour = Calendar.current.component(.hour, from: self)
+        let minute = Calendar.current.component(.minute, from: self)
         var minuteString = String(minute)
         if minuteString.characters.count == 1 {
             minuteString = "0"+minuteString
         }
-        timeLabel.text = "\(hour):\(minuteString)"
-        if hourDifference == 0 {
-        timeRemainingLabel.text = "Leaves in \(String(minuteDifference)) minutes"
-        }
-        else {
-            timeRemainingLabel.text = "Leaves in \(String(hourDifference)) h \(String(minuteDifference)) m"
-        }
-        }
-
-}
+        return "\(hour):\(minuteString)"
+    }
+    }
