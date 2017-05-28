@@ -17,6 +17,10 @@ public extension CLLocationCoordinate2D {
     public static func stopCoordinates(stop: StopName) -> CLLocationCoordinate2D{
         return CLLocationCoordinate2DMake(stopLatitudes[stop.rawValue], stopLatitudes[stop.rawValue])
     }
+    
+    static func distanceToStop(stop: StopName, fromLocation location: CLLocationCoordinate2D) {
+        return 
+    }
 }
 
 public enum StopName: Int {
