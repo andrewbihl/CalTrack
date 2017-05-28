@@ -156,13 +156,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Northbound" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlK-N1-6xw">
-                                                <rect key="frame" x="0.0" y="0.0" width="188" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="0.0"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Southbound" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uji-af-I2Y">
-                                                <rect key="frame" x="188" y="0.0" width="187" height="0.0"/>
+                                                <rect key="frame" x="187.5" y="0.0" width="187.5" height="0.0"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -187,13 +187,13 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="186" height="58"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leaves in _ Minutes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBz-ZU-LZ9">
-                                                                            <rect key="frame" x="46" y="34" width="94" height="12"/>
+                                                                            <rect key="frame" x="46.5" y="34" width="93.5" height="12"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="djM-Xd-oGR">
-                                                                            <rect key="frame" x="46" y="0.0" width="72" height="34"/>
+                                                                            <rect key="frame" x="46.5" y="0.5" width="71.5" height="33.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -211,13 +211,13 @@
                                                                     <rect key="frame" x="189" y="0.0" width="186" height="58"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leaves in _ Minutes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJH-dt-BCl">
-                                                                            <rect key="frame" x="46" y="34" width="94" height="12"/>
+                                                                            <rect key="frame" x="46.5" y="34" width="93.5" height="12"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afA-gi-B9H">
-                                                                            <rect key="frame" x="46" y="0.0" width="72" height="34"/>
+                                                                            <rect key="frame" x="46.5" y="0.5" width="71.5" height="33.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -256,10 +256,6 @@
                                     </tableView>
                                 </subviews>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="oXq-Ny-2U0" appends="YES" id="8T9-AK-xJM"/>
-                                    <outletCollection property="gestureRecognizers" destination="069-Fb-jLe" appends="YES" id="MUc-Dh-RvN"/>
-                                </connections>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -278,16 +274,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="86z-nX-9ze" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="up" id="oXq-Ny-2U0">
-                    <connections>
-                        <action selector="userSwipedUp:" destination="2gK-ey-41J" id="isg-C3-0pB"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="down" id="069-Fb-jLe">
-                    <connections>
-                        <action selector="userSwipedDown:" destination="2gK-ey-41J" id="39S-4Y-0yB"/>
-                    </connections>
-                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1469.5999999999999" y="-45.877061469265371"/>
         </scene>
