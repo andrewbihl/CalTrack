@@ -217,6 +217,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                 self.updateStops(northStop: north!, southStop: south!)
                 self.tableView.reloadData()
             }
+            
         } else{
             print("new location, same nearest stop")
         }
