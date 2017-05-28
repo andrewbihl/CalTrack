@@ -17,10 +17,29 @@ class DataServer {
     var stopTimes: Results<stop_times>?
     
     init() {
-        
+        let date = Date()
+        let today = Calendar.current.component(.weekday, from: date)
+        print("today", today)
         let realm = try! Realm()
-        self.stopTimes = realm.objects(stop_times.self)//.filter(<#T##predicate: NSPredicate##NSPredicate#>)
+        
+        switch today {
+        case 1:
+            self.stopTimes = realm.objects(stop_times.self).filter("trip_id contains %@", "Sunday")
+        case 2...6:
+            self.stopTimes = realm.objects(stop_times.self).filter("trip_id contains %@", "Weekday")
+        case 7:
+            self.stopTimes = realm.objects(stop_times.self).filter("trip_id contains %@", "Saturday")
+        default:
+            print("ERROR: Unknown day of the week -- potential apocalypse nearing")
+            
+        }
+        
+        
         print(self.stopTimes?.count)
+        
+    }
+    
+    public func getNearestTrainLocation() {
         
     }
     
@@ -29,25 +48,9 @@ class DataServer {
     }
     
     
-    /// Get all the stops with a particular direction.
-    ///
-    /// - Parameter headingNorth: If true, get stops with trains heading north toward San Francisco. Otherwise, get stops heading south to San Jose.
-    public func getStopLocations(headingNorth: Bool) -> [CLLocationCoordinate2D] {
-        var stops = [CLLocationCoordinate2D]()
-        for i in 0..<stopIDs.count {
-            if (i % 2 == 0) == headingNorth {
-                stops.append(CLLocationCoordinate2DMake(stopLatitudes[i], stopLongitudes[i]))
-            }
-        }
-        return stops
-    }
     
-    public func getStops()->[Int:CLLocationCoordinate2D] {
-        var stops = Dictionary<Int, CLLocationCoordinate2D>()
-        for id in stopIDs {
-            stops[id] = CLLocationCoordinate2D.stopCoordinates(id: id)
-        }
-        return stops
-    }
+}
+
+extension Int {
     
 }
