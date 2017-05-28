@@ -63,7 +63,7 @@ class MapViewController: UIViewController {
     
     func addTrainStopsAndPath() {
         let path = GMSMutablePath()
-        let stops = StopName.getStopLocations(headingNorth: true)
+        let stops = StopName.getStops(headingNorth: true)
         
         for stop in stops {
             let marker = GMSMarker(position: stop.stopCoordinates)
