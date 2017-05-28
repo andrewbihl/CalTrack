@@ -46,10 +46,15 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager {
             height = DETAIL_VIEW_HEIGHT
         }
         self.detailViewHeightConstraint.constant = height
-        UIView.animate(withDuration: 0.25, animations: { 
+        UIView.animate(withDuration: 0.25, animations: {
+            self.view.layoutIfNeeded()
             self.detailContainerView.layoutIfNeeded()
-            self.mapContainerView.layoutIfNeeded()
-        })
+        }) { (finished) in
+            
+        }
+//        UIView.animate(withDuration: 0.25, animations: { 
+//            self.view.layoutIfNeeded()
+//        })
     }
     
 
