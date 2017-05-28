@@ -156,13 +156,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Northbound" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlK-N1-6xw">
-                                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="188" height="0.0"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Southbound" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uji-af-I2Y">
-                                                <rect key="frame" x="187.5" y="0.0" width="187.5" height="0.0"/>
+                                                <rect key="frame" x="188" y="0.0" width="187" height="0.0"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -187,13 +187,13 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="186" height="58"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leaves in _ Minutes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBz-ZU-LZ9">
-                                                                            <rect key="frame" x="46.5" y="34" width="93.5" height="12"/>
+                                                                            <rect key="frame" x="46.5" y="38" width="93.5" height="12"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="djM-Xd-oGR">
-                                                                            <rect key="frame" x="46.5" y="0.5" width="71.5" height="33.5"/>
+                                                                            <rect key="frame" x="46.5" y="4.5" width="71.5" height="33.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -204,20 +204,20 @@
                                                                         <constraint firstItem="zBz-ZU-LZ9" firstAttribute="leading" secondItem="djM-Xd-oGR" secondAttribute="leading" id="1vn-lp-fJ0"/>
                                                                         <constraint firstItem="zBz-ZU-LZ9" firstAttribute="top" secondItem="djM-Xd-oGR" secondAttribute="bottom" id="4a7-up-2O8"/>
                                                                         <constraint firstItem="zBz-ZU-LZ9" firstAttribute="centerX" secondItem="2cr-dw-SEU" secondAttribute="centerX" id="Qr6-Io-Igh"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="zBz-ZU-LZ9" secondAttribute="bottom" constant="12" id="ijz-8B-Q4a"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="zBz-ZU-LZ9" secondAttribute="bottom" constant="8" id="ijz-8B-Q4a"/>
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KxK-2O-QHB">
                                                                     <rect key="frame" x="189" y="0.0" width="186" height="58"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leaves in _ Minutes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJH-dt-BCl">
-                                                                            <rect key="frame" x="46.5" y="34" width="93.5" height="12"/>
+                                                                            <rect key="frame" x="46.5" y="38" width="93.5" height="12"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afA-gi-B9H">
-                                                                            <rect key="frame" x="46.5" y="0.5" width="71.5" height="33.5"/>
+                                                                            <rect key="frame" x="46.5" y="4.5" width="71.5" height="33.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -226,9 +226,8 @@
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstItem="GJH-dt-BCl" firstAttribute="centerX" secondItem="KxK-2O-QHB" secondAttribute="centerX" id="0rI-RR-f0F"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="GJH-dt-BCl" secondAttribute="bottom" constant="12" id="A5c-ib-DAg"/>
                                                                         <constraint firstItem="GJH-dt-BCl" firstAttribute="top" secondItem="afA-gi-B9H" secondAttribute="bottom" id="aXE-qG-Him"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="GJH-dt-BCl" secondAttribute="bottom" constant="12" id="lNI-P4-MTm"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="GJH-dt-BCl" secondAttribute="bottom" constant="8" id="lNI-P4-MTm"/>
                                                                         <constraint firstItem="GJH-dt-BCl" firstAttribute="centerX" secondItem="KxK-2O-QHB" secondAttribute="centerX" id="ldQ-LW-vpo"/>
                                                                         <constraint firstItem="GJH-dt-BCl" firstAttribute="leading" secondItem="afA-gi-B9H" secondAttribute="leading" id="yF1-90-Gli"/>
                                                                     </constraints>
