@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		06068C4D1EDA8D3200978EA0 /* caltrainTimes.realm in Resources */ = {isa = PBXBuildFile; fileRef = 06068C4C1EDA8C2000978EA0 /* caltrainTimes.realm */; };
 		06B40CD31EDA50A500BA4A0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F737A1A1EDA3302006628BF /* AppDelegate.swift */; };
-		06B40CD41EDA50A800BA4A0F /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F737A1C1EDA3302006628BF /* FirstViewController.swift */; };
 		06B40CD61EDA50B400BA4A0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F737A201EDA3302006628BF /* Main.storyboard */; };
 		06B40CD71EDA50B900BA4A0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F737A231EDA3302006628BF /* Assets.xcassets */; };
 		06B40CD81EDA50BC00BA4A0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F737A251EDA3302006628BF /* LaunchScreen.storyboard */; };
@@ -24,6 +23,7 @@
 		2F11D1911EDA82BE003BB09B /* ScheduleFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F11D1901EDA82BE003BB09B /* ScheduleFooterView.xib */; };
 		2F11D1931EDA83B7003BB09B /* ScheduleFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11D1921EDA83B7003BB09B /* ScheduleFooterView.swift */; };
 		2F11D1951EDAA5EE003BB09B /* NorthSouthDeparturesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11D1941EDAA5EE003BB09B /* NorthSouthDeparturesTableViewCell.swift */; };
+		2F11D1991EDAD48C003BB09B /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11D1981EDAD48C003BB09B /* MainScreenViewController.swift */; };
 		F79832341109B29D64A0C3AB /* Pods_CalTrack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0A5EEC30AD58DFAC4FEE13 /* Pods_CalTrack.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,9 +39,9 @@
 		2F11D1901EDA82BE003BB09B /* ScheduleFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScheduleFooterView.xib; sourceTree = "<group>"; };
 		2F11D1921EDA83B7003BB09B /* ScheduleFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleFooterView.swift; sourceTree = "<group>"; };
 		2F11D1941EDAA5EE003BB09B /* NorthSouthDeparturesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NorthSouthDeparturesTableViewCell.swift; sourceTree = "<group>"; };
+		2F11D1981EDAD48C003BB09B /* MainScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		2F737A171EDA3302006628BF /* CalTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F737A1A1EDA3302006628BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2F737A1C1EDA3302006628BF /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		2F737A211EDA3302006628BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2F737A231EDA3302006628BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F737A261EDA3302006628BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 			children = (
 				2F737A1A1EDA3302006628BF /* AppDelegate.swift */,
 				06CB05FF1EDA631D00354E4E /* RealmModels.swift */,
-				2F737A1C1EDA3302006628BF /* FirstViewController.swift */,
+				2F11D1981EDAD48C003BB09B /* MainScreenViewController.swift */,
 				2F737A201EDA3302006628BF /* Main.storyboard */,
 				2F11D18E1EDA80E0003BB09B /* ScheduleViewController.swift */,
 				2F11D1901EDA82BE003BB09B /* ScheduleFooterView.xib */,
@@ -253,7 +253,7 @@
 				06CB05DF1EDA52A100354E4E /* MapDetailViewController.swift in Sources */,
 				2F11D1951EDAA5EE003BB09B /* NorthSouthDeparturesTableViewCell.swift in Sources */,
 				2F11D18D1EDA722F003BB09B /* DataServer.swift in Sources */,
-				06B40CD41EDA50A800BA4A0F /* FirstViewController.swift in Sources */,
+				2F11D1991EDAD48C003BB09B /* MainScreenViewController.swift in Sources */,
 				2F11D18F1EDA80E0003BB09B /* ScheduleViewController.swift in Sources */,
 				06CB06021EDA666300354E4E /* TabBarViewController.swift in Sources */,
 				2F11D1931EDA83B7003BB09B /* ScheduleFooterView.swift in Sources */,
