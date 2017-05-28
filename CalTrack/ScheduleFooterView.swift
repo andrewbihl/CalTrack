@@ -9,14 +9,34 @@
 import UIKit
 
 class ScheduleFooterView: UIView {
-    @IBOutlet weak var view: NSObject!
+    @IBOutlet var contentView: UIView!
+
+    @IBOutlet var estimatedTravelTimeLabel: UILabel!
     
-    required init?(coder aDecoder: NSCoder) {
+    @IBOutlet var originLabel: UILabel!
+    
+    @IBOutlet var destinationLabel: UILabel!
+    
+    
+    
+    // Initializers borrowed from https://gist.github.com/bwhiteley/049e4bede49e71a6d2e2 
+    
+    override init(frame: CGRect) { // for using CustomView in code
+        super.init(frame: frame)
+        self.commonInit()
+    }
+    
+    required init?(coder aDecoder: NSCoder) { // for using CustomView in IB
         super.init(coder: aDecoder)
-        self.backgroundColor = appColor1
-//        if let customView : UIView = UINib(nibName: "ScheduleFooterView", bundle: nil).instantiate(withOwner: self, options: nil)[0] as? UIView {
-//            self.addSubview(customView)
-//        }
+        self.commonInit()
+    }
+    
+    private func commonInit() {
+        Bundle.main.loadNibNamed("ScheduleFooterView", owner: self, options: nil)
+        guard let content = contentView else { return }
+        content.frame = self.bounds
+        content.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        self.addSubview(content)
     }
     
     
