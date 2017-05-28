@@ -32,4 +32,11 @@ class DataServer {
         return [CLLocationCoordinate2DMake(0, 0)]
     }
     
+    public func getStops()->[Int:CLLocationCoordinate2D]{
+        var stops = Dictionary<Int, CLLocationCoordinate2D>()
+        for id in stopIDs {
+            stops[id] = CLLocationCoordinate2D.stopCoordinates(stop: <#T##StopName#>)
+        }
+    }
+    
 }
