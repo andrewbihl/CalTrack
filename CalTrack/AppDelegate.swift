@@ -54,9 +54,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let allObj = realm.objects(stop_times.self)
         for obj in allObj {
             if obj.realTime == nil {
-                print("obj without written relationship", obj)
+                //print("obj without written relationship", obj)
                 if let real = realm.object(ofType: realtime_trips.self, forPrimaryKey: obj.trip_id) {
-                print("related real", real)
+                //print("related real", real)
                 try! realm.write {
                     obj.realTime = real
                 }
