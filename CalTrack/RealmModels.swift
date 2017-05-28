@@ -17,4 +17,7 @@ class stop_times: Object {
     dynamic var stop_sequence = 0
     dynamic var pickup_type = 0
     dynamic var drop_off_type = 0
+    
+    dynamic var arrivalTime = 0
+    dynamic var departureTime = 0
 }

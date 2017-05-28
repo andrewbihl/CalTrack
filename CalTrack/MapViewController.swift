@@ -41,12 +41,13 @@ class MapViewController: UIViewController {
                                               zoom: zoomLevel)
         mapView = GMSMapView.map(withFrame: view.bounds, camera: camera)
         mapView.settings.myLocationButton = true
+        mapView.isMyLocationEnabled = true
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         //mapView.isMyLocationEnabled = true
         
         // Add the map to the view, hide it until we've got a location update.
         view = mapView
-        mapView.isHidden = true
+       // mapView.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -105,12 +106,12 @@ extension MapViewController: CLLocationManagerDelegate {
         } else {
             mapView.animate(to: camera)
         }
-        
+            /*
             let queue = DispatchQueue.global(qos: .background)
             
             queue.async {
-                //
-            }
+                
+            } */
     }
     
     // Handle authorization for the location manager.
