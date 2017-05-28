@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     override init() {
         super.init()
         GMSServices.provideAPIKey("AIzaSyBOYBoKP3VQvrD5ddO2q7gZXpwIgD1Bdik")
+        
+        if let bUrl = bundleURL("caltrainTimes") {
+            let config = Realm.Configuration(
+                // retrieved file url in bundle
+                fileURL: bUrl,
+                // bundle files are not writeable
+                readOnly: true)
+            
+            // open realm with config
+            let realm = try! Realm(configuration: config)
+            print("successfully imported to database")
+        }
+        
+    }
+    
+    func bundleURL(_ name: String) -> URL? {
+        return Bundle.main.url(forResource: name, withExtension: "realm")
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

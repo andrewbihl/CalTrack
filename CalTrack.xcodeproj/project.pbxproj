@@ -16,12 +16,14 @@
 		06B40CD91EDA50BF00BA4A0F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F737A281EDA3302006628BF /* Info.plist */; };
 		06CB05DD1EDA528A00354E4E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CB05DC1EDA528A00354E4E /* MapViewController.swift */; };
 		06CB05DF1EDA52A100354E4E /* MapDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CB05DE1EDA52A100354E4E /* MapDetailViewController.swift */; };
+		06CB05FE1EDA5F8900354E4E /* caltrainTimes.realm in Resources */ = {isa = PBXBuildFile; fileRef = 06CB05FD1EDA5F8900354E4E /* caltrainTimes.realm */; };
 		F79832341109B29D64A0C3AB /* Pods_CalTrack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0A5EEC30AD58DFAC4FEE13 /* Pods_CalTrack.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		06CB05DC1EDA528A00354E4E /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		06CB05DE1EDA52A100354E4E /* MapDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailViewController.swift; sourceTree = "<group>"; };
+		06CB05FD1EDA5F8900354E4E /* caltrainTimes.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = caltrainTimes.realm; sourceTree = "<group>"; };
 		2F737A171EDA3302006628BF /* CalTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F737A1A1EDA3302006628BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F737A1C1EDA3302006628BF /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				2F737A231EDA3302006628BF /* Assets.xcassets */,
 				2F737A251EDA3302006628BF /* LaunchScreen.storyboard */,
 				2F737A281EDA3302006628BF /* Info.plist */,
+				06CB05FD1EDA5F8900354E4E /* caltrainTimes.realm */,
 			);
 			path = CalTrack;
 			sourceTree = "<group>";
@@ -165,6 +168,7 @@
 				06B40CD81EDA50BC00BA4A0F /* LaunchScreen.storyboard in Resources */,
 				06B40CD61EDA50B400BA4A0F /* Main.storyboard in Resources */,
 				06B40CD71EDA50B900BA4A0F /* Assets.xcassets in Resources */,
+				06CB05FE1EDA5F8900354E4E /* caltrainTimes.realm in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
