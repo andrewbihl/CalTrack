@@ -14,7 +14,9 @@ class ScheduleFooterView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.backgroundColor = appColor1
-        if let customView = UINib(nibName: "ScheduleFooterView.xib", bundle: nil).instantiate(withOwner: self, options: nil)[0]
+//        if let customView : UIView = UINib(nibName: "ScheduleFooterView", bundle: nil).instantiate(withOwner: self, options: nil)[0] as? UIView {
+//            self.addSubview(customView)
+//        }
     }
     
     
