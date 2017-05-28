@@ -18,8 +18,12 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     public var northDepartures = [Date]()
     public var southDepartures = [Date]()
     
-    private var northStop : Stop?
-    private var southStop : Stop?
+    private var northStop : Stop {
+        didSet {
+            self.stopLabel.text = northStop.stopName.replacingOccurrences(of: "Northbound", with: "")
+        }
+    }
+    private var southStop : Stop
     
     private let BORDER_WIDTH : CGFloat = 1.5
     private let BORDER_COLOR : CGColor = appColor1.cgColor
@@ -31,6 +35,12 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     private var updateTimer : Timer?
+    
+    required init?(coder aDecoder: NSCoder) {
+        northStop = defaultNorthStop
+        southStop = defaultSouthStop
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
