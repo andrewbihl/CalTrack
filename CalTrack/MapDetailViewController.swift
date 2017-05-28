@@ -43,7 +43,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         self.southStop = southStop
         self.northDepartures = DataServer.sharedInstance.getDepartureTimesForStop(id: northStop.rawValue)
         self.southDepartures = DataServer.sharedInstance.getDepartureTimesForStop(id: southStop.rawValue)
-        self.stopLabel.text = self.northStop.stopName.replacingOccurrences(of: "Northbound", with: "")
+        self.stopLabel.text = self.northStop?.stopName.replacingOccurrences(of: "Northbound", with: "")
     }
 
     // MARK: - Table View Functions

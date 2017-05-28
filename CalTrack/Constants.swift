@@ -134,19 +134,17 @@ public extension StopName {
     
 }
 
-/*
-extension Sequence where Iterator.Element: StopName {
+
+extension Sequence where Iterator.Element == StopName {
     
-    static var getStopLocations: [CLLocationCoordinate2D] {
+        func getStopLocations() -> [CLLocationCoordinate2D] {
         
-        let stops = self.map { (stopName) -> CLLocationCoordinate2D in
-            return stopName.stopCoordinates
-        }
-        return stops
+        return self.map ({
+            $0.stopCoordinates
+        })
         }
 
- } */
-
+ }
 
 extension CLLocationCoordinate2D {
     public static let defaultCoordinates = CLLocationCoordinate2DMake(defaultLatitude, defaultLongitude)
