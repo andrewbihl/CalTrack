@@ -58,6 +58,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     public var isExpanded = false {
         didSet {
+            self.tableView.reloadData()
             self.tableView.isScrollEnabled = isExpanded
             self.swipeDown?.isEnabled = isExpanded
             self.swipeUp?.isEnabled = !isExpanded
@@ -99,6 +100,9 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         self.southboundLabel.layer.borderWidth = BORDER_WIDTH
         self.northboundLabel.layer.borderColor = BORDER_COLOR
         self.southboundLabel.layer.borderColor = BORDER_COLOR
+        for i in 0..<self.northDepartures.count {
+            self.tableView(self.tableView, cellForRowAt: IndexPath(row: i, section: 0))
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -147,6 +151,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             let changedFrame = parentVC.userSwipedDown(vc: self)
             if changedFrame {
                 isExpanded = !isExpanded
+                self.tableView.setContentOffset(CGPoint.zero, animated: false)
             }
         }
     }
@@ -171,7 +176,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         if (!isExpanded) {
             return tableView.frame.height
         }
-        return 44
+        return 64
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
