@@ -13,13 +13,25 @@ let stopLatitudes = [37.77639, 37.776348, 37.757599, 37.757583, 37.709537, 37.70
 
 let stopLongitudes = [-122.394992, -122.394935, -122.39188, -122.392404, -122.401586, -122.40198, -122.40487, -122.405018, -122.411968, -122.412076, -122.386647, -122.386832, -122.36265, -122.362708, -122.3449, -122.345075, -122.323851, -122.324092, -122.309338, -122.309608, -122.297349, -122.297461, -122.275738, -122.275816, -122.26015, -122.260266, -122.231936, -122.232, -122.19779, -122.197869, -122.182297, -122.182405, -122.164614, -122.164697, -122.141927, -122.141978, -122.107069, -122.107125, -122.075956, -122.075994, -122.031372, -122.031423, -121.997114, -121.997135, -121.93608, -121.936135, -121.9146, -121.914677, -121.903011, -121.903173, -121.883721, -121.883999, -121.841955, -121.842037, -121.797643, -121.797683, -121.650244, -121.650304, -121.610049, -121.610936, -121.566088, -121.566225, -121.901985, -121.883403]
 
+let stopIDs = [70011, 70012, 70021, 70022, 70031, 70032, 70041, 70042, 70051, 70052, 70061, 70062, 70071, 70072, 70081, 70082, 70091, 70092, 70101, 70102, 70111, 70112, 70121, 70122, 70131, 70132, 70141, 70142, 70151, 70152, 70161, 70162, 70171, 70172, 70191, 70192, 70201, 70202, 70211, 70212, 70221, 70222, 70231, 70232, 70241, 70242, 70251, 70252, 70261, 70262, 70271, 70272, 70281, 70282, 70291, 70292, 70301, 70302, 70311, 70312, 70321, 70322, 777402, 777403]
+
+let stopNames = ["San Francisco Northbound", "San Francisco Southbound", "22nd St Northbound", "22nd St Southbound", "Bayshore Northbound", "Bayshore Southbound", "South San Francisco Northbound", "South San Francisco Southbound", "San Bruno Northbound", "San Bruno Southbound", "Millbrae Northbound", "Millbrae Southbound", "Broadway Northbound", "Broadway Southbound", "Burlingame Northbound", "Burlingame Southbound", "San Mateo Northbound", "San Mateo Southbound", "Hayward Park Northbound", "Hayward Park Southbound", "Hillsdale Northbound", "Hillsdale Southbound", "Belmont Northbound", "Belmont Southbound", "San Carlos Northbound", "San Carlos Southbound", "Redwood City Northbound", "Redwood City Southbound", "Atherton Northbound", "Atherton Southbound", "Menlo Park Northbound", "Menlo Park Southbound", "Palo Alto Northbound", "Palo Alto Southbound", "California Ave Northbound", "California Ave Southbound", "San Antonio Northbound", "San Antonio Southbound", "Mountain View Northbound", "Mountain View Southbound", "Sunnyvale Northbound", "Sunnyvale Southbound", "Lawrence Northbound", "Lawrence Southbound", "Santa Clara Northbound", "Santa Clara Southbound", "College Park Northbound", "College Park Southbound", "San Jose Diridon Northbound", "San Jose Diridon Southbound", "Tamien Northbound", "Tamien Southbound", "Capitol Northbound", "Capitol Southbound", "Blossom Hill Northbound", "Blossom Hill Southbound", "Morgan Hill Northbound", "Morgan Hill Southbound", "San Martin Northbound", "San Martin Southbound", "Gilroy Northbound", "Gilroy Southbound", "San Jose Northbound", "Tamien Southbound"]
+
 public extension CLLocationCoordinate2D {
     public static func stopCoordinates(stop: StopName) -> CLLocationCoordinate2D{
         return CLLocationCoordinate2DMake(stopLatitudes[stop.rawValue], stopLatitudes[stop.rawValue])
     }
     
+    public static func stopID(stop: StopName) -> Int {
+        return stopIDs[stop.rawValue]
+    }
+    
     static func distanceToStop(stop: StopName, fromLocation location: CLLocationCoordinate2D) {
         return 
+    }
+    
+    static func nameOfStop(stop: StopName) -> String {
+        return stopNames[stop.rawValue]
     }
 }
 
