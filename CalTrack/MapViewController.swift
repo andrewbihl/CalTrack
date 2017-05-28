@@ -8,13 +8,28 @@
 
 import UIKit
 import GoogleMaps
+import CoreLocation
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, CLLocationManagerDelegate {
 
+    // location
+//    var lastUpdatedNearby = 0.0
+    var locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+            locationManager.distanceFilter = 10000 // meters
+            locationManager.startUpdatingLocation()
+            print("start updating location")
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,6 +50,8 @@ class MapViewController: UIViewController {
         marker.title = "Sydney"
         marker.snippet = "Australia"
         marker.map = mapView
+        
+        
     }
 
     /*
@@ -46,5 +63,27 @@ class MapViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: - CLLocationManagerDelegate
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("locations", locations)
+        //let locCoord: CLLocationCoordinate2D = manager.location!.coordinate
+//        if Date().timeIntervalSince1970 - self.lastUpdatedNearby > 60 {
+//            self.lastUpdatedNearby = Date().timeIntervalSince1970
+            print("long lat = \(locations.last!.coordinate.longitude) \(locations.last!.coordinate.latitude)")
+            let longitude = locations.last!.coordinate.longitude
+            let latitude = locations.last!.coordinate.latitude
+            let queue = DispatchQueue.global(qos: .background)
+            
+            queue.async {
+                //
+            }
+//        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("failed with error \(error.localizedDescription)")
+    }
 
 }
