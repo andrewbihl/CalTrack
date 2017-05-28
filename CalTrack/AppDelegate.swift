@@ -19,18 +19,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         super.init()
         GMSServices.provideAPIKey("AIzaSyBOYBoKP3VQvrD5ddO2q7gZXpwIgD1Bdik")
         
-        if let bUrl = bundleURL("caltrainTimes") {
-            let config = Realm.Configuration(
-                // retrieved file url in bundle
-                fileURL: bUrl,
-                // bundle files are not writeable
-                readOnly: true)
-            
-            // open realm with config
-            Realm.Configuration.defaultConfiguration = config
-            print("successfully imported to database")
-        }
         
+    }
+    
+    func copyRealmData() {
+        if let bUrl = bundleURL("caltrainTimes") {
+
+            let defaultRealmPath = Realm.Configuration.defaultConfiguration.fileURL!
+            
+           // if !FileManager.default.fileExists(atPath: defaultRealmPath.absoluteString) {
+                do {
+                    try FileManager.default.removeItem(at: defaultRealmPath)
+                    try FileManager.default.copyItem(at: bUrl, to: defaultRealmPath)
+                } catch let error {
+                    print("error copying seeds: \(error)")
+                }
+       //     }
+        }
+     
+    }
+    
+    func checkRealmData() {
+        let realm = try! Realm()
+        let stopTimes = realm.objects(stop_times.self)//.filter(<#T##predicate: NSPredicate##NSPredicate#>)
+        print(stopTimes.count)
     }
     
     func bundleURL(_ name: String) -> URL? {
@@ -39,6 +51,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        self.copyRealmData()
+        let config = Realm.Configuration(
+   //         fileURL: bundleURL("caltrainTimes")!,
+    //        readOnly: true,
+            // Set the new schema version. This must be greater than the previously used
+            // version (if you've never set a schema version before, the version is 0).
+            schemaVersion: 5,
+            
+            // Set the block which will be called automatically when opening a Realm with
+            // a schema version lower than the one set above
+            migrationBlock: { migration, oldSchemaVersion in
+                if oldSchemaVersion < 4 {
+                    migration.enumerateObjects(ofType: stop_times.className(), { (oldObject, newObject) in
+                        let depTime = oldObject!["departure_time"] as! String
+                        let arrTime = oldObject!["arrival_time"] as! String
+                        
+                        let depArr = depTime.components(separatedBy: ":")
+                        let firstDep = Int(depArr.first!)!
+                        let secondDep = Int(depArr[1])!
+                        
+                        newObject!["departureTime"] = firstDep * 60 + secondDep
+                        
+                        let arrArr = arrTime.components(separatedBy: ":")
+                        let firstArr = Int(arrArr.first!)!
+                        let secondArr = Int(arrArr[1])!
+                        
+                        newObject!["arrivalTime"] = firstArr * 60 + secondArr
+                    })
+                }
+        }
+        )
+        
+        // Tell Realm to use this new configuration object for the default Realm
+        Realm.Configuration.defaultConfiguration = config
+        
+        // Now that we've told Realm how to handle the schema change, opening the file
+        // will automatically perform the migration
+        let realm = try! Realm()
+        
+        self.checkRealmData()
+        
         return true
     }
 
