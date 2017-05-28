@@ -37,15 +37,22 @@ class NorthSouthDeparturesTableViewCell: UITableViewCell {
             timeLabel = self.southDepartureTimeLabel
             timeRemainingLabel = self.southTimeToDepartureLabel
         }
+
         let hour = Calendar.current.component(.hour, from: time)
         let minute = Calendar.current.component(.minute, from: time)
         let minuteDifference = minute - Calendar.current.component(.minute, from: Date())
+        let hourDifference = hour - Calendar.current.component(.hour, from: Date())
         var minuteString = String(minute)
         if minuteString.characters.count == 1 {
             minuteString = "0"+minuteString
         }
         timeLabel.text = "\(hour):\(minuteString)"
+        if hourDifference == 0 {
         timeRemainingLabel.text = "Leaves in \(String(minuteDifference)) minutes"
+        }
+        else {
+            timeRemainingLabel.text = "Leaves in \(String(hourDifference)) h \(String(minuteDifference)) m"
+        }
         }
 
 }
