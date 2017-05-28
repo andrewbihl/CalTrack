@@ -12,8 +12,11 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet var tableView: UITableView!
     @IBOutlet var stopLabel: UILabel!
     
-    public var northDepartures = [Int]()
-    public var southDepartures = [Int]()
+    public var northDepartures = [Date]()
+    public var southDepartures = [Date]()
+    
+    private var northStop : StopName
+    private var southStop : StopName
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +28,11 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         // Do any additional setup after loading the view.
     }
     
-    public func updateStop(stop: StopName) {
-        
+    public func updateStops(northStop: StopName, southStop: StopName) {
+        self.northStop = northStop
+        self.southStop = southStop
+        self.northDepartures = DataServer.sharedInstance.getDepartureTimesForStop(id: northStop)
+        self.southDepartures = DataServer.sharedInstance.getDepartureTimesForStop(id: southStop)
     }
 
     // MARK: - Table View Functions

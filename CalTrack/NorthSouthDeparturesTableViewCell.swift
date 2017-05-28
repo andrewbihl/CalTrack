@@ -27,7 +27,7 @@ class NorthSouthDeparturesTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    public func setDepartureTime(timeInMinutes:Int, north:Bool) {
+    public func setDepartureTime(time:Date, north:Bool) {
         var timeLabel : UILabel
         var timeRemainingLabel : UILabel
         if north {
@@ -37,6 +37,7 @@ class NorthSouthDeparturesTableViewCell: UITableViewCell {
             timeLabel = self.southDepartureTimeLabel
             timeRemainingLabel = self.southTimeToDepartureLabel
         }
+        
         timeLabel.text = String(timeInMinutes)
         timeRemainingLabel.text = "Leaves in " + String(timeInMinutes - Int.currentDateInMinutes()) + " minutes"
         }
