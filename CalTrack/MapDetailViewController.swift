@@ -37,6 +37,8 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     var swipeUp : UIGestureRecognizer?
     var swipeDown : UIGestureRecognizer?
     
+    private let CELL_HEIGHT : CGFloat = 58
+    
     public var northDepartures = [Date]()
     public var southDepartures = [Date]()
     
@@ -94,6 +96,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
 
     override func viewWillAppear(_ animated: Bool) {
         self.view.backgroundColor = appColor2
+        self.tableView.backgroundColor = appColor2
         self.view.layer.borderWidth = 3
         self.view.layer.borderColor = BORDER_COLOR
         self.northboundLabel.layer.borderWidth = BORDER_WIDTH
@@ -176,7 +179,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         if (!isExpanded) {
             return tableView.frame.height
         }
-        return 64
+        return CELL_HEIGHT
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
