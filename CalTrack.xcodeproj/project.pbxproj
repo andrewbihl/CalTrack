@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		064DECCD1EDAEE5B009CFE14 /* caltrainTimes.realm in Resources */ = {isa = PBXBuildFile; fileRef = 064DECCC1EDAEE4E009CFE14 /* caltrainTimes.realm */; };
+		069EA2131EDB725500A31BD6 /* caltrainTimes.realm in Resources */ = {isa = PBXBuildFile; fileRef = 069EA2121EDB71DE00A31BD6 /* caltrainTimes.realm */; };
 		06B40CD31EDA50A500BA4A0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F737A1A1EDA3302006628BF /* AppDelegate.swift */; };
 		06B40CD61EDA50B400BA4A0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F737A201EDA3302006628BF /* Main.storyboard */; };
 		06B40CD71EDA50B900BA4A0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F737A231EDA3302006628BF /* Assets.xcassets */; };
@@ -28,7 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		064DECCC1EDAEE4E009CFE14 /* caltrainTimes.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = caltrainTimes.realm; sourceTree = "<group>"; };
+		069EA2121EDB71DE00A31BD6 /* caltrainTimes.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = caltrainTimes.realm; sourceTree = "<group>"; };
 		06CB05DC1EDA528A00354E4E /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		06CB05DE1EDA52A100354E4E /* MapDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailViewController.swift; sourceTree = "<group>"; };
 		06CB05FF1EDA631D00354E4E /* RealmModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmModels.swift; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 				2F737A231EDA3302006628BF /* Assets.xcassets */,
 				2F737A251EDA3302006628BF /* LaunchScreen.storyboard */,
 				2F737A281EDA3302006628BF /* Info.plist */,
-				064DECCC1EDAEE4E009CFE14 /* caltrainTimes.realm */,
+				069EA2121EDB71DE00A31BD6 /* caltrainTimes.realm */,
 			);
 			path = CalTrack;
 			sourceTree = "<group>";
@@ -187,7 +187,7 @@
 			files = (
 				2F11D1911EDA82BE003BB09B /* ScheduleFooterView.xib in Resources */,
 				06B40CD91EDA50BF00BA4A0F /* Info.plist in Resources */,
-				064DECCD1EDAEE5B009CFE14 /* caltrainTimes.realm in Resources */,
+				069EA2131EDB725500A31BD6 /* caltrainTimes.realm in Resources */,
 				06B40CD81EDA50BC00BA4A0F /* LaunchScreen.storyboard in Resources */,
 				06B40CD61EDA50B400BA4A0F /* Main.storyboard in Resources */,
 				06B40CD71EDA50B900BA4A0F /* Assets.xcassets in Resources */,

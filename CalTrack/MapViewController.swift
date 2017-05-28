@@ -20,7 +20,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     let defaultLocation = CLLocationCoordinate2D.defaultCoordinates
     var detailVC : MapDetailViewController?
     
-    var nearestStop: Stop?
+    var selectedStop: Stop?
     
     var tapActive = false
     
@@ -99,24 +99,29 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     
     
     func addAnimatedTrain() {
-        if let stop = self.nearestStop {
-        let (northFrom, northTo, northAmt) = DataServer.sharedInstance.getNearestTrainLocation(with: stop, north: true)
+        if let stop = self.selectedStop {
+            let current = Calendar.dateInMinutes
+            
+        let (northStops, northTimes) = DataServer.sharedInstance.getNearestTrainLocation(with: stop, north: true)
         
-        let (southFrom, southTo, southAmt) = DataServer.sharedInstance.getNearestTrainLocation(with: stop, north: false)
+        let (southStops, southTimes) = DataServer.sharedInstance.getNearestTrainLocation(with: stop, north: false)
+            
             northTrain?.map = nil 
-            northTrain = GMSMarker(position: northFrom.stopCoordinates)
+            northTrain = GMSMarker(position: northStops[0].stopCoordinates)
             northTrain?.icon = #imageLiteral(resourceName: "SpeedTrainSmall")
             northTrain?.map = mapView
             
+            for (ind, elem) in northStops.enumerated() {
+                if elem != northStops.first {
             CATransaction.begin()
-            CATransaction.setAnimationDuration(CFTimeInterval(northAmt * 60))
-            northTrain?.position = northTo.stopCoordinates
+            CATransaction.setAnimationDuration(CFTimeInterval((northTimes[ind] - northTimes[ind - 1]) * 60))
+            northTrain?.position = northStops[ind].stopCoordinates
             CATransaction.commit()
+                }
+            }
             
             
-            
-            
-            print("added train from \(northFrom.stopName) to \(northTo.stopName)")
+           // print("added train from \(northFrom.stopName) to \(northTo.stopName)")
     }
     }
 
@@ -234,8 +239,8 @@ extension MapViewController: CLLocationManagerDelegate {
 extension MapViewController: InformingDelegate {
     func valueChangedFromLoc() -> Stop? {
         if let stop = self.currentLocation?.getClosestStop {
-            if stop != self.nearestStop {
-            self.nearestStop = stop
+            if stop != self.selectedStop {
+            self.selectedStop = stop
             return stop
             }
             else {
@@ -248,8 +253,8 @@ extension MapViewController: InformingDelegate {
     }
     
     func valueChangedFromTap(with stop: Stop) -> Stop? {
-        if stop != self.nearestStop {
-            self.nearestStop = stop
+        if stop != self.selectedStop {
+            self.selectedStop = stop
             return stop
         }
         else {

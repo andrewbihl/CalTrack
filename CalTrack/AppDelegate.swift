@@ -48,6 +48,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(stopTimes.count)
     }
     
+    func buildRelationships() {
+        let realm = try! Realm()
+        
+        let allObj = realm.objects(stop_times.self)
+        for obj in allObj {
+            if obj.realTime == nil {
+                //print("obj without written relationship", obj)
+                if let real = realm.object(ofType: realtime_trips.self, forPrimaryKey: obj.trip_id) {
+                //print("related real", real)
+                try! realm.write {
+                    obj.realTime = real
+                }
+                }
+            } else {
+                print("break!")
+                break
+            }
+        }
+    }
+    
     func bundleURL(_ name: String) -> URL? {
         return Bundle.main.url(forResource: name, withExtension: "realm")
     }
@@ -55,35 +75,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         self.copyRealmData()
+        
+        let migrationBlock: MigrationBlock = { migration, oldSchemaVersion in
+            if oldSchemaVersion < 10 {
+                migration.enumerateObjects(ofType: stop_times.className(), { (oldObject, newObject) in
+                    let depTime = oldObject!["departure_time"] as! String
+                    let arrTime = oldObject!["arrival_time"] as! String
+                    
+                    let depArr = depTime.components(separatedBy: ":")
+                    let firstDep = Int(depArr.first!)!
+                    let secondDep = Int(depArr[1])!
+                    
+                    newObject!["departureTime"] = firstDep * 60 + secondDep
+                    
+                    let arrArr = arrTime.components(separatedBy: ":")
+                    let firstArr = Int(arrArr.first!)!
+                    let secondArr = Int(arrArr[1])!
+                    
+                    newObject!["arrivalTime"] = firstArr * 60 + secondArr
+                    
+                })
+                /*
+                migration.enumerateObjects(ofType: stop_times.className(), { (oldStop, newStop) in
+                    let stopID = oldStop!["trip_id"] as! String
+                    migration.enumerateObjects(ofType: realtime_trips.className(), { (oldReal, newReal) in
+                        let realID = oldReal!["trip_id"] as! String
+                        if stopID == realID {
+                            newStop!["realTime"] = oldReal
+                        }
+                    })
+                }) */
+            }
+            
+        }
+        
         let config = Realm.Configuration(
-   //         fileURL: bundleURL("caltrainTimes")!,
-    //        readOnly: true,
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 8,
+            schemaVersion: 11,
             
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
-            migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 7 {
-                    migration.enumerateObjects(ofType: stop_times.className(), { (oldObject, newObject) in
-                        let depTime = oldObject!["departure_time"] as! String
-                        let arrTime = oldObject!["arrival_time"] as! String
-                        
-                        let depArr = depTime.components(separatedBy: ":")
-                        let firstDep = Int(depArr.first!)!
-                        let secondDep = Int(depArr[1])!
-                        
-                        newObject!["departureTime"] = firstDep * 60 + secondDep
-                        
-                        let arrArr = arrTime.components(separatedBy: ":")
-                        let firstArr = Int(arrArr.first!)!
-                        let secondArr = Int(arrArr[1])!
-                        
-                        newObject!["arrivalTime"] = firstArr * 60 + secondArr
-                    })
-                }
-        }
+            migrationBlock: migrationBlock
         )
         
         // Tell Realm to use this new configuration object for the default Realm
@@ -94,6 +127,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let realm = try! Realm()
         
         self.checkRealmData()
+        self.buildRelationships()
         
         return true
     }
