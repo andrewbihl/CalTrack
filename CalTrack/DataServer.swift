@@ -43,7 +43,7 @@ class DataServer {
         
     }
     
-    public func getDepartureTimesForStop(id: Int) -> [Date]{
+    public func getDepartureTimesForStop(stop: Stop) -> [Date]{
         return [Date.distantFuture]
     }
     
