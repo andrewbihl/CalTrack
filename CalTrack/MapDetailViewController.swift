@@ -15,18 +15,23 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     public var northDepartures = [Date]()
     public var southDepartures = [Date]()
     
-    private var northStop : Stop?
-    private var southStop : Stop?
+    private var northStop = Stop(rawValue: 0)
+    private var southStop = Stop(rawValue: 1)
     
     private var updateTimer : Timer?
     
+    var sharedInstance = DataServer.sharedInstance
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        
         tableView.delegate = self
         tableView.dataSource = self
-        northDepartures.append(Date())
-        southDepartures.append(Date())
-        // Do any additional setup after loading the view.
+        
+        self.northDepartures = self.sharedInstance.getDepartureTimesForStop(stop: northStop!)
+        self.southDepartures = self.sharedInstance.getDepartureTimesForStop(stop: southStop!)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,8 +46,8 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     public func updateStops(northStop: Stop, southStop: Stop) {
         self.northStop = northStop
         self.southStop = southStop
-        self.northDepartures = DataServer.sharedInstance.getDepartureTimesForStop(stop: northStop)
-        self.southDepartures = DataServer.sharedInstance.getDepartureTimesForStop(stop: southStop)
+        self.northDepartures = sharedInstance.getDepartureTimesForStop(stop: northStop)
+        self.southDepartures = sharedInstance.getDepartureTimesForStop(stop: southStop)
         self.stopLabel.text = northStop.stopName.replacingOccurrences(of: "Northbound", with: "")
     }
 
