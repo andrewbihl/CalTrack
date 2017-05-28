@@ -30,7 +30,9 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     private var northStop : Stop {
         didSet {
+            if (self.isViewLoaded && (self.view.window != nil)) {
             self.stopLabel.text = northStop.stopName.replacingOccurrences(of: "Northbound", with: "")
+            }
         }
     }
     private var southStop : Stop
@@ -95,7 +97,9 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         self.southStop = southStop
         self.northDepartures = sharedInstance.getDepartureTimesForStop(stop: northStop)
         self.southDepartures = sharedInstance.getDepartureTimesForStop(stop: southStop)
+        if (self.isViewLoaded && (self.view.window != nil)) {
         self.stopLabel.text = northStop.stopName.replacingOccurrences(of: "Northbound", with: "")
+        }
     }
 
     // MARK: - Table View Functions
@@ -148,8 +152,10 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     } */
     
     func closestStopChanged() {
-        let value = self.delegate?.valueChanged()
+        if let value = self.delegate?.valueChanged() {
         print("closest stop changed", value)
+        self.updateStops(northStop: value, southStop: value)
+        }
     }
     
 }

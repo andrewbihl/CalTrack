@@ -54,11 +54,15 @@ class MapViewController: UIViewController {
         self.showTimesForClosestStop()
         self.addAnimatedTrain()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         // delegate value sharing
         
-        detailVC = MapDetailViewController()
+        let parent = self.parent!
+        detailVC = parent.childViewControllers[0] as? MapDetailViewController
         detailVC?.delegate = self
-        
     }
 
     override func didReceiveMemoryWarning() {
