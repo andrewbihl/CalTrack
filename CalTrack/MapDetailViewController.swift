@@ -18,6 +18,8 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     private var northStop : StopName
     private var southStop : StopName
     
+    private var updateTimer : Timer
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -28,11 +30,21 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        beginUpdateTimer(60)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.updateTimer.invalidate()
+    }
+    
     public func updateStops(northStop: StopName, southStop: StopName) {
         self.northStop = northStop
         self.southStop = southStop
         self.northDepartures = DataServer.sharedInstance.getDepartureTimesForStop(id: northStop)
         self.southDepartures = DataServer.sharedInstance.getDepartureTimesForStop(id: southStop)
+        self.stopLabel = self.northStop.stopName.replacingOccurrences(of: "Northbound", with: "")
     }
 
     // MARK: - Table View Functions
@@ -61,6 +73,12 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+    }
+    
+    func beginUpdateTimer(intervalInSeconds: Int){
+        timer = Timer.init(timeInterval: intervalInSeconds, repeats: true, block: { (timer) in
+            self.tableView.refresh()
+        });
     }
     
 }
