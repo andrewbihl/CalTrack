@@ -52,7 +52,7 @@ class DataServer {
 }
 
 extension Int {
-    func getDateFromInt() {
+    func getDateFromInt() -> Date {
         let str = "\(self / 60):\(self % 60)"
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
