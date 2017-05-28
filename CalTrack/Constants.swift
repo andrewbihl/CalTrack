@@ -17,7 +17,13 @@ public let stopIDs = [70011, 70012, 70021, 70022, 70031, 70032, 70041, 70042, 70
 
 public let stopNames = ["San Francisco Northbound", "San Francisco Southbound", "22nd St Northbound", "22nd St Southbound", "Bayshore Northbound", "Bayshore Southbound", "South San Francisco Northbound", "South San Francisco Southbound", "San Bruno Northbound", "San Bruno Southbound", "Millbrae Northbound", "Millbrae Southbound", "Broadway Northbound", "Broadway Southbound", "Burlingame Northbound", "Burlingame Southbound", "San Mateo Northbound", "San Mateo Southbound", "Hayward Park Northbound", "Hayward Park Southbound", "Hillsdale Northbound", "Hillsdale Southbound", "Belmont Northbound", "Belmont Southbound", "San Carlos Northbound", "San Carlos Southbound", "Redwood City Northbound", "Redwood City Southbound", "Atherton Northbound", "Atherton Southbound", "Menlo Park Northbound", "Menlo Park Southbound", "Palo Alto Northbound", "Palo Alto Southbound", "California Ave Northbound", "California Ave Southbound", "San Antonio Northbound", "San Antonio Southbound", "Mountain View Northbound", "Mountain View Southbound", "Sunnyvale Northbound", "Sunnyvale Southbound", "Lawrence Northbound", "Lawrence Southbound", "Santa Clara Northbound", "Santa Clara Southbound", "College Park Northbound", "College Park Southbound", "San Jose Diridon Northbound", "San Jose Diridon Southbound", "Tamien Northbound", "Tamien Southbound", "Capitol Northbound", "Capitol Southbound", "Blossom Hill Northbound", "Blossom Hill Southbound", "Morgan Hill Northbound", "Morgan Hill Southbound", "San Martin Northbound", "San Martin Southbound", "Gilroy Northbound", "Gilroy Southbound", "San Jose Northbound", "Tamien Southbound"]
 
+public let defaultLatitude = 37.788153
+public let defaultLongitude = -122.406468
+
 public extension CLLocationCoordinate2D {
+    
+    public static let defaultCoordinates = CLLocationCoordinate2DMake(defaultLatitude, defaultLongitude)
+    
     public static func stopCoordinates(stop: StopName) -> CLLocationCoordinate2D {
         return CLLocationCoordinate2DMake(stopLatitudes[stop.rawValue], stopLatitudes[stop.rawValue])
     }

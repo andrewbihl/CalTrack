@@ -12,12 +12,16 @@ import RealmSwift
 
 class DataServer {
     
+    public static let sharedInstance = DataServer()
+
     var stopTimes: Results<stop_times>?
     
     init() {
+        
         let realm = try! Realm()
         self.stopTimes = realm.objects(stop_times.self)//.filter(<#T##predicate: NSPredicate##NSPredicate#>)
         print(self.stopTimes?.count)
+        
     }
     
     public func getDepartureTimesForStop(id: Int) -> [Date]{
@@ -32,7 +36,7 @@ class DataServer {
         return [CLLocationCoordinate2DMake(0, 0)]
     }
     
-    public func getStops()->[Int:CLLocationCoordinate2D]{
+    public func getStops()->[Int:CLLocationCoordinate2D] {
         var stops = Dictionary<Int, CLLocationCoordinate2D>()
         for id in stopIDs {
             stops[id] = CLLocationCoordinate2D.stopCoordinates(id: id)
