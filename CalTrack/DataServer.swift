@@ -8,8 +8,17 @@
 
 import Foundation
 import CoreLocation
+import RealmSwift
 
 class DataServer {
+    
+    var stopTimes: Results<stop_times>?
+    
+    init() {
+        let realm = try! Realm()
+        self.stopTimes = realm.objects(stop_times.self)//.filter(<#T##predicate: NSPredicate##NSPredicate#>)
+        print(self.stopTimes?.count)
+    }
     
     public func getDepartureTimesForStop(id: Int) -> [Date]{
         return [Date.distantFuture]

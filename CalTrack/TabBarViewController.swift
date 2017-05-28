@@ -10,16 +10,12 @@ import UIKit
 import RealmSwift
 
 class TabBarViewController: UITabBarController {
-
-    var stopTimes: Results<stop_times>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let realm = try! Realm()
-        self.stopTimes = realm.objects(stop_times.self)//.filter(<#T##predicate: NSPredicate##NSPredicate#>)
-        print(self.stopTimes?.count)
+        
     }
 
     override func didReceiveMemoryWarning() {
