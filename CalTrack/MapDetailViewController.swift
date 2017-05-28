@@ -12,6 +12,9 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet var tableView: UITableView!
     @IBOutlet var stopLabel: UILabel!
     
+    @IBOutlet var northboundLabel: UILabel!
+    @IBOutlet var southboundLabel: UILabel!
+    
     public var northDepartures = [Date]()
     public var southDepartures = [Date]()
     
@@ -33,6 +36,15 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         northDepartures.append(Date())
         southDepartures.append(Date())
         // Do any additional setup after loading the view.
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.view.layer.borderWidth = 3
+        self.view.layer.borderColor = appColor1.cgColor
+        self.northboundLabel.layer.borderWidth = 1.5
+        self.southboundLabel.layer.borderWidth = 1.5
+        self.northboundLabel.layer.borderColor = appColor1.cgColor
+        self.southboundLabel.layer.borderColor = appColor1.cgColor
     }
     
     override func viewDidAppear(_ animated: Bool) {
