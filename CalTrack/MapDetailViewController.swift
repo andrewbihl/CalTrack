@@ -9,7 +9,8 @@
 import UIKit
 
 protocol InformingDelegate {
-    func valueChanged() -> Stop?
+    func valueChangedFromLoc() -> Stop?
+    func valueChangedFromTap(with stop: Stop) -> Stop?
 }
 
 protocol MapDetailAnimationManager {
@@ -212,7 +213,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     } */
     
     func closestStopChanged() {
-        if let value = self.delegate?.valueChanged() {
+        if let value = self.delegate?.valueChangedFromLoc() {
         print("closest stop changed", value)
             let north = value.stopIsNorth ? value : value.stopPartner
             let south = value.stopIsNorth ? value.stopPartner : value

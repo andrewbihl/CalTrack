@@ -158,7 +158,7 @@ extension MapViewController: CLLocationManagerDelegate {
 }
 
 extension MapViewController: InformingDelegate {
-    func valueChanged() -> Stop? {
+    func valueChangedFromLoc() -> Stop? {
         if let stop = self.currentLocation?.getClosestStop {
             if stop != self.nearestStop {
             self.nearestStop = stop
@@ -171,6 +171,11 @@ extension MapViewController: InformingDelegate {
             return Stop(rawValue: 1)!
         }
 
+    }
+    
+    func valueChangedFromTap(with stop: Stop) -> Stop? {
+        
+        return nil
     }
 }
 
