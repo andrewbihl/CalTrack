@@ -21,6 +21,9 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     private var northStop : Stop?
     private var southStop : Stop?
     
+    private let BORDER_WIDTH : CGFloat = 1.5
+    private let BORDER_COLOR : CGColor = appColor1.cgColor
+    
     public var isExpanded = false {
         didSet {
             self.tableView.isScrollEnabled = isExpanded
@@ -39,12 +42,13 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        self.view.backgroundColor = UIColor.gray
         self.view.layer.borderWidth = 3
-        self.view.layer.borderColor = appColor1.cgColor
-        self.northboundLabel.layer.borderWidth = 1.5
-        self.southboundLabel.layer.borderWidth = 1.5
-        self.northboundLabel.layer.borderColor = appColor1.cgColor
-        self.southboundLabel.layer.borderColor = appColor1.cgColor
+        self.view.layer.borderColor = BORDER_COLOR
+        self.northboundLabel.layer.borderWidth = BORDER_WIDTH
+        self.southboundLabel.layer.borderWidth = BORDER_WIDTH
+        self.northboundLabel.layer.borderColor = BORDER_COLOR
+        self.southboundLabel.layer.borderColor = BORDER_COLOR
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,6 +74,9 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         if let cell : NorthSouthDeparturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "NorthSouthCell") as?NorthSouthDeparturesTableViewCell {
             cell.setDepartureTime(time: northDepartures[indexPath.row], north: true)
             cell.setDepartureTime(time: southDepartures[indexPath.row], north: false)
+            cell.contentView.layer.borderColor = BORDER_COLOR
+            cell.contentView.layer.borderWidth = BORDER_WIDTH
+            cell.contentView.backgroundColor = appColor1 //Same as BORDER_COLOR
             return cell
         } else {
             return UITableViewCell()
@@ -77,7 +84,10 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.height
+        if (!isExpanded) {
+            return tableView.frame.height
+        }
+        return 44
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

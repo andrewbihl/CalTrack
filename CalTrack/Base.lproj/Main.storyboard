@@ -151,11 +151,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.23137254900000001" green="0.77646169350000005" blue="0.20392156859999999" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="j7j-mM-nq6">
                                         <rect key="frame" x="0.0" y="47" width="375" height="81"/>
-                                        <color key="backgroundColor" red="0.23137254900000001" green="0.77646169350000005" blue="0.20392156859999999" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NorthSouthCell" rowHeight="59" id="bQn-dH-8RG" customClass="NorthSouthDeparturesTableViewCell" customModule="CalTrack" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="59"/>
@@ -220,7 +219,6 @@
                                                             </subviews>
                                                         </stackView>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.23137254900000001" green="0.77646169350000005" blue="0.20392156859999999" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="1cj-xU-fH7" secondAttribute="trailing" id="Uml-pc-uxh"/>
                                                         <constraint firstAttribute="bottom" secondItem="1cj-xU-fH7" secondAttribute="bottom" id="YOj-dU-m4v"/>
@@ -240,7 +238,6 @@
                                         </prototypes>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.23137254900000001" green="0.77646169350000005" blue="0.20392156859999999" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
