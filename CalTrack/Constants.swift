@@ -16,7 +16,7 @@ public let defaultLongitude = -122.406468
 
 public let appColor1 = UIColor(red:0.31, green:0.75, blue:0.62, alpha:0.91)
 
-public enum StopName: Int {
+public enum Stop: Int {
     case sanFranciscoNorthbound = 0, sanFranciscoSouthbound,
     twentySecondStreetNorthbound, twentySecondStreetSouthbound,
     bayshoreNorthbound, bayshoreSouthbound,
@@ -85,11 +85,11 @@ public enum StopName: Int {
                             sanJose,
                             tamien]
     
-    static var count: Int { return StopName.tamien.hashValue + 1}
+    static var count: Int { return Stop.tamien.hashValue + 1}
     
-    static func getStops(headingNorth: Bool) -> [StopName] {
-        let stops = StopName.allValues.filter { (stopName) -> Bool in
-            return (stopName.rawValue % 2 == 0) ? headingNorth : !headingNorth
+    static func getStops(headingNorth: Bool) -> [Stop] {
+        let stops = Stop.allValues.filter { (Stop) -> Bool in
+            return (Stop.rawValue % 2 == 0) ? headingNorth : !headingNorth
         }
         return stops
     }
@@ -97,11 +97,11 @@ public enum StopName: Int {
 }
 
 
-public extension StopName {
+public extension Stop {
     
-    var stopName: String {
-        let stopNames = ["San Francisco Northbound", "San Francisco Southbound", "22nd St Northbound", "22nd St Southbound", "Bayshore Northbound", "Bayshore Southbound", "South San Francisco Northbound", "South San Francisco Southbound", "San Bruno Northbound", "San Bruno Southbound", "Millbrae Northbound", "Millbrae Southbound", "Broadway Northbound", "Broadway Southbound", "Burlingame Northbound", "Burlingame Southbound", "San Mateo Northbound", "San Mateo Southbound", "Hayward Park Northbound", "Hayward Park Southbound", "Hillsdale Northbound", "Hillsdale Southbound", "Belmont Northbound", "Belmont Southbound", "San Carlos Northbound", "San Carlos Southbound", "Redwood City Northbound", "Redwood City Southbound", "Atherton Northbound", "Atherton Southbound", "Menlo Park Northbound", "Menlo Park Southbound", "Palo Alto Northbound", "Palo Alto Southbound", "California Ave Northbound", "California Ave Southbound", "San Antonio Northbound", "San Antonio Southbound", "Mountain View Northbound", "Mountain View Southbound", "Sunnyvale Northbound", "Sunnyvale Southbound", "Lawrence Northbound", "Lawrence Southbound", "Santa Clara Northbound", "Santa Clara Southbound", "College Park Northbound", "College Park Southbound", "San Jose Diridon Northbound", "San Jose Diridon Southbound", "Tamien Northbound", "Tamien Southbound", "Capitol Northbound", "Capitol Southbound", "Blossom Hill Northbound", "Blossom Hill Southbound", "Morgan Hill Northbound", "Morgan Hill Southbound", "San Martin Northbound", "San Martin Southbound", "Gilroy Northbound", "Gilroy Southbound", "San Jose Northbound", "Tamien Southbound"]
-        return stopNames[self.rawValue]
+    var Stop: String {
+        let Stops = ["San Francisco Northbound", "San Francisco Southbound", "22nd St Northbound", "22nd St Southbound", "Bayshore Northbound", "Bayshore Southbound", "South San Francisco Northbound", "South San Francisco Southbound", "San Bruno Northbound", "San Bruno Southbound", "Millbrae Northbound", "Millbrae Southbound", "Broadway Northbound", "Broadway Southbound", "Burlingame Northbound", "Burlingame Southbound", "San Mateo Northbound", "San Mateo Southbound", "Hayward Park Northbound", "Hayward Park Southbound", "Hillsdale Northbound", "Hillsdale Southbound", "Belmont Northbound", "Belmont Southbound", "San Carlos Northbound", "San Carlos Southbound", "Redwood City Northbound", "Redwood City Southbound", "Atherton Northbound", "Atherton Southbound", "Menlo Park Northbound", "Menlo Park Southbound", "Palo Alto Northbound", "Palo Alto Southbound", "California Ave Northbound", "California Ave Southbound", "San Antonio Northbound", "San Antonio Southbound", "Mountain View Northbound", "Mountain View Southbound", "Sunnyvale Northbound", "Sunnyvale Southbound", "Lawrence Northbound", "Lawrence Southbound", "Santa Clara Northbound", "Santa Clara Southbound", "College Park Northbound", "College Park Southbound", "San Jose Diridon Northbound", "San Jose Diridon Southbound", "Tamien Northbound", "Tamien Southbound", "Capitol Northbound", "Capitol Southbound", "Blossom Hill Northbound", "Blossom Hill Southbound", "Morgan Hill Northbound", "Morgan Hill Southbound", "San Martin Northbound", "San Martin Southbound", "Gilroy Northbound", "Gilroy Southbound", "San Jose Northbound", "Tamien Southbound"]
+        return Stops[self.rawValue]
     }
     
     var stopLatitude: Double {
@@ -127,7 +127,7 @@ public extension StopName {
     }
     
     /*
-    static func distanceToStop(stop: StopName, fromLocation location: CLLocationCoordinate2D) {
+    static func distanceToStop(stop: Stop, fromLocation location: CLLocationCoordinate2D) {
         return
     }
      */
@@ -135,12 +135,12 @@ public extension StopName {
 }
 
 /*
-extension Sequence where Iterator.Element: StopName {
+extension Sequence where Iterator.Element: Stop {
     
     static var getStopLocations: [CLLocationCoordinate2D] {
         
-        let stops = self.map { (stopName) -> CLLocationCoordinate2D in
-            return stopName.stopCoordinates
+        let stops = self.map { (Stop) -> CLLocationCoordinate2D in
+            return Stop.stopCoordinates
         }
         return stops
         }
@@ -152,8 +152,8 @@ extension CLLocationCoordinate2D {
     public static let defaultCoordinates = CLLocationCoordinate2DMake(defaultLatitude, defaultLongitude)
     
     /*
-    func getClosestStop(with location: CLLocationCoordinate2D) -> StopName {
-        let stopLocations = StopName.allValues.getStopLocations
+    func getClosestStop(with location: CLLocationCoordinate2D) -> Stop {
+        let stopLocations = Stop.allValues.getStopLocations
     } */
     
 }

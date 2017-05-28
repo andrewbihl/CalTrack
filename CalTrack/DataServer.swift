@@ -47,8 +47,6 @@ class DataServer {
         return [Date.distantFuture]
     }
     
-    
-    
 }
 
 extension Int {
