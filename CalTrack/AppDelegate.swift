@@ -33,6 +33,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     try FileManager.default.copyItem(at: bUrl, to: defaultRealmPath)
                 } catch let error {
                     print("error copying seeds: \(error)")
+                    do {
+                    try FileManager.default.copyItem(at: bUrl, to: defaultRealmPath)
+                    } catch {
+                        
+                    }
                 }
        //     }
         }
@@ -57,12 +62,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //        readOnly: true,
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 6,
+            schemaVersion: 8,
             
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
             migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 4 {
+                if oldSchemaVersion < 7 {
                     migration.enumerateObjects(ofType: stop_times.className(), { (oldObject, newObject) in
                         let depTime = oldObject!["departure_time"] as! String
                         let arrTime = oldObject!["arrival_time"] as! String
@@ -80,9 +85,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         newObject!["arrivalTime"] = firstArr * 60 + secondArr
                     })
                 }
-      //          if oldSchemaVersion < 6 {
-      //              migration.deleteData(forType: "stop_times")
-      //          }
         }
         )
         
