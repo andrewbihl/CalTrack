@@ -35,10 +35,10 @@ class NorthSouthDeparturesTableViewCell: UITableViewCell {
             timeRemainingLabel = self.northTimeToDepartureLabel
         } else {
             timeLabel = self.southDepartureTimeLabel
-            timeRemainingLabel = self.southDepartureTimeLabel
+            timeRemainingLabel = self.southTimeToDepartureLabel
         }
-        
-        timeToDepartureLabel.text = String(timeInMinutes - Int.currentDateInMinutes())
+        timeLabel.text = String(timeInMinutes)
+        timeRemainingLabel.text = String(timeInMinutes - Int.currentDateInMinutes())
         }
 
 }
