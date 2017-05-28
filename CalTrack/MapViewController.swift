@@ -17,7 +17,7 @@ class MapViewController: UIViewController {
     var currentLocation: CLLocation?
     var mapView: GMSMapView!
     var zoomLevel: Float = 15.0
-    let defaultLocation = CLLocationCoordinate2DMake(37.77639, -122.394992)
+    let defaultLocation = CLLocationCoordinate2D.defaultCoordinates
     
     override func viewDidLoad() {
         super.viewDidLoad()
