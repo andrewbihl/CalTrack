@@ -18,6 +18,10 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     public var northDepartures = [Date]()
     public var southDepartures = [Date]()
     
+    private var updateTimer : Timer?
+    
+    var sharedInstance = DataServer.sharedInstance
+    
     private var northStop : Stop {
         didSet {
             self.stopLabel.text = northStop.stopName.replacingOccurrences(of: "Northbound", with: "")
@@ -34,8 +38,6 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    private var updateTimer : Timer?
-    
     required init?(coder aDecoder: NSCoder) {
         northStop = defaultNorthStop
         southStop = defaultSouthStop
@@ -44,11 +46,14 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        
         tableView.delegate = self
         tableView.dataSource = self
-        northDepartures.append(Date())
-        southDepartures.append(Date())
-        // Do any additional setup after loading the view.
+        
+        self.northDepartures = self.sharedInstance.getDepartureTimesForStop(stop: northStop)
+        self.southDepartures = self.sharedInstance.getDepartureTimesForStop(stop: southStop)
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -73,8 +78,8 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     public func updateStops(northStop: Stop, southStop: Stop) {
         self.northStop = northStop
         self.southStop = southStop
-        self.northDepartures = DataServer.sharedInstance.getDepartureTimesForStop(stop: northStop)
-        self.southDepartures = DataServer.sharedInstance.getDepartureTimesForStop(stop: southStop)
+        self.northDepartures = sharedInstance.getDepartureTimesForStop(stop: northStop)
+        self.southDepartures = sharedInstance.getDepartureTimesForStop(stop: southStop)
         self.stopLabel.text = northStop.stopName.replacingOccurrences(of: "Northbound", with: "")
     }
 

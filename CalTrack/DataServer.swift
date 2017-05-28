@@ -43,8 +43,20 @@ class DataServer {
         
     }
     
-    public func getDepartureTimesForStop(stop: Stop) -> [Date]{
-        return [Date.distantFuture]
+    public func getDepartureTimesForStop(stop: Stop) -> [Date]{ // get array of next 8 stop times
+        let intDate = Calendar.dateInMinutes
+        if let stopTimes = stopTimes {
+            let theseStops = Array(stopTimes.filter("stop_id == %@ AND departureTime > %@", stop.stopId, intDate).sorted(byKeyPath: "departureTime")).prefix(8)
+            let theseTimes = theseStops.map({ (stopTime) -> Date in
+                return stopTime.departureTime.getDateFromInt()
+            }) 
+            
+            print(theseStops, theseTimes)
+            return theseTimes
+        } else {
+            return []
+        }
+        
     }
     
     
@@ -52,5 +64,19 @@ class DataServer {
 }
 
 extension Int {
-    
+    func getDateFromInt() -> Date {
+        
+        let hour = self / 60
+        let minute = self % 60
+        var str = ""
+        if hour < 10 {
+            str = "0\(self / 60):\(self % 60)"
+        } else {
+        str = "\(self / 60):\(self % 60)"
+        }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        let someDateTime = formatter.date(from: str)
+        return someDateTime!
+    }
 }

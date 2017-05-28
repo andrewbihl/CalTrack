@@ -168,3 +168,12 @@ extension Calendar {
         return 60 * hour + minute
     }
 }
+
+extension Date {
+    var dateInMinutes: Int {
+        let hour = Calendar.current.component(.hour, from: self)
+        let minute = Calendar.current.component(.minute, from: self)
+        
+        return 60 * hour + minute
+    }
+}

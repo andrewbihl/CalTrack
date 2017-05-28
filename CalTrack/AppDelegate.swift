@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //        readOnly: true,
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 5,
+            schemaVersion: 6,
             
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
@@ -80,6 +80,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         newObject!["arrivalTime"] = firstArr * 60 + secondArr
                     })
                 }
+      //          if oldSchemaVersion < 6 {
+      //              migration.deleteData(forType: "stop_times")
+      //          }
         }
         )
         
