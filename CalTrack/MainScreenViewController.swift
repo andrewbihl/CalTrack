@@ -31,7 +31,7 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager {
     }
     
     func userSwipedDown(vc: MapDetailViewController) -> Bool {
-        if !vc.isExpanded {
+        if vc.isExpanded {
             self.animateDetailViewController(expand: false)
             return true
         }

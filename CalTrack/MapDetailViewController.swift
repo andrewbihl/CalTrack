@@ -28,6 +28,9 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet var northboundLabel: UILabel!
     @IBOutlet var southboundLabel: UILabel!
     
+    var swipeUp : UIGestureRecognizer?
+    var swipeDown : UIGestureRecognizer?
+    
     public var northDepartures = [Date]()
     public var southDepartures = [Date]()
     
@@ -45,7 +48,13 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     private let BORDER_WIDTH : CGFloat = 1.5
     private let BORDER_COLOR : CGColor = appColor1.cgColor
     
-    public var isExpanded = false
+    public var isExpanded = false {
+        didSet {
+            self.tableView.isScrollEnabled = isExpanded
+            self.swipeDown?.isEnabled = isExpanded
+            self.swipeUp?.isEnabled = !isExpanded
+        }
+    }
     
     required init?(coder aDecoder: NSCoder) {
         northStop = defaultNorthStop
@@ -76,6 +85,18 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.userSwipedUp))
+        swipeUp.direction = .up
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.userSwipedDown))
+        swipeDown.direction = .down
+//        swipeUp.delegate = self
+//        swipeDown.delegate = self
+        self.view.addGestureRecognizer(swipeUp)
+        self.view.addGestureRecognizer(swipeDown)
+        self.swipeDown = swipeDown
+        self.swipeUp = swipeUp
+        self.swipeDown?.isEnabled = false
+        
         beginUpdateTimer(intervalInSeconds: 60)
     }
     
@@ -93,7 +114,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
     
-    @IBAction func userSwipedUp(_ sender: UISwipeGestureRecognizer) {
+    @IBAction func userSwipedUp() {
         if let parentVC = self.parent as? MapDetailAnimationManager {
             let changedFrame = parentVC.userSwipedUp(vc: self)
             if changedFrame {
@@ -102,7 +123,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
 
-    @IBAction func userSwipedDown(_ sender: UISwipeGestureRecognizer) {
+    @IBAction func userSwipedDown() {
         if let parentVC = self.parent as? MapDetailAnimationManager {
             let changedFrame = parentVC.userSwipedDown(vc: self)
             if changedFrame {
@@ -131,7 +152,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         if (!isExpanded) {
             return tableView.frame.height
         }
-        return tableView.frame.height / CGFloat(self.tableView(tableView, numberOfRowsInSection: indexPath.section))
+        return 44
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -152,7 +173,6 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             self.tableView.reloadData()
             self.beginUpdateTimer(intervalInSeconds: intervalInSeconds)
         });
-        updateTimer?.fire()
     }
     
 }
