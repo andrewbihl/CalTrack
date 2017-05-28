@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 readOnly: true)
             
             // open realm with config
-            let realm = try! Realm(configuration: config)
+            Realm.Configuration.defaultConfiguration = config
             print("successfully imported to database")
         }
         
