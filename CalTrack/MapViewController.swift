@@ -24,6 +24,9 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     
     var tapActive = false
     
+    var northTrain: GMSMarker?
+    var southTrain: GMSMarker?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -56,7 +59,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         mapView.delegate = self
         
         self.addTrainStopsAndPath()
-        self.showTimesForClosestStop()
+
         self.addAnimatedTrain()
         
         
@@ -84,6 +87,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         for stop in stops {
             let marker = GMSMarker(position: stop.stopCoordinates)
             path.add(stop.stopCoordinates)
+            marker.title = stop.stopName
             marker.map = mapView
         }
         
@@ -93,12 +97,27 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         polyline.map = mapView
     }
     
-    func showTimesForClosestStop() {
-        
-    }
     
     func addAnimatedTrain() {
+        if let stop = self.nearestStop {
+        let (northFrom, northTo, northAmt) = DataServer.sharedInstance.getNearestTrainLocation(with: stop, north: true)
         
+        let (southFrom, southTo, southAmt) = DataServer.sharedInstance.getNearestTrainLocation(with: stop, north: false)
+            northTrain?.map = nil 
+            northTrain = GMSMarker(position: northFrom.stopCoordinates)
+            northTrain?.icon = #imageLiteral(resourceName: "SpeedTrainSmall")
+            northTrain?.map = mapView
+            
+            CATransaction.begin()
+            CATransaction.setAnimationDuration(CFTimeInterval(northAmt * 60))
+            northTrain?.position = northTo.stopCoordinates
+            CATransaction.commit()
+            
+            
+            
+            
+            print("added train from \(northFrom.stopName) to \(northTo.stopName)")
+    }
     }
 
     /*
@@ -133,6 +152,28 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         detailVC?.stopTappedChanged(with: stop)
         }
         
+        self.addAnimatedTrain()
+        
+        return true
+    }
+    
+    func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
+        if let coord = mapView.myLocation?.coordinate {
+        let camera = GMSCameraPosition.camera(withLatitude: coord.latitude,
+                                              longitude: coord.longitude,
+                                              zoom: zoomLevel)
+        
+        if mapView.isHidden {
+            mapView.isHidden = false
+            mapView.camera = camera
+        }  else {
+            
+            mapView.animate(to: camera)
+        }
+        }
+        
+        detailVC?.closestStopChanged()
+        
         return true
     }
     
@@ -154,9 +195,11 @@ extension MapViewController: CLLocationManagerDelegate {
         if mapView.isHidden {
             mapView.isHidden = false
             mapView.camera = camera
+             detailVC?.closestStopChanged()
         }  else {
             if !tapActive {
             mapView.animate(to: camera)
+                 detailVC?.closestStopChanged()
             }
         }
         

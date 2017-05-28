@@ -39,8 +39,13 @@ class DataServer {
         
     }
     
-    public func getNearestTrainLocation() {
-        
+    public func getNearestTrainLocation(with stop: Stop, north: Bool) -> (Stop, Stop, Int){ // nearest north/southbound train in format (from stop, to stop, minutes in between)
+        let current = Calendar.dateInMinutes
+        if north {
+            return (Stop(rawValue: 2)!, Stop(rawValue: 0)!, 5)
+        } else {
+            return (Stop(rawValue: 2)!, Stop(rawValue: 4)!, 4)
+        }
     }
     
     public func getDepartureTimesForStop(stop: Stop) -> [Date]{ // get array of next 8 stop times
