@@ -12,15 +12,37 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet var tableView: UITableView!
     @IBOutlet var stopLabel: UILabel!
     
+    @IBOutlet var northboundLabel: UILabel!
+    @IBOutlet var southboundLabel: UILabel!
+    
     public var northDepartures = [Date]()
     public var southDepartures = [Date]()
-    
-    private var northStop = Stop(rawValue: 0)
-    private var southStop = Stop(rawValue: 1)
     
     private var updateTimer : Timer?
     
     var sharedInstance = DataServer.sharedInstance
+    
+    private var northStop : Stop {
+        didSet {
+            self.stopLabel.text = northStop.stopName.replacingOccurrences(of: "Northbound", with: "")
+        }
+    }
+    private var southStop : Stop
+    
+    private let BORDER_WIDTH : CGFloat = 1.5
+    private let BORDER_COLOR : CGColor = appColor1.cgColor
+    
+    public var isExpanded = false {
+        didSet {
+            self.tableView.isScrollEnabled = isExpanded
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        northStop = defaultNorthStop
+        southStop = defaultSouthStop
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +51,19 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.delegate = self
         tableView.dataSource = self
         
-        self.northDepartures = self.sharedInstance.getDepartureTimesForStop(stop: northStop!)
-        self.southDepartures = self.sharedInstance.getDepartureTimesForStop(stop: southStop!)
+        self.northDepartures = self.sharedInstance.getDepartureTimesForStop(stop: northStop)
+        self.southDepartures = self.sharedInstance.getDepartureTimesForStop(stop: southStop)
         
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.view.backgroundColor = appColor2
+        self.view.layer.borderWidth = 3
+        self.view.layer.borderColor = BORDER_COLOR
+        self.northboundLabel.layer.borderWidth = BORDER_WIDTH
+        self.southboundLabel.layer.borderWidth = BORDER_WIDTH
+        self.northboundLabel.layer.borderColor = BORDER_COLOR
+        self.southboundLabel.layer.borderColor = BORDER_COLOR
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -57,6 +89,9 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         if let cell : NorthSouthDeparturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "NorthSouthCell") as?NorthSouthDeparturesTableViewCell {
             cell.setDepartureTime(time: northDepartures[indexPath.row], north: true)
             cell.setDepartureTime(time: southDepartures[indexPath.row], north: false)
+            cell.contentView.layer.borderColor = BORDER_COLOR
+            cell.contentView.layer.borderWidth = BORDER_WIDTH
+            cell.contentView.backgroundColor = appColor1 //Same as BORDER_COLOR
             return cell
         } else {
             return UITableViewCell()
@@ -64,6 +99,9 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (!isExpanded) {
+            return tableView.frame.height
+        }
         return 44
     }
     
