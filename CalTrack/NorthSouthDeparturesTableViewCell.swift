@@ -38,7 +38,7 @@ class NorthSouthDeparturesTableViewCell: UITableViewCell {
             timeRemainingLabel = self.southTimeToDepartureLabel
         }
         timeLabel.text = String(timeInMinutes)
-        timeRemainingLabel.text = String(timeInMinutes - Int.currentDateInMinutes())
+        timeRemainingLabel.text = "Leaves in " + String(timeInMinutes - Int.currentDateInMinutes()) + " minutes"
         }
 
 }
