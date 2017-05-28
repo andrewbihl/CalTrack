@@ -24,6 +24,8 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        northDepartures.append(Date())
+        southDepartures.append(Date())
         // Do any additional setup after loading the view.
     }
     
