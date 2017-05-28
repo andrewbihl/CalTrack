@@ -2,8 +2,6 @@ platform :ios, '10.0'
 use_frameworks!
 
 target 'CalTrack' do
-pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
-pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git'
 pod 'KeychainAccess', :git => 'https://github.com/kishikawakatsumi/KeychainAccess.git'
 pod 'RealmSwift'
 pod 'Whisper', :git => 'https://github.com/hyperoslo/Whisper.git'
