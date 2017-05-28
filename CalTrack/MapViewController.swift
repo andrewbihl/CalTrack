@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 import CoreLocation
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, GMSMapViewDelegate {
 
     // location
     var locationManager = CLLocationManager()
@@ -21,6 +21,8 @@ class MapViewController: UIViewController {
     var detailVC : MapDetailViewController?
     
     var nearestStop: Stop?
+    
+    var tapActive = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,10 +53,12 @@ class MapViewController: UIViewController {
         // Add the map to the view, hide it until we've got a location update.
         view = mapView
         mapView.isHidden = true
+        mapView.delegate = self
         
         self.addTrainStopsAndPath()
         self.showTimesForClosestStop()
         self.addAnimatedTrain()
+        
         
     }
     
@@ -107,6 +111,31 @@ class MapViewController: UIViewController {
     }
     */
   
+    // MARK: GMSMapViewDelegate
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        
+        let camera = GMSCameraPosition.camera(withLatitude: marker.position.latitude,
+                                              longitude: marker.position.longitude,
+                                              zoom: zoomLevel)
+        if mapView.isHidden {
+            mapView.isHidden = false
+            mapView.camera = camera
+        }  else {
+            
+            mapView.animate(to: camera)
+        }
+        
+        self.tapActive = true
+        print("You tapped at \(marker.position.latitude), \(marker.position.longitude)")
+        
+        if let stop = marker.position.stopWithExactPosition {
+        detailVC?.stopTappedChanged(with: stop)
+        }
+        
+        return true
+    }
+    
     }
 
 extension MapViewController: CLLocationManagerDelegate {
@@ -126,7 +155,9 @@ extension MapViewController: CLLocationManagerDelegate {
             mapView.isHidden = false
             mapView.camera = camera
         }  else {
+            if !tapActive {
             mapView.animate(to: camera)
+            }
         }
         
         detailVC?.closestStopChanged()
@@ -174,8 +205,13 @@ extension MapViewController: InformingDelegate {
     }
     
     func valueChangedFromTap(with stop: Stop) -> Stop? {
-        
-        return nil
+        if stop != self.nearestStop {
+            self.nearestStop = stop
+            return stop
+        }
+        else {
+            return nil
+        }
     }
 }
 

@@ -219,6 +219,21 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             let south = value.stopIsNorth ? value.stopPartner : value
             if north != nil && south != nil {
                 self.updateStops(northStop: north!, southStop: south!)
+                self.tableView.reloadData()
+            }
+        } else{
+            print("new location, same nearest stop")
+        }
+    }
+    
+    func stopTappedChanged(with stop: Stop) {
+        if let value = self.delegate?.valueChangedFromTap(with: stop) {
+            print("closest stop changed", value)
+            let north = value.stopIsNorth ? value : value.stopPartner
+            let south = value.stopIsNorth ? value.stopPartner : value
+            if north != nil && south != nil {
+                self.updateStops(northStop: north!, southStop: south!)
+                self.tableView.reloadData()
             }
         } else{
             print("new location, same nearest stop")
