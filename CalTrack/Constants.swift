@@ -157,3 +157,14 @@ extension CLLocationCoordinate2D {
     } */
     
 }
+
+extension Calendar {
+    
+    static var dateInMinutes: Int {
+        let date = Date()
+        let hour = self.current.component(.hour, from: date)
+        let minute = self.current.component(.minute, from: date)
+        
+        return 60 * hour + minute
+    }
+}
