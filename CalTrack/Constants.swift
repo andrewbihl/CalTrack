@@ -139,7 +139,7 @@ public extension Stop {
 
 extension Sequence where Iterator.Element == Stop {
     
-        func getStopLocations() -> [CLLocationCoordinate2D] {
+    var getStopLocations: [CLLocationCoordinate2D] {
         
         return self.map ({
             $0.stopCoordinates
@@ -151,11 +151,32 @@ extension Sequence where Iterator.Element == Stop {
 extension CLLocationCoordinate2D {
     public static let defaultCoordinates = CLLocationCoordinate2DMake(defaultLatitude, defaultLongitude)
     
-    /*
-    func getClosestStop(with location: CLLocationCoordinate2D) -> Stop {
-        let stopLocations = Stop.allValues.getStopLocations
-    } */
     
+    
+}
+
+extension CLLocation {
+    
+    var getClosestStop:  Stop {
+        let stopLocations = Stop.allValues//.getStopLocations
+        
+        var resStop: Stop?
+        var leastDistance: CLLocationDistance = 10000000.0
+        
+        for stop in stopLocations {
+            let dist = self.distance(from: CLLocation(coordinate: stop.stopCoordinates, altitude: 0, horizontalAccuracy:  5, verticalAccuracy: 5, timestamp: Date()))
+            if dist < leastDistance {
+                leastDistance = dist
+                resStop = stop
+            }
+        }
+        
+        if resStop != nil{
+        return resStop!
+        } else {
+            return Stop(rawValue: 0)!
+        }
+    }
 }
 
 extension Calendar {

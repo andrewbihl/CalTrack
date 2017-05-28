@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol InformingDelegate {
+    func valueChanged() -> Stop
+}
+
 protocol MapDetailAnimationManager {
     
     /// Respond to the user swiping on the view
@@ -22,6 +26,8 @@ protocol MapDetailAnimationManager {
 }
 
 class MapDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    var delegate: InformingDelegate?
+    
     @IBOutlet var tableView: UITableView!
     @IBOutlet var stopLabel: UILabel!
     
@@ -37,7 +43,9 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     private var northStop : Stop {
         didSet {
+            if (self.isViewLoaded && (self.view.window != nil)) {
             self.stopLabel.text = northStop.stopName.replacingOccurrences(of: "Northbound", with: "")
+            }
         }
     }
     private var southStop : Stop
@@ -53,6 +61,13 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         super.init(coder: aDecoder)
     }
     
+    init() {
+        northStop = defaultNorthStop
+        southStop = defaultSouthStop
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -62,6 +77,8 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         
         self.northDepartures = self.sharedInstance.getDepartureTimesForStop(stop: northStop)
         self.southDepartures = self.sharedInstance.getDepartureTimesForStop(stop: southStop)
+        
+        //addObserver(self, forKeyPath: #keyPath(self.sharedInstance.defaultNorthStop), options: [.old, .new], context: nil)
         
     }
 
@@ -89,7 +106,9 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         self.southStop = southStop
         self.northDepartures = sharedInstance.getDepartureTimesForStop(stop: northStop)
         self.southDepartures = sharedInstance.getDepartureTimesForStop(stop: southStop)
+        if (self.isViewLoaded && (self.view.window != nil)) {
         self.stopLabel.text = northStop.stopName.replacingOccurrences(of: "Northbound", with: "")
+        }
     }
 
     
@@ -150,9 +169,25 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         updateTimer = Timer(timeInterval: TimeInterval(intervalInSeconds), repeats: true, block: { (timer) in
             print("Updating table.")
             self.tableView.reloadData()
-            self.beginUpdateTimer(intervalInSeconds: intervalInSeconds)
+           // self.beginUpdateTimer(intervalInSeconds: intervalInSeconds)
         });
         updateTimer?.fire()
+    }
+    
+    
+    // MARK: - Key-Value Observing
+    /*
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == #keyPath() {
+            //
+        }
+    } */
+    
+    func closestStopChanged() {
+        if let value = self.delegate?.valueChanged() {
+        print("closest stop changed", value)
+        self.updateStops(northStop: value, southStop: value)
+        }
     }
     
 }

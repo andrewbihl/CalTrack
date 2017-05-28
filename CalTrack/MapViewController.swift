@@ -18,6 +18,7 @@ class MapViewController: UIViewController {
     var mapView: GMSMapView!
     var zoomLevel: Float = 15.0
     let defaultLocation = CLLocationCoordinate2D.defaultCoordinates
+    var detailVC : MapDetailViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +54,15 @@ class MapViewController: UIViewController {
         self.showTimesForClosestStop()
         self.addAnimatedTrain()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // delegate value sharing
+        
+        let parent = self.parent!
+        detailVC = parent.childViewControllers[0] as? MapDetailViewController
+        detailVC?.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -105,6 +115,7 @@ extension MapViewController: CLLocationManagerDelegate {
         
             let location = locations.last!
             print("Location: \(location)")
+            self.currentLocation = location
         
             let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
                                               longitude: location.coordinate.longitude,
@@ -115,6 +126,8 @@ extension MapViewController: CLLocationManagerDelegate {
         }  else {
             mapView.animate(to: camera)
         }
+        
+        detailVC?.closestStopChanged()
 
     }
     
@@ -139,6 +152,17 @@ extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         locationManager.stopUpdatingLocation()
         print("Error: \(error)")
+    }
+}
+
+extension MapViewController: InformingDelegate {
+    func valueChanged() -> Stop {
+        if let stop = self.currentLocation?.getClosestStop {
+            return stop
+        } else {
+            return Stop(rawValue: 1)!
+        }
+
     }
 }
 
