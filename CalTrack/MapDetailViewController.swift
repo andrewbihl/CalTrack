@@ -169,7 +169,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         updateTimer = Timer(timeInterval: TimeInterval(intervalInSeconds), repeats: true, block: { (timer) in
             print("Updating table.")
             self.tableView.reloadData()
-            self.beginUpdateTimer(intervalInSeconds: intervalInSeconds)
+           // self.beginUpdateTimer(intervalInSeconds: intervalInSeconds)
         });
         updateTimer?.fire()
     }
