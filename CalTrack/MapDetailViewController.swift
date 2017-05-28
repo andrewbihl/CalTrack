@@ -103,9 +103,6 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         self.southboundLabel.layer.borderWidth = BORDER_WIDTH
         self.northboundLabel.layer.borderColor = BORDER_COLOR
         self.southboundLabel.layer.borderColor = BORDER_COLOR
-        for i in 0..<self.northDepartures.count {
-            self.tableView(self.tableView, cellForRowAt: IndexPath(row: i, section: 0))
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -121,7 +118,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         self.swipeUp = swipeUp
         self.swipeDown?.isEnabled = false
         
-        beginUpdateTimer(intervalInSeconds: 60)
+        beginUpdateTimer(intervalInSeconds: 30)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -195,11 +192,10 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func beginUpdateTimer(intervalInSeconds: Int){
-        updateTimer = Timer(timeInterval: TimeInterval(intervalInSeconds), repeats: true, block: { (timer) in
-            print("Updating table.")
+        Timer.scheduledTimer(withTimeInterval: TimeInterval(intervalInSeconds), repeats: true) { (timer) in
+            print("Reload table")
             self.tableView.reloadData()
-           // self.beginUpdateTimer(intervalInSeconds: intervalInSeconds)
-        });
+        }
     }
     
     
