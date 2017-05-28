@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		06B40CD31EDA50A500BA4A0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F737A1A1EDA3302006628BF /* AppDelegate.swift */; };
 		06B40CD41EDA50A800BA4A0F /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F737A1C1EDA3302006628BF /* FirstViewController.swift */; };
-		06B40CD51EDA50AB00BA4A0F /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F737A1E1EDA3302006628BF /* SecondViewController.swift */; };
 		06B40CD61EDA50B400BA4A0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F737A201EDA3302006628BF /* Main.storyboard */; };
 		06B40CD71EDA50B900BA4A0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F737A231EDA3302006628BF /* Assets.xcassets */; };
 		06B40CD81EDA50BC00BA4A0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F737A251EDA3302006628BF /* LaunchScreen.storyboard */; };
@@ -21,6 +20,9 @@
 		06CB06021EDA666300354E4E /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CB06011EDA666300354E4E /* TabBarViewController.swift */; };
 		2F11D18B1EDA5A3F003BB09B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11D18A1EDA5A3F003BB09B /* Constants.swift */; };
 		2F11D18D1EDA722F003BB09B /* DataServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11D18C1EDA722F003BB09B /* DataServer.swift */; };
+		2F11D18F1EDA80E0003BB09B /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11D18E1EDA80E0003BB09B /* ScheduleViewController.swift */; };
+		2F11D1911EDA82BE003BB09B /* ScheduleFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F11D1901EDA82BE003BB09B /* ScheduleFooterView.xib */; };
+		2F11D1931EDA83B7003BB09B /* ScheduleFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11D1921EDA83B7003BB09B /* ScheduleFooterView.swift */; };
 		F79832341109B29D64A0C3AB /* Pods_CalTrack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0A5EEC30AD58DFAC4FEE13 /* Pods_CalTrack.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,10 +34,12 @@
 		06CB06011EDA666300354E4E /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		2F11D18A1EDA5A3F003BB09B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2F11D18C1EDA722F003BB09B /* DataServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataServer.swift; sourceTree = "<group>"; };
+		2F11D18E1EDA80E0003BB09B /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
+		2F11D1901EDA82BE003BB09B /* ScheduleFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScheduleFooterView.xib; sourceTree = "<group>"; };
+		2F11D1921EDA83B7003BB09B /* ScheduleFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleFooterView.swift; sourceTree = "<group>"; };
 		2F737A171EDA3302006628BF /* CalTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F737A1A1EDA3302006628BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F737A1C1EDA3302006628BF /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		2F737A1E1EDA3302006628BF /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		2F737A211EDA3302006628BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2F737A231EDA3302006628BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F737A261EDA3302006628BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -98,8 +102,10 @@
 				2F737A1A1EDA3302006628BF /* AppDelegate.swift */,
 				06CB05FF1EDA631D00354E4E /* RealmModels.swift */,
 				2F737A1C1EDA3302006628BF /* FirstViewController.swift */,
-				2F737A1E1EDA3302006628BF /* SecondViewController.swift */,
 				2F737A201EDA3302006628BF /* Main.storyboard */,
+				2F11D18E1EDA80E0003BB09B /* ScheduleViewController.swift */,
+				2F11D1901EDA82BE003BB09B /* ScheduleFooterView.xib */,
+				2F11D1921EDA83B7003BB09B /* ScheduleFooterView.swift */,
 				2F11D18A1EDA5A3F003BB09B /* Constants.swift */,
 				06CB06011EDA666300354E4E /* TabBarViewController.swift */,
 				06CB05DE1EDA52A100354E4E /* MapDetailViewController.swift */,
@@ -176,6 +182,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F11D1911EDA82BE003BB09B /* ScheduleFooterView.xib in Resources */,
 				06B40CD91EDA50BF00BA4A0F /* Info.plist in Resources */,
 				06B40CD81EDA50BC00BA4A0F /* LaunchScreen.storyboard in Resources */,
 				06B40CD61EDA50B400BA4A0F /* Main.storyboard in Resources */,
@@ -241,10 +248,11 @@
 			files = (
 				06CB06001EDA631D00354E4E /* RealmModels.swift in Sources */,
 				06CB05DF1EDA52A100354E4E /* MapDetailViewController.swift in Sources */,
-				06B40CD51EDA50AB00BA4A0F /* SecondViewController.swift in Sources */,
 				2F11D18D1EDA722F003BB09B /* DataServer.swift in Sources */,
 				06B40CD41EDA50A800BA4A0F /* FirstViewController.swift in Sources */,
+				2F11D18F1EDA80E0003BB09B /* ScheduleViewController.swift in Sources */,
 				06CB06021EDA666300354E4E /* TabBarViewController.swift in Sources */,
+				2F11D1931EDA83B7003BB09B /* ScheduleFooterView.swift in Sources */,
 				06B40CD31EDA50A500BA4A0F /* AppDelegate.swift in Sources */,
 				06CB05DD1EDA528A00354E4E /* MapViewController.swift in Sources */,
 				2F11D18B1EDA5A3F003BB09B /* Constants.swift in Sources */,
