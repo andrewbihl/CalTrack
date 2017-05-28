@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F11D18B1EDA5A3F003BB09B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11D18A1EDA5A3F003BB09B /* Constants.swift */; };
 		2F737A1B1EDA3302006628BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F737A1A1EDA3302006628BF /* AppDelegate.swift */; };
 		2F737A1D1EDA3302006628BF /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F737A1C1EDA3302006628BF /* FirstViewController.swift */; };
 		2F737A1F1EDA3302006628BF /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F737A1E1EDA3302006628BF /* SecondViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F11D18A1EDA5A3F003BB09B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2F737A171EDA3302006628BF /* CalTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F737A1A1EDA3302006628BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F737A1C1EDA3302006628BF /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				2F737A1C1EDA3302006628BF /* FirstViewController.swift */,
 				2F737A1E1EDA3302006628BF /* SecondViewController.swift */,
 				2F737A201EDA3302006628BF /* Main.storyboard */,
+				2F11D18A1EDA5A3F003BB09B /* Constants.swift */,
 				2F737A231EDA3302006628BF /* Assets.xcassets */,
 				2F737A251EDA3302006628BF /* LaunchScreen.storyboard */,
 				2F737A281EDA3302006628BF /* Info.plist */,
@@ -215,6 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F11D18B1EDA5A3F003BB09B /* Constants.swift in Sources */,
 				2F737A1F1EDA3302006628BF /* SecondViewController.swift in Sources */,
 				2F737A1B1EDA3302006628BF /* AppDelegate.swift in Sources */,
 				2F737A1D1EDA3302006628BF /* FirstViewController.swift in Sources */,
