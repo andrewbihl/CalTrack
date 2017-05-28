@@ -18,6 +18,7 @@ class MapViewController: UIViewController {
     var mapView: GMSMapView!
     var zoomLevel: Float = 15.0
     let defaultLocation = CLLocationCoordinate2D.defaultCoordinates
+    var detailVC : MapDetailViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,9 +56,8 @@ class MapViewController: UIViewController {
         
         // delegate value sharing
         
-        let detailVC : MapDetailViewController = MapDetailViewController()
-        detailVC.delegate = self
-        detailVC.closestStopChanged()
+        detailVC = MapDetailViewController()
+        detailVC?.delegate = self
         
     }
 
@@ -111,6 +111,7 @@ extension MapViewController: CLLocationManagerDelegate {
         
             let location = locations.last!
             print("Location: \(location)")
+            self.currentLocation = location
         
             let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
                                               longitude: location.coordinate.longitude,
@@ -121,6 +122,8 @@ extension MapViewController: CLLocationManagerDelegate {
         }  else {
             mapView.animate(to: camera)
         }
+        
+        detailVC?.closestStopChanged()
 
     }
     
@@ -150,7 +153,12 @@ extension MapViewController: CLLocationManagerDelegate {
 
 extension MapViewController: InformingDelegate {
     func valueChanged() -> Stop {
-        return Stop(rawValue: 0)! // which is 5 in your case (value taken from a question)
+        if let stop = self.currentLocation?.getClosestStop {
+            return stop
+        } else {
+            return Stop(rawValue: 1)!
+        }
+
     }
 }
 
