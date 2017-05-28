@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol InformingDelegate {
+    func valueChanged() -> Stop
+}
+
 class MapDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    var delegate: InformingDelegate?
+    
     @IBOutlet var tableView: UITableView!
     @IBOutlet var stopLabel: UILabel!
     
@@ -44,6 +50,13 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         super.init(coder: aDecoder)
     }
     
+    init() {
+        northStop = defaultNorthStop
+        southStop = defaultSouthStop
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -53,6 +66,8 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         
         self.northDepartures = self.sharedInstance.getDepartureTimesForStop(stop: northStop)
         self.southDepartures = self.sharedInstance.getDepartureTimesForStop(stop: southStop)
+        
+        //addObserver(self, forKeyPath: #keyPath(self.sharedInstance.defaultNorthStop), options: [.old, .new], context: nil)
         
     }
 
@@ -121,6 +136,20 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         updateTimer = Timer(timeInterval: TimeInterval(intervalInSeconds), repeats: true, block: { (timer) in
             self.tableView.reloadData()
         });
+    }
+    
+    
+    // MARK: - Key-Value Observing
+    /*
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == #keyPath() {
+            //
+        }
+    } */
+    
+    func closestStopChanged() {
+        let value = self.delegate?.valueChanged()
+        print("closest stop changed", value)
     }
     
 }

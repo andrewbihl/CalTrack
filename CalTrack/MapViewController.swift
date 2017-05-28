@@ -53,6 +53,12 @@ class MapViewController: UIViewController {
         self.showTimesForClosestStop()
         self.addAnimatedTrain()
         
+        // delegate value sharing
+        
+        let detailVC : MapDetailViewController = MapDetailViewController()
+        detailVC.delegate = self
+        detailVC.closestStopChanged()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -139,6 +145,12 @@ extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         locationManager.stopUpdatingLocation()
         print("Error: \(error)")
+    }
+}
+
+extension MapViewController: InformingDelegate {
+    func valueChanged() -> Stop {
+        return Stop(rawValue: 0)! // which is 5 in your case (value taken from a question)
     }
 }
 
