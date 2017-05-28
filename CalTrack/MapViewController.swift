@@ -47,9 +47,12 @@ class MapViewController: UIViewController {
         
         // Add the map to the view, hide it until we've got a location update.
         view = mapView
-       // mapView.isHidden = true
+        mapView.isHidden = true
         
-        self.addTrainStops()
+        self.addTrainStopsAndPath()
+        self.showTimesForClosestStop()
+        self.addAnimatedTrain()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,13 +61,28 @@ class MapViewController: UIViewController {
     }
     
     
-    func addTrainStops() {
-        let stops = DataServer.sharedInstance.getAllStops()
+    func addTrainStopsAndPath() {
+        let path = GMSMutablePath()
+        let stops = StopName.getStopLocations(headingNorth: true)
+        
         for stop in stops {
-            let marker = GMSMarker(position: stop.value)
-            
+            let marker = GMSMarker(position: stop.stopCoordinates)
+            path.add(stop.stopCoordinates)
             marker.map = mapView
         }
+        
+        let polyline = GMSPolyline(path: path)
+        //polyline.strokeColor = .green
+        polyline.strokeWidth = 3
+        polyline.map = mapView
+    }
+    
+    func showTimesForClosestStop() {
+        
+    }
+    
+    func addAnimatedTrain() {
+        
     }
 
     /*
