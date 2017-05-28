@@ -129,6 +129,18 @@ public extension Stop {
         return CLLocationCoordinate2DMake(self.stopLatitude, self.stopLongitude)
     }
     
+    var stopIsNorth: Bool {
+        return self.rawValue % 2 == 0
+    }
+    
+    var stopPartner: Stop? {
+        if let stop = self.stopIsNorth ? Stop(rawValue: self.rawValue + 1)! : Stop(rawValue: self.rawValue - 1) {
+        return stop
+        } else {
+            return nil
+        }
+    }
+    
     /*
     static func distanceToStop(stop: Stop, fromLocation location: CLLocationCoordinate2D) {
         return

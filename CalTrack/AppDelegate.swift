@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             let defaultRealmPath = Realm.Configuration.defaultConfiguration.fileURL!
             
-           // if !FileManager.default.fileExists(atPath: defaultRealmPath.absoluteString) {
                 do {
                     try FileManager.default.removeItem(at: defaultRealmPath)
                     try FileManager.default.copyItem(at: bUrl, to: defaultRealmPath)
@@ -39,7 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                     }
                 }
-       //     }
         }
      
     }

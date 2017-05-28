@@ -20,6 +20,8 @@ class MapViewController: UIViewController {
     let defaultLocation = CLLocationCoordinate2D.defaultCoordinates
     var detailVC : MapDetailViewController?
     
+    var nearestStop: Stop?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -156,9 +158,15 @@ extension MapViewController: CLLocationManagerDelegate {
 }
 
 extension MapViewController: InformingDelegate {
-    func valueChanged() -> Stop {
+    func valueChanged() -> Stop? {
         if let stop = self.currentLocation?.getClosestStop {
+            if stop != self.nearestStop {
+            self.nearestStop = stop
             return stop
+            }
+            else {
+                return nil 
+            }
         } else {
             return Stop(rawValue: 1)!
         }
