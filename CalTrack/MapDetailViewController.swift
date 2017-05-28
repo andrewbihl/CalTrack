@@ -24,6 +24,10 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         
         // Do any additional setup after loading the view.
     }
+    
+    public func updateStop(stop: StopName) {
+        
+    }
 
     // MARK: - Table View Functions
 
