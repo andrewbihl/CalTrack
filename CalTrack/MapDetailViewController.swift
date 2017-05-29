@@ -37,6 +37,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var swipeUp : UIGestureRecognizer?
     var swipeDown : UIGestureRecognizer?
+    var tapBanner : UIGestureRecognizer?
     
     private let CELL_HEIGHT : CGFloat = 58
     
@@ -104,17 +105,22 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         self.southboundLabel.layer.borderWidth = BORDER_WIDTH
         self.northboundLabel.layer.borderColor = BORDER_COLOR
         self.southboundLabel.layer.borderColor = BORDER_COLOR
+        self.tableView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.userSwipedUp))
         swipeUp.direction = .up
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.userSwipedDown))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.userTappedBanner))
         swipeDown.direction = .down
 //        swipeUp.delegate = self
 //        swipeDown.delegate = self
+//        self.view.addGestureRecognizer(tap)
+        self.stopLabel.addGestureRecognizer(tap)
         self.view.addGestureRecognizer(swipeUp)
         self.view.addGestureRecognizer(swipeDown)
+        self.tapBanner = tap
         self.swipeDown = swipeDown
         self.swipeUp = swipeUp
         self.swipeDown?.isEnabled = false
@@ -137,6 +143,9 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
 
+    @IBAction func userTappedBanner() {
+        self.userSwipedUp()
+    }
     
     @IBAction func userSwipedUp() {
         if let parentVC = self.parent as? MapDetailAnimationManager {
