@@ -60,7 +60,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         
         self.addTrainStopsAndPath()
 
-        self.addAnimatedTrain()
         
         
     }
@@ -103,26 +102,81 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             let current = Calendar.dateInMinutes
             
         let (northStops, northTimes) = DataServer.sharedInstance.getNearestTrainLocation(with: stop, north: true)
-        
-        let (southStops, southTimes) = DataServer.sharedInstance.getNearestTrainLocation(with: stop, north: false)
             
-            northTrain?.map = nil 
-            northTrain = GMSMarker(position: northStops[0].stopCoordinates)
+            if northStops.count > 1 && northTimes.count > 1 {
+            northTrain?.map = nil
+            let northTrainLess = northStops[0].stopCoordinates
+            let northTrainMore = northStops[0].stopCoordinates
+                let (latDiff, longDiff)  = (northTrainMore.latitude - northTrainLess.latitude, northTrainMore.longitude - northTrainLess.longitude)
+                let timeProp: Double = Double((current - northTimes[0]) / (northTimes[1] - northTimes[0]))
+                let pos = CLLocationCoordinate2DMake(northTrainLess.latitude + timeProp * latDiff, northTrainLess.longitude + timeProp * longDiff)
+            northTrain = GMSMarker(position: pos)
             northTrain?.icon = #imageLiteral(resourceName: "SpeedTrainSmall")
             northTrain?.map = mapView
             
-            for (ind, elem) in northStops.enumerated() {
-                if elem != northStops.first {
-            CATransaction.begin()
-            CATransaction.setAnimationDuration(CFTimeInterval((northTimes[ind] - northTimes[ind - 1]) * 60))
-            northTrain?.position = northStops[ind].stopCoordinates
-            CATransaction.commit()
-                }
+                self.trainAnimation(stops: northStops, times: northTimes, current: current, first: true, north: true)
+            
+            }
+           // print("added train from \(northFrom.stopName) to \(northTo.stopName)")
+            
+            if let stopPart = stop.stopPartner {
+            let (southStops, southTimes) = DataServer.sharedInstance.getNearestTrainLocation(with: stopPart, north: false)
+            
+            if southStops.count > 1 && southTimes.count > 1 {
+                southTrain?.map = nil
+                let southTrainLess = southStops[0].stopCoordinates
+                let southTrainMore = southStops[0].stopCoordinates
+                let (latDiff, longDiff)  = (southTrainMore.latitude - southTrainLess.latitude, southTrainMore.longitude - southTrainLess.longitude)
+                let timeProp: Double = Double((current - southTimes[0]) / (southTimes[1] - southTimes[0]))
+                let pos = CLLocationCoordinate2DMake(southTrainLess.latitude + timeProp * latDiff, southTrainLess.longitude + timeProp * longDiff)
+                southTrain = GMSMarker(position: pos)
+                southTrain?.icon = #imageLiteral(resourceName: "SpeedTrainSmall")
+                southTrain?.map = mapView
+                
+                self.trainAnimation(stops: southStops, times: southTimes, current: current, first: true, north: false)
+                
+            }
             }
             
-            
-           // print("added train from \(northFrom.stopName) to \(northTo.stopName)")
     }
+        
+    }
+        
+    func trainAnimation(stops: [Stop], times: [Int], current: Int?, first: Bool, north: Bool) {
+        var stops = stops
+        var times = times
+        if stops.count > 1 {
+            
+            CATransaction.begin()
+            
+            let lastStopTime = times.removeFirst()
+                stops.removeFirst()
+            
+            CATransaction.setCompletionBlock ({
+                self.trainAnimation(stops: stops, times: times, current: nil, first: false, north: north)
+            })
+            
+           if first {
+                print("animate for duration", CFTimeInterval((times[0] - current!) * 60))
+            CATransaction.setAnimationDuration(CFTimeInterval((times[0] - current!) * 60))
+            
+                
+            } else {
+                print("animate for duration", CFTimeInterval((times[0] - lastStopTime) * 60))
+                CATransaction.setAnimationDuration(CFTimeInterval((times[0] - lastStopTime) * 60))
+                
+            }
+            if north {
+            northTrain?.position = stops[0].stopCoordinates
+                print("north to destination", stops[0].stopCoordinates )
+            }
+            else {
+                southTrain?.position = stops[0].stopCoordinates
+                print("south to destination", stops[0].stopCoordinates )
+            }
+            
+            CATransaction.commit()
+        }
     }
 
     /*
@@ -252,7 +306,9 @@ extension MapViewController: InformingDelegate {
         if let stop = self.currentLocation?.getClosestStop {
             if stop != self.selectedStop {
             self.selectedStop = stop
+                 self.addAnimatedTrain()
             return stop
+               
             }
             else {
                 return nil 
