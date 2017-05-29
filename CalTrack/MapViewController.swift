@@ -85,7 +85,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         
         for stop in stops {
             let marker = GMSMarker(position: stop.stopCoordinates)
-            if stop.rawValue != Stop.tamien.rawValue || stop.rawValue != Stop.sanJose.rawValue {
+            if stop.rawValue != Stop.tamien.rawValue && stop.rawValue != Stop.sanJose.rawValue {
+                
             path.add(stop.stopCoordinates)
             } else {
                 print("is tamien or sanjose")
