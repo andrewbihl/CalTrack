@@ -85,7 +85,11 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         
         for stop in stops {
             let marker = GMSMarker(position: stop.stopCoordinates)
+            if stop.rawValue != Stop.tamien.rawValue || stop.rawValue != Stop.sanJose.rawValue {
             path.add(stop.stopCoordinates)
+            } else {
+                print("is tamien or sanjose")
+            }
             marker.title = stop.stopName
             marker.map = mapView
         }
@@ -259,10 +263,11 @@ extension MapViewController: CLLocationManagerDelegate {
         }  else {
             if !tapActive {
             mapView.animate(to: camera)
+                
                  detailVC?.closestStopChanged()
             }
         }
-        zoomToIncludeStop()
+        
         detailVC?.closestStopChanged()
 
     }
@@ -307,6 +312,9 @@ extension MapViewController: InformingDelegate {
             if stop != self.selectedStop {
             self.selectedStop = stop
                  self.addAnimatedTrain()
+                if !tapActive {
+                zoomToIncludeStop()
+                }
             return stop
                
             }
