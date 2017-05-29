@@ -19,7 +19,7 @@ class DataServer {
     init() {
         let date = Date()
         let today = Calendar.current.component(.weekday, from: date)
-        print("today", today, Calendar.dateInMinutes)
+        //print("today", today, Calendar.dateInMinutes)
         let realm = try! Realm()
         
         switch today {
@@ -80,7 +80,7 @@ class DataServer {
                 return stopTime.departureTime.getDateFromInt()
             }) 
             
-            print(theseStops, theseTimes)
+            //print(theseStops, theseTimes)
             return theseTimes
         } else {
             return []

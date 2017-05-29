@@ -47,6 +47,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         let camera = GMSCameraPosition.camera(withLatitude: defaultLocation.latitude,
                                               longitude: defaultLocation.longitude,
                                               zoom: zoomLevel)
+        print("initial camera zoom")
         mapView = GMSMapView.map(withFrame: view.bounds, camera: camera)
         mapView.settings.myLocationButton = true
         mapView.isMyLocationEnabled = true
@@ -201,6 +202,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         let camera = GMSCameraPosition.camera(withLatitude: marker.position.latitude,
                                               longitude: marker.position.longitude,
                                               zoom: zoomLevel)
+        print("zooming to tapped marker \(marker.position)")
         if mapView.isHidden {
             mapView.isHidden = false
             mapView.camera = camera
@@ -226,6 +228,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         let camera = GMSCameraPosition.camera(withLatitude: coord.latitude,
                                               longitude: coord.longitude,
                                               zoom: zoomLevel)
+            print("zooming because location button was tapped")
         
         if mapView.isHidden {
             mapView.isHidden = false
@@ -253,33 +256,36 @@ extension MapViewController: CLLocationManagerDelegate {
         print("Location: \(location)")
         self.currentLocation = location
         
+        /*
         let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
                                               longitude: location.coordinate.longitude,
-                                              zoom: zoomLevel)
+                                              zoom: zoomLevel) */
         
         if mapView.isHidden {
             mapView.isHidden = false
-            mapView.camera = camera
-             detailVC?.closestStopChanged()
-        }  else {
-            if !tapActive {
-            mapView.animate(to: camera)
-                
-                 detailVC?.closestStopChanged()
-            }
+            //mapView.camera = camera
+        
         }
         
-        detailVC?.closestStopChanged()
+        detailVC?.closestStopChanged() // this will take care of zoom if necessary
 
     }
     
     func zoomToIncludeStop() {
+        if let myCoordinates = self.currentLocation?.coordinate{
         if let nearestStop = self.currentLocation?.getClosestStop {
-            if let myCoordinates = self.currentLocation?.coordinate{
+                print("zooming to include me \(myCoordinates) and nearest stop \(nearestStop.stopCoordinates)")
                 let bounds = GMSCoordinateBounds(coordinate: myCoordinates, coordinate: nearestStop.stopCoordinates)
                 let cameraUpdate = GMSCameraUpdate.fit(bounds, withPadding: 50)
                 mapView.animate(with: cameraUpdate)
             }
+         else {
+            print("couldn't retrieve nearest stop")
+            let camera = GMSCameraPosition.camera(withLatitude: myCoordinates.latitude ,
+                                                  longitude: myCoordinates.longitude,
+                                                  zoom: zoomLevel)
+                mapView.camera = camera
+        }
         }
     }
     
@@ -314,6 +320,7 @@ extension MapViewController: InformingDelegate {
             self.selectedStop = stop
                  self.addAnimatedTrain()
                 if !tapActive {
+                    print("zooming because location changed")
                 zoomToIncludeStop()
                 }
             return stop
