@@ -49,6 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func buildRelationships() {
+        
         let realm = try! Realm()
         
         let allObj = realm.objects(stop_times.self)

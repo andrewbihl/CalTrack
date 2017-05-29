@@ -64,12 +64,18 @@ extension Date {
     }
     
     var timeOfDepartureText: String {
-        let hour = Calendar.current.component(.hour, from: self)
+        var hour = Calendar.current.component(.hour, from: self)
+        var am = "AM"
+        
+        if hour > 11 {
+            hour = hour % 12
+            am = "PM"
+        }
         let minute = Calendar.current.component(.minute, from: self)
         var minuteString = String(minute)
         if minuteString.characters.count == 1 {
             minuteString = "0"+minuteString
         }
-        return "\(hour):\(minuteString)"
+        return "\(hour):\(minuteString) \(am)"
     }
     }
