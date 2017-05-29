@@ -190,13 +190,14 @@ extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("locations", locations)
         
-            let location = locations.last!
-            print("Location: \(location)")
-            self.currentLocation = location
+        let location = locations.last!
+        print("Location: \(location)")
+        self.currentLocation = location
         
-            let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
+        let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
                                               longitude: location.coordinate.longitude,
                                               zoom: zoomLevel)
+        
         if mapView.isHidden {
             mapView.isHidden = false
             mapView.camera = camera
@@ -207,9 +208,19 @@ extension MapViewController: CLLocationManagerDelegate {
                  detailVC?.closestStopChanged()
             }
         }
-        
+        zoomToIncludeStop()
         detailVC?.closestStopChanged()
 
+    }
+    
+    func zoomToIncludeStop() {
+        if let nearestStop = self.currentLocation?.getClosestStop {
+            if let myCoordinates = self.currentLocation?.coordinate{
+                let bounds = GMSCoordinateBounds(coordinate: myCoordinates, coordinate: nearestStop.stopCoordinates)
+                let cameraUpdate = GMSCameraUpdate.fit(bounds, withPadding: 50)
+                mapView.animate(with: cameraUpdate)
+            }
+        }
     }
     
     // Handle authorization for the location manager.
