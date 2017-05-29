@@ -77,6 +77,7 @@ class DataServer {
         if let stopTimes = stopTimes {
             let theseStops = Array(stopTimes.filter("stop_id == %@ AND departureTime > %@", stop.stopId, intDate).sorted(byKeyPath: "departureTime")).prefix(8)
             let theseTimes = theseStops.map({ (stopTime) -> Date in
+                print("departure time", stopTime.departureTime)
                 return stopTime.departureTime.getDateFromInt()
             }) 
             
@@ -95,17 +96,18 @@ class DataServer {
 extension Int {
     func getDateFromInt() -> Date {
         
-        let hour = self / 60
+        let hour = (self / 60) % 24 // sometimes time is given as 24:43 for some reason
         let minute = self % 60
         var str = ""
         if hour < 10 {
-            str = "0\(self / 60):\(self % 60)"
+            str = "0\(hour):\(minute)"
         } else {
-        str = "\(self / 60):\(self % 60)"
+        str = "\(hour):\(minute)"
         }
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         let someDateTime = formatter.date(from: str)
+        
         return someDateTime!
     }
 }

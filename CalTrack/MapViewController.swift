@@ -199,6 +199,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         
+        /*
         let camera = GMSCameraPosition.camera(withLatitude: marker.position.latitude,
                                               longitude: marker.position.longitude,
                                               zoom: zoomLevel)
@@ -212,7 +213,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         }
         
         self.tapActive = true
-        print("You tapped at \(marker.position.latitude), \(marker.position.longitude)")
+        print("You tapped at \(marker.position.latitude), \(marker.position.longitude)") */
         
         if let stop = marker.position.stopWithExactPosition {
         detailVC?.stopTappedChanged(with: stop)
@@ -220,10 +221,11 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         
         self.addAnimatedTrain()
         
-        return true
+        return false
     }
     
     func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
+        /*
         if let coord = mapView.myLocation?.coordinate {
         let camera = GMSCameraPosition.camera(withLatitude: coord.latitude,
                                               longitude: coord.longitude,
@@ -237,11 +239,11 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             
             mapView.animate(to: camera)
         }
-        }
+        } */
         
         detailVC?.closestStopChanged()
         
-        return true
+        return false
     }
     
     }
