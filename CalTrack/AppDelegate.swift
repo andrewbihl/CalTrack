@@ -15,29 +15,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    override init() {
-        super.init()
-        GMSServices.provideAPIKey("AIzaSyBOYBoKP3VQvrD5ddO2q7gZXpwIgD1Bdik")
-        
-        
-    }
-    
     func copyRealmData() {
         if let bUrl = bundleURL("caltrainTimes") {
 
             let defaultRealmPath = Realm.Configuration.defaultConfiguration.fileURL!
             
+                if !FileManager.default.fileExists(atPath: defaultRealmPath.path) {
+                    print("First initialization")
                 do {
-                    try FileManager.default.removeItem(at: defaultRealmPath)
                     try FileManager.default.copyItem(at: bUrl, to: defaultRealmPath)
                 } catch let error {
                     print("error copying seeds: \(error)")
-                    do {
-                    try FileManager.default.copyItem(at: bUrl, to: defaultRealmPath)
-                    } catch {
-                        
-                    }
                 }
+            }
         }
      
     }
@@ -63,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 }
             } else {
-                print("break!")
+                print("Not first initialization")
                 break
             }
         }
@@ -75,6 +65,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        GMSServices.provideAPIKey("AIzaSyBOYBoKP3VQvrD5ddO2q7gZXpwIgD1Bdik")
+        
         self.copyRealmData()
         
         let migrationBlock: MigrationBlock = { migration, oldSchemaVersion in
