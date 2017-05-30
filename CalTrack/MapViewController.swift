@@ -191,6 +191,14 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             
             CATransaction.commit()
             
+        } else if stops.count == 1 && !first && transactionID == self.transactionID {
+            print("final destination reached")
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
+                //if north { self.northTrain?.map = nil } else { self.southTrain?.map = nil }
+                self.addAnimatedTrain()
+            })
+            
         }
     }
 
