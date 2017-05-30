@@ -225,6 +225,30 @@ extension Date {
         
         return 60 * hour + minute
     }
+    
+    var isTodayAHoliday: Bool {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy"
+        
+        let holidays = ["05/29/2017", "07/04/2017", "09/04/2017", "11/23/2017", "12/25/2017", "01/01/2018", "05/28/2018", "07/04/2018", "09/03/2018", "11/22/2018", "12/25/2018"]
+        
+        let dateTimes = holidays.map { (elem) -> Date in
+            formatter.date(from: elem)!
+        }
+        
+        var hol = false
+        for date in dateTimes {
+            let order =  Calendar.current.compare(date, to: self, toGranularity: .day)
+            switch order {
+            case .orderedSame:
+                hol = true
+            default:
+                break
+            }
+        }
+        
+        return hol
+    }
 }
 
 extension Int {

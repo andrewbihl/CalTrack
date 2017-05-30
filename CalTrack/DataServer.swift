@@ -17,13 +17,20 @@ class DataServer {
     var stopTimes: Results<stop_times>?
     
     init() {
+        
+        
         let date = Date()
         let today = Calendar.current.component(.weekday, from: date)
-        //print("today", today, Calendar.dateInMinutes)
+        
+        let isHoliday = date.isTodayAHoliday
+        
+        print("today is a holiday? \(isHoliday)")
+        
+        print("today", today, date)
         let realm = try! Realm()
         
         switch today {
-        case 1:
+        case let x where x == 1 || isHoliday:
             self.stopTimes = realm.objects(stop_times.self).filter("trip_id contains %@", "Sunday")
         case 2...6:
             self.stopTimes = realm.objects(stop_times.self).filter("trip_id contains %@", "Weekday")
