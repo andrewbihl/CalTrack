@@ -125,15 +125,6 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         self.updateTimer?.invalidate()
     }
     
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        if size.height < size.width {
-//            self.transitionCoordinator?.animateAlongsideTransition(in: self.view, animation: { (context: UIViewControllerTransitionCoordinatorContext) in
-//                self.view.frame = CGRect.zero
-//                self.view.layoutSubviews()
-//            }, completion: nil)
-//        }
-//    }
-    
     private func configureGestureRecognizers() {
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.userSwipedUp))
         swipeUp.direction = .up
