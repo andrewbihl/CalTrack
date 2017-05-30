@@ -21,17 +21,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ukJ-VS-0bT">
-                                <rect key="frame" x="0.0" y="493" width="375" height="125"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ukJ-VS-0bT">
+                                <rect key="frame" x="0.0" y="201" width="667" height="125"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" id="Hvq-vp-rrh"/>
                                     <constraint firstAttribute="height" constant="125" id="Zz0-zs-crK"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Hvq-vp-rrh"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Hvq-vp-rrh"/>
+                                        <exclude reference="Zz0-zs-crK"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <segue destination="2gK-ey-41J" kind="embed" id="H4X-HM-PCz"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cJf-cL-ewm">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="493"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cJf-cL-ewm">
+                                <rect key="frame" x="0.0" y="0.0" width="667" height="201"/>
                                 <connections>
                                     <segue destination="cTP-Li-AbQ" kind="embed" id="Qlu-ew-bBe"/>
                                 </connections>
@@ -140,29 +152,29 @@
                         <viewControllerLayoutGuide type="bottom" id="egt-wF-k8s"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="YUn-R9-9R9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="125"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2zW-G5-0P7">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
+                                <rect key="frame" x="0.0" y="0.0" width="667" height="125"/>
                                 <subviews>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="San Francisco" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7g1-Mz-B4C">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="667" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="h3n-5V-rmC">
-                                        <rect key="frame" x="0.0" y="30" width="375" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="30" width="667" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Northbound" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlK-N1-6xw">
-                                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="333.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Southbound" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uji-af-I2Y">
-                                                <rect key="frame" x="187.5" y="0.0" width="187.5" height="20.5"/>
+                                                <rect key="frame" x="333.5" y="0.0" width="333.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -170,7 +182,7 @@
                                         </subviews>
                                     </stackView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="43z-Kl-Kqb">
-                                        <rect key="frame" x="0.0" y="50.5" width="375" height="74.5"/>
+                                        <rect key="frame" x="0.0" y="50.5" width="667" height="74.5"/>
                                     </containerView>
                                 </subviews>
                                 <gestureRecognizers/>
@@ -323,7 +335,7 @@
                         <viewControllerLayoutGuide type="bottom" id="WNu-T5-07D"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="FB4-11-4bS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="493"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="201"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -336,6 +348,10 @@
         <scene sceneID="n2G-40-bOk">
             <objects>
                 <viewController id="hic-7j-wB3" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nUl-Ho-4Im"/>
+                        <viewControllerLayoutGuide type="bottom" id="By1-ot-maO"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gbE-kj-S8J">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
