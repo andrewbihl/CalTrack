@@ -13,6 +13,8 @@ import RealmSwift
 class DataServer {
     
     public static let sharedInstance = DataServer()
+    
+    let STOP_TIMES_SHOWN_COUNT = 16
 
     var stopTimes: Results<stop_times>?
     
@@ -79,10 +81,10 @@ class DataServer {
         }
     }
     
-    public func getDepartureTimesForStop(stop: Stop) -> [Int]{ // get array of next 8 stop times
+    public func getDepartureTimesForStop(stop: Stop) -> [Int]{ // get array of next n stop times
         let intDate = Calendar.dateInMinutes
         if let stopTimes = stopTimes {
-            let theseStops = Array(stopTimes.filter("stop_id == %@ AND departureTime > %@", stop.stopId, intDate).sorted(byKeyPath: "departureTime")).prefix(8)
+            let theseStops = Array(stopTimes.filter("stop_id == %@ AND departureTime > %@", stop.stopId, intDate).sorted(byKeyPath: "departureTime")).prefix(STOP_TIMES_SHOWN_COUNT)
             let theseTimes = theseStops.map({ (stopTime) -> Int in
                 
                 return stopTime.departureTime//.getDateFromInt()

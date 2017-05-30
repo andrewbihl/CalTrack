@@ -124,6 +124,12 @@ public extension Stop {
         return stopIDs[self.rawValue]
     }
     
+    var stopZone: Int {
+        let stopZones = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 4, 4]
+        
+        return stopZones[self.rawValue]
+    }
+    
     var stopCoordinates: CLLocationCoordinate2D {
         
         return CLLocationCoordinate2DMake(self.stopLatitude, self.stopLongitude)
