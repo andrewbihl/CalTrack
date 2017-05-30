@@ -51,5 +51,13 @@ class NorthSouthDeparturesTableViewCell: UITableViewCell {
         timeRemainingLabel.text = time.timeRemainingText
 
 }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.southDepartureTimeLabel.isHidden = true
+        self.northDepartureTimeLabel.isHidden = true
+        self.northTimeToDepartureLabel.isHidden = true
+        self.southTimeToDepartureLabel.isHidden = true
+    }
 
 }
