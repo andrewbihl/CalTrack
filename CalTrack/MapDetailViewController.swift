@@ -29,6 +29,8 @@ protocol MapDetailAnimationManager {
 class MapDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var delegate: InformingDelegate?
     
+    // Parent view exists just for separation in the Interface Builder
+    @IBOutlet var tableParentView: UIView!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var stopLabel: UILabel!
     
@@ -88,6 +90,9 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableParentView.addSubview(tableView)
+        
+//        tableView.frame = tableParentView.frame
         
         self.northDepartures = self.sharedInstance.getDepartureTimesForStop(stop: northStop)
         self.southDepartures = self.sharedInstance.getDepartureTimesForStop(stop: southStop)
@@ -99,6 +104,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        self.tableView.frame = self.tableParentView.bounds
         self.view.backgroundColor = appColor2
         self.tableView.backgroundColor = appColor2
         self.view.layer.borderWidth = 3
@@ -118,6 +124,15 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewWillDisappear(animated)
         self.updateTimer?.invalidate()
     }
+    
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        if size.height < size.width {
+//            self.transitionCoordinator?.animateAlongsideTransition(in: self.view, animation: { (context: UIViewControllerTransitionCoordinatorContext) in
+//                self.view.frame = CGRect.zero
+//                self.view.layoutSubviews()
+//            }, completion: nil)
+//        }
+//    }
     
     private func configureGestureRecognizers() {
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.userSwipedUp))
