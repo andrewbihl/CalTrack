@@ -118,7 +118,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="ListIcon" id="cPa-gy-q4n">
-                        <inset key="imageInsets" minX="1" minY="10" maxX="2" maxY="-6"/>
+                        <inset key="imageInsets" minX="0.0" minY="4" maxX="0.0" maxY="-4"/>
                     </tabBarItem>
                     <connections>
                         <outlet property="scheduleTableView" destination="SfO-V8-Dxk" id="jBr-W7-zbI"/>
@@ -456,7 +456,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ListIcon" width="35" height="28"/>
+        <image name="ListIcon" width="41" height="37"/>
         <image name="MapIcon" width="34" height="28"/>
     </resources>
 </document>
