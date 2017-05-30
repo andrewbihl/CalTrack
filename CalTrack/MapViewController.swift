@@ -27,6 +27,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     var northTrain: GMSMarker?
     var southTrain: GMSMarker?
     
+    var transactionID: UUID? // ensure CATransactions are abandoned appropriately
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -92,6 +94,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             } else {
                 print("is tamien or sanjose")
             }
+            marker.icon = #imageLiteral(resourceName: "TrainStop")
             marker.title = stop.stopName.replacingOccurrences(of: " Northbound", with: "")
             marker.map = mapView
         }
@@ -109,6 +112,11 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             
         let (northStops, northTimes) = DataServer.sharedInstance.getNearestTrainLocation(with: stop, north: true)
             
+            print("added animated train")
+            
+            self.transactionID = UUID()
+            let unique = self.transactionID
+            
             if northStops.count > 1 && northTimes.count > 1 {
             northTrain?.map = nil
             let northTrainLess = northStops[0].stopCoordinates
@@ -120,10 +128,10 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             northTrain?.icon = #imageLiteral(resourceName: "SpeedTrainSmall")
             northTrain?.map = mapView
             
-                self.trainAnimation(stops: northStops, times: northTimes, current: current, first: true, north: true)
+                self.trainAnimation(stops: northStops, times: northTimes, current: current, first: true, north: true, transactionID: unique!)
             
             }
-           // print("added train from \(northFrom.stopName) to \(northTo.stopName)")
+            
             
             if let stopPart = stop.stopPartner {
             let (southStops, southTimes) = DataServer.sharedInstance.getNearestTrainLocation(with: stopPart, north: false)
@@ -139,7 +147,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
                 southTrain?.icon = #imageLiteral(resourceName: "SpeedTrainSmall")
                 southTrain?.map = mapView
                 
-                self.trainAnimation(stops: southStops, times: southTimes, current: current, first: true, north: false)
+                self.trainAnimation(stops: southStops, times: southTimes, current: current, first: true, north: false, transactionID: unique!)
                 
             }
             }
@@ -148,18 +156,18 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         
     }
         
-    func trainAnimation(stops: [Stop], times: [Int], current: Int?, first: Bool, north: Bool) {
+    func trainAnimation(stops: [Stop], times: [Int], current: Int?, first: Bool, north: Bool, transactionID: UUID) {
         var stops = stops
         var times = times
-        if stops.count > 1 {
+        if stops.count > 1 && transactionID == self.transactionID {
             
             CATransaction.begin()
             
             let lastStopTime = times.removeFirst()
-                stops.removeFirst()
+                let lastStop = stops.removeFirst()
             
             CATransaction.setCompletionBlock ({
-                self.trainAnimation(stops: stops, times: times, current: nil, first: false, north: north)
+                self.trainAnimation(stops: stops, times: times, current: nil, first: false, north: north, transactionID: transactionID)
             })
             
            if first {
@@ -174,14 +182,15 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             }
             if north {
             northTrain?.position = stops[0].stopCoordinates
-                print("north to destination", stops[0].stopCoordinates )
+                print("north to destination", stops[0].stopCoordinates, "from stop \(lastStop) to \(stops[0])")
             }
             else {
                 southTrain?.position = stops[0].stopCoordinates
-                print("south to destination", stops[0].stopCoordinates )
+                print("south to destination", stops[0].stopCoordinates, "from stop \(lastStop) to \(stops[0])")
             }
             
             CATransaction.commit()
+            
         }
     }
 
