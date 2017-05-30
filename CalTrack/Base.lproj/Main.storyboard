@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16G8c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -191,12 +192,21 @@
                                 </subviews>
                                 <gestureRecognizers/>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VFq-04-0EH">
+                                <rect key="frame" x="287" y="2" width="47" height="30"/>
+                                <state key="normal" title="Report"/>
+                                <connections>
+                                    <action selector="reportDelayTapped:" destination="2gK-ey-41J" eventType="touchUpInside" id="vuW-b3-eKA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="2zW-G5-0P7" secondAttribute="trailing" id="Fu4-jI-9im"/>
+                            <constraint firstItem="VFq-04-0EH" firstAttribute="top" secondItem="1g4-ek-6HL" secondAttribute="bottom" constant="2" id="Ucz-wI-yLN"/>
                             <constraint firstItem="2zW-G5-0P7" firstAttribute="leading" secondItem="YUn-R9-9R9" secondAttribute="leading" id="dhG-hi-7ze"/>
                             <constraint firstItem="2zW-G5-0P7" firstAttribute="top" secondItem="1g4-ek-6HL" secondAttribute="bottom" id="eiM-lB-kZI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="VFq-04-0EH" secondAttribute="trailing" constant="25" id="oFw-2j-jE0"/>
                             <constraint firstAttribute="bottom" secondItem="2zW-G5-0P7" secondAttribute="bottom" id="r8H-a6-3cX"/>
                         </constraints>
                     </view>
@@ -330,8 +340,8 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tg9-S0-3u3">
                                                         <rect key="frame" x="0.0" y="0.0" width="186" height="58"/>
                                                         <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="CLV-SZ-ICk">
-                                                                <rect key="frame" x="47" y="7" width="94" height="46"/>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="CLV-SZ-ICk">
+                                                                <rect key="frame" x="47" y="7" width="93.5" height="45.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Rx-gK-dYI">
                                                                         <rect key="frame" x="11" y="0.0" width="71.5" height="33.5"/>
@@ -358,7 +368,7 @@
                                                         <rect key="frame" x="189" y="0.0" width="186" height="58"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Kp0-Cj-jNf">
-                                                                <rect key="frame" x="47" y="7" width="95" height="46"/>
+                                                                <rect key="frame" x="47" y="7" width="94.5" height="45.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zC-8p-dp1">
                                                                         <rect key="frame" x="11.5" y="0.0" width="71.5" height="33.5"/>
@@ -417,7 +427,7 @@
                     </prototypes>
                 </tableView>
             </objects>
-            <point key="canvasLocation" x="2305" y="57"/>
+            <point key="canvasLocation" x="2304.8000000000002" y="56.221889055472268"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="cGM-rd-LfE">

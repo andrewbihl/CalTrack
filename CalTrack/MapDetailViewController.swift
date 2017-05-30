@@ -269,4 +269,16 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    // MARK: - Actions
+    
+    @IBAction func reportDelayTapped(_ sender: UIButton) {
+        
+        // TODO: - Let user report delay for north vs south with pop-up
+        
+        let reportStop = self.northStop
+        
+        DataServer.sharedInstance.addPotentialDelay(to: reportStop)
+    }
+    
+    
 }

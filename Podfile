@@ -9,6 +9,10 @@ pod 'NVActivityIndicatorView'
 pod 'Instructions', :git => 'https://github.com/ephread/Instructions.git'
 pod 'GoogleMaps'
 pod 'GooglePlaces'
+pod 'Firebase/Core'
+pod 'Firebase/AdMob'
+pod 'Firebase/Database'
+pod 'Firebase/Auth'
 end
 
 post_install do |installer|

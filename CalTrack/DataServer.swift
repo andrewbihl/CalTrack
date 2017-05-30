@@ -9,6 +9,9 @@
 import Foundation
 import CoreLocation
 import RealmSwift
+import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 
 class DataServer {
     
@@ -17,9 +20,19 @@ class DataServer {
     let STOP_TIMES_SHOWN_COUNT = 16
 
     var stopTimes: Results<stop_times>?
+    var ref: DatabaseReference!
+    
     
     init() {
         
+        ref = Database.database().reference()
+        
+        
+        Auth.auth().signInAnonymously() { (user, error) in // sign in anonymously (allows us to retain user settings such as bookmarked stations without actually requiring sign-up)
+            if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            self.ref.child("users").child((user?.uid)!).setValue(["version": version]) // write the app version this user is using to the db
+            }
+        }
         
         let date = Date()
         let today = Calendar.current.component(.weekday, from: date)
@@ -45,7 +58,7 @@ class DataServer {
         
         
         print(self.stopTimes?.count ?? "")
-        
+        print("data server initialization complete")
     }
     
     public func getNearestTrainLocation(with stop: Stop, north: Bool) -> ([Stop], [Int]){ // nearest north/southbound train in format ([stops along the way], array of departure times)
@@ -96,6 +109,37 @@ class DataServer {
             return []
         }
         
+    }
+    
+    public func addPotentialDelay(to: Stop) {
+        ref.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
+            if var post = currentData.value as? [String : AnyObject], let uid = Auth.auth().currentUser?.uid {
+                var stars: Dictionary<String, Bool>
+                stars = post["stars"] as? [String : Bool] ?? [:]
+                var starCount = post["starCount"] as? Int ?? 0
+                if let _ = stars[uid] {
+                    // Unstar the post and remove self from stars
+                    starCount -= 1
+                    stars.removeValue(forKey: uid)
+                } else {
+                    // Star the post and add self to stars
+                    starCount += 1
+                    stars[uid] = true
+                }
+                post["starCount"] = starCount as AnyObject?
+                post["stars"] = stars as AnyObject?
+                
+                // Set value and report transaction success
+                currentData.value = post
+                
+                return TransactionResult.success(withValue: currentData)
+            }
+            return TransactionResult.success(withValue: currentData)
+        }) { (error, committed, snapshot) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
     }
     
     
