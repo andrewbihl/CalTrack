@@ -180,6 +180,14 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: - Table View Functions
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 && max(self.northDepartures.count, self.southDepartures.count) == 0 {
+            if let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "NoTimesCell") {
+                cell.contentView.layer.borderColor = BORDER_COLOR
+                cell.contentView.layer.borderWidth = BORDER_WIDTH
+                return cell
+            }
+        }
+        
         if let cell : NorthSouthDeparturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "NorthSouthCell") as?NorthSouthDeparturesTableViewCell {
             
             if northDepartures.count > indexPath.row {
@@ -205,7 +213,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return max(northDepartures.count, southDepartures.count)
+        return max(northDepartures.count, southDepartures.count, 1)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
