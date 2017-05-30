@@ -92,6 +92,8 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         self.northDepartures = self.sharedInstance.getDepartureTimesForStop(stop: northStop)
         self.southDepartures = self.sharedInstance.getDepartureTimesForStop(stop: southStop)
         
+        configureGestureRecognizers()
+        
         //addObserver(self, forKeyPath: #keyPath(self.sharedInstance.defaultNorthStop), options: [.old, .new], context: nil)
         
     }
@@ -109,14 +111,23 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        beginUpdateTimer(intervalInSeconds: 30)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.updateTimer?.invalidate()
+    }
+    
+    private func configureGestureRecognizers() {
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.userSwipedUp))
         swipeUp.direction = .up
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.userSwipedDown))
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.userTappedBanner))
         swipeDown.direction = .down
-//        swipeUp.delegate = self
-//        swipeDown.delegate = self
-//        self.view.addGestureRecognizer(tap)
+        //        swipeUp.delegate = self
+        //        swipeDown.delegate = self
+        //        self.view.addGestureRecognizer(tap)
         self.stopLabel.addGestureRecognizer(tap)
         self.view.addGestureRecognizer(swipeUp)
         self.view.addGestureRecognizer(swipeDown)
@@ -124,13 +135,6 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         self.swipeDown = swipeDown
         self.swipeUp = swipeUp
         self.swipeDown?.isEnabled = false
-        
-        beginUpdateTimer(intervalInSeconds: 30)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.updateTimer?.invalidate()
     }
     
     public func updateStops(northStop: Stop, southStop: Stop) {
@@ -168,7 +172,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     
     // MARK: - Table View Functions
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell : NorthSouthDeparturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "NorthSouthCell") as?NorthSouthDeparturesTableViewCell {
             
