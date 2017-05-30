@@ -137,10 +137,10 @@ extension Int {
         var am = "AM"
         
         if hour > 11 {
-            hour = hour % 12
             if !(hour > 23) {
             am = "PM"
             }
+            hour = hour % 12
         }
         
         if hour == 0 {
