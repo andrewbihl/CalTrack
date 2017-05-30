@@ -116,8 +116,9 @@ extension Int {
         let hour = (self / 60)
         let minute = self % 60
         
-        var minuteDifference = hour - Calendar.current.component(.minute, from: Date())
-        var hourDifference = minute - Calendar.current.component(.hour, from: Date())
+        var minuteDifference = minute - Calendar.current.component(.minute, from: Date())
+        var hourDifference = hour - Calendar.current.component(.hour, from: Date())
+        
         
         if minuteDifference < 0 {
             minuteDifference += 60
@@ -132,8 +133,6 @@ extension Int {
     }
     
     var timeOfDepartureText: String {
-        print("getting time of departure", self)
-        
         var hour = self / 60
         var am = "AM"
         
