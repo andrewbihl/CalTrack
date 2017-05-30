@@ -19,6 +19,10 @@ class NorthSouthDeparturesTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.southDepartureTimeLabel.isHidden = true
+        self.northDepartureTimeLabel.isHidden = true
+        self.northTimeToDepartureLabel.isHidden = true
+        self.southTimeToDepartureLabel.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -27,16 +31,21 @@ class NorthSouthDeparturesTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    public func setDepartureTime(time: Date, north:Bool) {
+    public func setDepartureTime(time: Int, north:Bool) {
         var timeLabel : UILabel
         var timeRemainingLabel : UILabel
+        
         if north {
             timeLabel = self.northDepartureTimeLabel
             timeRemainingLabel = self.northTimeToDepartureLabel
+        
         } else {
             timeLabel = self.southDepartureTimeLabel
             timeRemainingLabel = self.southTimeToDepartureLabel
         }
+        
+        timeLabel.isHidden = false
+        timeRemainingLabel.isHidden = false
         
         timeLabel.text = time.timeOfDepartureText
         timeRemainingLabel.text = time.timeRemainingText
@@ -44,38 +53,3 @@ class NorthSouthDeparturesTableViewCell: UITableViewCell {
 }
 
 }
-
-extension Date {
-    var timeRemainingText: String {
-        
-        var minuteDifference = Calendar.current.component(.minute, from: self) - Calendar.current.component(.minute, from: Date())
-        var hourDifference = Calendar.current.component(.hour, from: self) - Calendar.current.component(.hour, from: Date())
-        
-        if minuteDifference < 0 {
-            minuteDifference += 60
-            hourDifference -= 1
-        }
-        if hourDifference == 0 {
-            return "Leaves in \(String(minuteDifference)) minutes"
-        }
-        else {
-            return "Leaves in \(String(hourDifference)) h \(String(minuteDifference)) m"
-        }
-    }
-    
-    var timeOfDepartureText: String {
-        var hour = Calendar.current.component(.hour, from: self)
-        var am = "AM"
-        
-        if hour > 11 {
-            hour = hour % 12
-            am = "PM"
-        }
-        let minute = Calendar.current.component(.minute, from: self)
-        var minuteString = String(minute)
-        if minuteString.characters.count == 1 {
-            minuteString = "0"+minuteString
-        }
-        return "\(hour):\(minuteString) \(am)"
-    }
-    }

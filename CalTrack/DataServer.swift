@@ -72,16 +72,16 @@ class DataServer {
         }
     }
     
-    public func getDepartureTimesForStop(stop: Stop) -> [Date]{ // get array of next 8 stop times
+    public func getDepartureTimesForStop(stop: Stop) -> [Int]{ // get array of next 8 stop times
         let intDate = Calendar.dateInMinutes
         if let stopTimes = stopTimes {
             let theseStops = Array(stopTimes.filter("stop_id == %@ AND departureTime > %@", stop.stopId, intDate).sorted(byKeyPath: "departureTime")).prefix(8)
-            let theseTimes = theseStops.map({ (stopTime) -> Date in
-                print("departure time", stopTime.departureTime)
-                return stopTime.departureTime.getDateFromInt()
+            let theseTimes = theseStops.map({ (stopTime) -> Int in
+                
+                return stopTime.departureTime//.getDateFromInt()
             }) 
             
-            //print(theseStops, theseTimes)
+            
             return theseTimes
         } else {
             return []
@@ -109,5 +109,50 @@ extension Int {
         let someDateTime = formatter.date(from: str)
         
         return someDateTime!
+    }
+    
+    var timeRemainingText: String {
+        
+        let hour = (self / 60)
+        let minute = self % 60
+        
+        var minuteDifference = hour - Calendar.current.component(.minute, from: Date())
+        var hourDifference = minute - Calendar.current.component(.hour, from: Date())
+        
+        if minuteDifference < 0 {
+            minuteDifference += 60
+            hourDifference -= 1
+        }
+        if hourDifference == 0 {
+            return "Leaves in \(String(minuteDifference)) minutes"
+        }
+        else {
+            return "Leaves in \(String(hourDifference)) h \(String(minuteDifference)) m"
+        }
+    }
+    
+    var timeOfDepartureText: String {
+        print("getting time of departure", self)
+        
+        var hour = self / 60
+        var am = "AM"
+        
+        if hour > 11 {
+            hour = hour % 12
+            if !(hour > 23) {
+            am = "PM"
+            }
+        }
+        
+        if hour == 0 {
+            hour = 12
+        }
+        let minute = self % 60 
+        var minuteString = String(minute)
+        if minuteString.characters.count == 1 {
+            minuteString = "0"+minuteString
+        }
+        return "\(hour):\(minuteString) \(am)"
+        
     }
 }

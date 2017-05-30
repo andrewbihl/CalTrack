@@ -41,8 +41,8 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     private let CELL_HEIGHT : CGFloat = 58
     
-    public var northDepartures = [Date]()
-    public var southDepartures = [Date]()
+    public var northDepartures = [Int]()
+    public var southDepartures = [Int]()
     
     private var updateTimer : Timer?
     
@@ -171,8 +171,13 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell : NorthSouthDeparturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "NorthSouthCell") as?NorthSouthDeparturesTableViewCell {
+            
+            if northDepartures.count > indexPath.row {
             cell.setDepartureTime(time: northDepartures[indexPath.row], north: true)
+            }
+            if southDepartures.count > indexPath.row {
             cell.setDepartureTime(time: southDepartures[indexPath.row], north: false)
+            }
             cell.contentView.layer.borderColor = BORDER_COLOR
             cell.contentView.layer.borderWidth = BORDER_WIDTH
             cell.contentView.backgroundColor = appColor1 //Same as BORDER_COLOR
@@ -190,7 +195,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return northDepartures.count
+        return max(northDepartures.count, southDepartures.count)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

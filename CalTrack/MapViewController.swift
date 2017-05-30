@@ -92,7 +92,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             } else {
                 print("is tamien or sanjose")
             }
-            marker.title = stop.stopName
+            marker.title = stop.stopName.replacingOccurrences(of: " Northbound", with: "")
             marker.map = mapView
         }
         
