@@ -20,6 +20,9 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     let defaultLocation = CLLocationCoordinate2D.defaultCoordinates
     var detailVC : MapDetailViewController?
     
+    // Once the user has interacted with the map, don't refocus to his location + nearest stop again while the view is up.
+    var userHasInteracted = false
+    
     var selectedStop: Stop?
     
     var tapActive = false
@@ -70,7 +73,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // delegate value sharing
-        
+        self.userHasInteracted = false
         let parent = self.parent!
         detailVC = parent.childViewControllers[0] as? MapDetailViewController
         detailVC?.delegate = self
@@ -214,6 +217,12 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
   
     // MARK: GMSMapViewDelegate
     
+    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+        if gesture {
+            userHasInteracted = true
+        }
+    }
+    
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         
         /*
@@ -290,21 +299,21 @@ extension MapViewController: CLLocationManagerDelegate {
 
     }
     
-    func zoomToIncludeStop() {
+    func zoomToIncludeStop(_ stop: Stop?) {
         if let myCoordinates = self.currentLocation?.coordinate{
-        if let nearestStop = self.currentLocation?.getClosestStop {
-                print("zooming to include me \(myCoordinates) and nearest stop \(nearestStop.stopCoordinates)")
-                let bounds = GMSCoordinateBounds(coordinate: myCoordinates, coordinate: nearestStop.stopCoordinates)
+            if let stop = stop{
+                print("zooming to include me \(myCoordinates) and nearest stop \(stop.stopCoordinates)")
+                let bounds = GMSCoordinateBounds(coordinate: myCoordinates, coordinate: stop.stopCoordinates)
                 let cameraUpdate = GMSCameraUpdate.fit(bounds, withPadding: 50)
                 mapView.animate(with: cameraUpdate)
             }
-         else {
-            print("couldn't retrieve nearest stop")
-            let camera = GMSCameraPosition.camera(withLatitude: myCoordinates.latitude ,
-                                                  longitude: myCoordinates.longitude,
-                                                  zoom: zoomLevel)
+            else {
+                print("couldn't retrieve nearest stop")
+                let camera = GMSCameraPosition.camera(withLatitude: myCoordinates.latitude ,
+                                                      longitude: myCoordinates.longitude,
+                                                      zoom: zoomLevel)
                 mapView.camera = camera
-        }
+            }
         }
     }
     
@@ -338,9 +347,9 @@ extension MapViewController: InformingDelegate {
             if stop != self.selectedStop {
             self.selectedStop = stop
                  self.addAnimatedTrain()
-                if !tapActive {
+                if !tapActive && !userHasInteracted {
                     print("zooming because location changed")
-                zoomToIncludeStop()
+                    zoomToIncludeStop(stop)
                 }
             return stop
                
