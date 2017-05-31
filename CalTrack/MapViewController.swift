@@ -12,10 +12,12 @@ import CoreLocation
 
 class MapViewController: UIViewController, GMSMapViewDelegate {
 
+    let UNSELECTED_MARKER_OPACITY : Float = 0.55
     // location
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation?
     var mapView: GMSMapView!
+    var mapMarkers : [Stop : GMSMarker] = [Stop : GMSMarker]()
     var zoomLevel: Float = 15.0
     let defaultLocation = CLLocationCoordinate2D.defaultCoordinates
     var detailVC : MapDetailViewController?
@@ -23,7 +25,28 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     // Once the user has interacted with the map, don't refocus to his location + nearest stop again while the view is up.
     var userHasInteracted = false
     
-    var selectedStop: Stop?
+    var selectedStop: Stop? {
+        willSet {
+            if selectedStop != nil{
+                if let oldMarker = mapMarkers[selectedStop!] {
+                    oldMarker.opacity = UNSELECTED_MARKER_OPACITY
+                } else if let partner = selectedStop?.stopPartner {
+                    if let oldMarker = mapMarkers[partner] {
+                        oldMarker.opacity = UNSELECTED_MARKER_OPACITY
+                    }
+                }
+            }
+            if newValue != nil {
+                if let selectedMarker = mapMarkers[newValue!] {
+                    selectedMarker.opacity = 1.0
+                } else if let partner = newValue?.stopPartner {
+                    if let selectedMarker = mapMarkers[partner] {
+                        selectedMarker.opacity = 1.0
+                    }
+                }
+            }
+        }
+    }
     
     var tapActive = false
     
@@ -34,7 +57,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
         
         self.locationManager.requestWhenInUseAuthorization()
@@ -100,6 +122,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             marker.icon = #imageLiteral(resourceName: "TrainStop")
             marker.title = stop.stopName.replacingOccurrences(of: " Northbound", with: "")
             marker.map = mapView
+            marker.opacity = 0.55
+            mapMarkers[stop] = marker
         }
         
         let polyline = GMSPolyline(path: path)
@@ -296,7 +320,7 @@ extension MapViewController: CLLocationManagerDelegate {
         }
         
         detailVC?.closestStopChanged() // this will take care of zoom if necessary
-
+        self.selectedStop = self.currentLocation?.getClosestStop
     }
     
     func zoomToIncludeStop(_ stop: Stop?) {
@@ -304,7 +328,7 @@ extension MapViewController: CLLocationManagerDelegate {
             if let stop = stop{
                 print("zooming to include me \(myCoordinates) and nearest stop \(stop.stopCoordinates)")
                 let bounds = GMSCoordinateBounds(coordinate: myCoordinates, coordinate: stop.stopCoordinates)
-                let cameraUpdate = GMSCameraUpdate.fit(bounds, withPadding: 50)
+                let cameraUpdate = GMSCameraUpdate.fit(bounds, withPadding: 60)
                 mapView.animate(with: cameraUpdate)
             }
             else {
@@ -350,6 +374,7 @@ extension MapViewController: InformingDelegate {
                 if !tapActive && !userHasInteracted {
                     print("zooming because location changed")
                     zoomToIncludeStop(stop)
+                    mapMarkers[stop]?.opacity = 1.0
                 }
             return stop
                

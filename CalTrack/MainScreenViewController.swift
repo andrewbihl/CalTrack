@@ -11,14 +11,14 @@ import UIKit
 class MainScreenViewController: UIViewController, MapDetailAnimationManager {
     @IBOutlet var detailViewHeightConstraint: NSLayoutConstraint!
     
-    private let DETAIL_VIEW_HEIGHT : CGFloat = 125.0
+    private let DETAIL_VIEW_HEIGHT : CGFloat = 100.0
     
     @IBOutlet var mapContainerView: UIView!
 
     @IBOutlet var detailContainerView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.detailViewHeightConstraint.constant = DETAIL_VIEW_HEIGHT
         // Do any additional setup after loading the view.
     }
 
