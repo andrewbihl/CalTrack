@@ -94,9 +94,6 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         
 //        tableView.frame = tableParentView.frame
         
-        self.northDepartures = self.sharedInstance.getDepartureTimesForStop(stop: northStop)
-        self.southDepartures = self.sharedInstance.getDepartureTimesForStop(stop: southStop)
-        
         configureGestureRecognizers()
         
         //addObserver(self, forKeyPath: #keyPath(self.sharedInstance.defaultNorthStop), options: [.old, .new], context: nil)
@@ -117,6 +114,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        retrieveDepartureTimes()
         beginUpdateTimer(intervalInSeconds: 30)
     }
     
@@ -143,15 +141,21 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         self.swipeDown?.isEnabled = false
     }
     
+    private func retrieveDepartureTimes(){
+        self.northDepartures = self.sharedInstance.getDepartureTimesForStop(stop: northStop)
+        self.southDepartures = self.sharedInstance.getDepartureTimesForStop(stop: southStop)
+    }
+    
     public func updateStops(northStop: Stop, southStop: Stop) {
         self.northStop = northStop
         self.southStop = southStop
-        self.northDepartures = sharedInstance.getDepartureTimesForStop(stop: northStop)
-        self.southDepartures = sharedInstance.getDepartureTimesForStop(stop: southStop)
+        retrieveDepartureTimes()
         if (self.isViewLoaded && (self.view.window != nil)) {
         self.stopLabel.text = northStop.stopName.replacingOccurrences(of: "Northbound", with: "")
         }
     }
+    
+    // MARK: - User Actions
 
     @IBAction func userTappedBanner() {
         self.userSwipedUp()

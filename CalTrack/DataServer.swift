@@ -176,8 +176,7 @@ extension Int {
         return someDateTime!
     }
     
-    var timeRemainingText: String {
-        
+    var timeRemaining: (hours: Int, minutes: Int) {
         let hour = (self / 60)
         let minute = self % 60
         
@@ -189,11 +188,20 @@ extension Int {
             minuteDifference += 60
             hourDifference -= 1
         }
+        return (hourDifference, minuteDifference)
+    }
+    
+    var timeRemainingText: String {
+        
+        let (hourDifference, minuteDifference) = self.timeRemaining
         if hourDifference == 0 {
             return "Leaves in \(String(minuteDifference)) minutes"
         }
-        else {
+        else if hourDifference > 0 {
             return "Leaves in \(String(hourDifference)) h \(String(minuteDifference)) m"
+        } else {
+            // Ideally this doesn't get displayed.
+            return "Train left \(String(60-minuteDifference)) minutes ago."
         }
     }
     
