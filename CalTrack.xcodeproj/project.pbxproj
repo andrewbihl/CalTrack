@@ -31,6 +31,7 @@
 /* Begin PBXFileReference section */
 		069EA2121EDB71DE00A31BD6 /* caltrainTimes.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = caltrainTimes.realm; sourceTree = "<group>"; };
 		06AA603F1EDE219500869688 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		06AA60421EDE4A9D00869688 /* CalTrack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CalTrack.entitlements; sourceTree = "<group>"; };
 		06CB05DC1EDA528A00354E4E /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		06CB05DE1EDA52A100354E4E /* MapDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailViewController.swift; sourceTree = "<group>"; };
 		06CB05FF1EDA631D00354E4E /* RealmModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmModels.swift; sourceTree = "<group>"; };
@@ -103,6 +104,7 @@
 		2F737A191EDA3302006628BF /* CalTrack */ = {
 			isa = PBXGroup;
 			children = (
+				06AA60421EDE4A9D00869688 /* CalTrack.entitlements */,
 				2F737A1A1EDA3302006628BF /* AppDelegate.swift */,
 				06CB05FF1EDA631D00354E4E /* RealmModels.swift */,
 				2F11D1981EDAD48C003BB09B /* MainScreenViewController.swift */,
@@ -163,6 +165,14 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 4EU7KH7ZUS;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -401,6 +411,7 @@
 			baseConfigurationReference = D8EDB87EA409300049CCA0E1 /* Pods-CalTrack.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CalTrack/CalTrack.entitlements;
 				DEVELOPMENT_TEAM = 4EU7KH7ZUS;
 				INFOPLIST_FILE = CalTrack/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -415,6 +426,7 @@
 			baseConfigurationReference = 326761B2A9492146E1CCE6F2 /* Pods-CalTrack.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CalTrack/CalTrack.entitlements;
 				DEVELOPMENT_TEAM = 4EU7KH7ZUS;
 				INFOPLIST_FILE = CalTrack/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
