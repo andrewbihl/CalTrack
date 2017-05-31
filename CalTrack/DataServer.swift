@@ -111,29 +111,41 @@ class DataServer {
         
     }
     
-    public func addPotentialDelay(to: Stop) {
-        ref.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
-            if var post = currentData.value as? [String : AnyObject], let uid = Auth.auth().currentUser?.uid {
-                var stars: Dictionary<String, Bool>
-                stars = post["stars"] as? [String : Bool] ?? [:]
-                var starCount = post["starCount"] as? Int ?? 0
-                if let _ = stars[uid] {
-                    // Unstar the post and remove self from stars
-                    starCount -= 1
-                    stars.removeValue(forKey: uid)
+    public func addPotentialDelay(to stop: Stop) {
+        print("add potential delay")
+        
+        let timestamp: String = "05-30-2017"//Date().dateString
+        
+        ref.child(timestamp).runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
+            
+            if var post = currentData.value as? [String: Any], let uid = Auth.auth().currentUser?.uid {
+                //var stopForPost: Dictionary<String, AnyObject>
+                //stopForPost = post[stop.stopName] as? [String: AnyObject] ?? [:]
+                
+                var delays: [String: Bool]
+                delays = post["delays"] as? [String : Bool] ?? [:]
+                var delayCount = post["delayCount"] as? [String: Int] ?? [stop.stopName: 0]
+                let uniqID = uid+"-\(stop.stopId)"
+                if let _ = delays[uniqID] {
+                    //
+                    delayCount[stop.stopName]! -= 1
+                    delays.removeValue(forKey: uniqID)
                 } else {
-                    // Star the post and add self to stars
-                    starCount += 1
-                    stars[uid] = true
+                    //
+                    delayCount[stop.stopName]! += 1
+                    delays[uniqID] = true
                 }
-                post["starCount"] = starCount as AnyObject?
-                post["stars"] = stars as AnyObject?
+                post["delayCount"] = delayCount as AnyObject?
+                post["delays"] = delays as AnyObject?
                 
                 // Set value and report transaction success
                 currentData.value = post
                 
                 return TransactionResult.success(withValue: currentData)
+            } else {
+                print("failed cast")
             }
+            print("success trans")
             return TransactionResult.success(withValue: currentData)
         }) { (error, committed, snapshot) in
             if let error = error {
