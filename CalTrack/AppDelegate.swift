@@ -10,6 +10,8 @@ import UIKit
 import GoogleMaps
 import RealmSwift
 import Firebase
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -68,6 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         GMSServices.provideAPIKey("AIzaSyBOYBoKP3VQvrD5ddO2q7gZXpwIgD1Bdik")
         FirebaseApp.configure()
+        Fabric.with([Crashlytics.self])
         
         self.copyRealmData()
         

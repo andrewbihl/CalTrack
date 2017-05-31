@@ -13,6 +13,8 @@ pod 'Firebase/Core'
 pod 'Firebase/AdMob'
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
+pod 'Fabric'
+pod 'Crashlytics'
 end
 
 post_install do |installer|

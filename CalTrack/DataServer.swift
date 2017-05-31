@@ -143,7 +143,7 @@ class DataServer {
                 
                 return TransactionResult.success(withValue: currentData)
             } else {
-                print("failed cast")
+                print("failed trans")
             }
             print("success trans")
             return TransactionResult.success(withValue: currentData)
