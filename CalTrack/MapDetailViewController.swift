@@ -192,13 +192,23 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             }
         }
         
-        if let cell : NorthSouthDeparturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "NorthSouthCell") as?NorthSouthDeparturesTableViewCell {
+        if let cell : NorthSouthDeparturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "NorthSouthCell") as? NorthSouthDeparturesTableViewCell {
             
             if northDepartures.count > indexPath.row {
-            cell.setDepartureTime(time: northDepartures[indexPath.row], north: true)
+                let departureTime = northDepartures[indexPath.row]
+                if departureTime.timeRemaining.hours < 0 {
+                    self.retrieveDepartureTimes()
+                    tableView.reloadData()
+                }
+                cell.setDepartureTime(time: departureTime, north: true)
             }
             if southDepartures.count > indexPath.row {
-            cell.setDepartureTime(time: southDepartures[indexPath.row], north: false)
+                let departureTime = southDepartures[indexPath.row]
+                if departureTime.timeRemaining.hours < 0 {
+                    self.retrieveDepartureTimes()
+                    tableView.reloadData()
+                }
+                cell.setDepartureTime(time: departureTime, north: false)
             }
             cell.contentView.layer.borderColor = BORDER_COLOR
             cell.contentView.layer.borderWidth = BORDER_WIDTH
