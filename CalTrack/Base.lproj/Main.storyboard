@@ -51,10 +51,10 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="05C-sm-GZC">
-                                <rect key="frame" x="239" y="426" width="60" height="60"/>
+                                <rect key="frame" x="237" y="427" width="62" height="62"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="05C-sm-GZC" secondAttribute="height" multiplier="1:1" id="UZI-QW-57D"/>
-                                    <constraint firstAttribute="width" constant="60" id="aO9-di-0nc"/>
+                                    <constraint firstAttribute="width" constant="62" id="aO9-di-0nc"/>
                                 </constraints>
                                 <color key="tintColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="RouteIconWithShadow"/>
@@ -73,7 +73,7 @@
                             <constraint firstItem="cJf-cL-ewm" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" id="El7-9x-gdA"/>
                             <constraint firstItem="ukJ-VS-0bT" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="K6m-YV-gFd"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="ukJ-VS-0bT" secondAttribute="bottom" id="N16-3G-jWp"/>
-                            <constraint firstItem="ukJ-VS-0bT" firstAttribute="top" secondItem="05C-sm-GZC" secondAttribute="bottom" constant="7" id="Nbd-tt-Vze"/>
+                            <constraint firstItem="ukJ-VS-0bT" firstAttribute="top" secondItem="05C-sm-GZC" secondAttribute="bottom" constant="4" id="Nbd-tt-Vze"/>
                             <constraint firstAttribute="trailing" secondItem="cJf-cL-ewm" secondAttribute="trailing" id="wXS-xE-FOq"/>
                         </constraints>
                     </view>
@@ -483,6 +483,6 @@
     <resources>
         <image name="ListIcon" width="41" height="37"/>
         <image name="MapIcon" width="34" height="28"/>
-        <image name="RouteIconWithShadow" width="107" height="107"/>
+        <image name="RouteIconWithShadow" width="109" height="109"/>
     </resources>
 </document>
