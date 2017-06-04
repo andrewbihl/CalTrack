@@ -13,6 +13,7 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager {
     
     private let DETAIL_VIEW_HEIGHT : CGFloat = 100.0
     
+    @IBOutlet var routeButton: UIButton!
     @IBOutlet var mapContainerView: UIView!
 
     @IBOutlet var detailContainerView: UIView!
@@ -38,6 +39,10 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager {
         return false
     }
     
+    @IBAction func userPressedRouteButton(_ sender: Any) {
+    }
+    
+    
     public func animateDetailViewController(expand: Bool) {
         let height : CGFloat
         if expand {
@@ -56,7 +61,6 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager {
 //            self.view.layoutIfNeeded()
 //        })
     }
-    
 
     /*
     // MARK: - Navigation

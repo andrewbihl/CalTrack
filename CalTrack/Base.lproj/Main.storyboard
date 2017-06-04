@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16G8c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -49,16 +50,30 @@
                                     <segue destination="cTP-Li-AbQ" kind="embed" id="Qlu-ew-bBe"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="05C-sm-GZC">
+                                <rect key="frame" x="239" y="426" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="05C-sm-GZC" secondAttribute="height" multiplier="1:1" id="UZI-QW-57D"/>
+                                    <constraint firstAttribute="width" constant="60" id="aO9-di-0nc"/>
+                                </constraints>
+                                <color key="tintColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="RouteIconWithShadow"/>
+                                <connections>
+                                    <action selector="userPressedRouteButton:" destination="9pv-A4-QxB" eventType="touchUpInside" id="KTG-op-UkC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="cJf-cL-ewm" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="1c0-KJ-gqZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="05C-sm-GZC" secondAttribute="trailing" constant="60" id="9WS-WE-emh"/>
                             <constraint firstAttribute="trailing" secondItem="ukJ-VS-0bT" secondAttribute="trailing" id="A1w-fI-rVr"/>
                             <constraint firstItem="ukJ-VS-0bT" firstAttribute="top" secondItem="cJf-cL-ewm" secondAttribute="bottom" id="DPP-bw-0GI"/>
                             <constraint firstItem="cJf-cL-ewm" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" id="El7-9x-gdA"/>
                             <constraint firstItem="ukJ-VS-0bT" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="K6m-YV-gFd"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="ukJ-VS-0bT" secondAttribute="bottom" id="N16-3G-jWp"/>
+                            <constraint firstItem="ukJ-VS-0bT" firstAttribute="top" secondItem="05C-sm-GZC" secondAttribute="bottom" constant="7" id="Nbd-tt-Vze"/>
                             <constraint firstAttribute="trailing" secondItem="cJf-cL-ewm" secondAttribute="trailing" id="wXS-xE-FOq"/>
                         </constraints>
                     </view>
@@ -69,10 +84,10 @@
                         <outlet property="detailContainerView" destination="ukJ-VS-0bT" id="SHi-h4-4n0"/>
                         <outlet property="detailViewHeightConstraint" destination="Zz0-zs-crK" id="cLY-YV-4j2"/>
                         <outlet property="mapContainerView" destination="cJf-cL-ewm" id="AwH-Ow-3cD"/>
+                        <outlet property="routeButton" destination="05C-sm-GZC" id="RCF-b8-uHh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="Ajd-g6-gjz"/>
             </objects>
             <point key="canvasLocation" x="632.79999999999995" y="-369.26536731634184"/>
         </scene>
@@ -468,5 +483,6 @@
     <resources>
         <image name="ListIcon" width="41" height="37"/>
         <image name="MapIcon" width="34" height="28"/>
+        <image name="RouteIconWithShadow" width="107" height="107"/>
     </resources>
 </document>
