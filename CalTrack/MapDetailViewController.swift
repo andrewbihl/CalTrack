@@ -65,6 +65,8 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     private var southStop : Stop
     
+    private var destinationStop : Stop?
+    
     private let BORDER_WIDTH : CGFloat = 1.5
     private let BORDER_COLOR : CGColor = appColor1.cgColor
     

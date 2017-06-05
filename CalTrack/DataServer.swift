@@ -61,6 +61,12 @@ class DataServer {
         print("data server initialization complete")
     }
     
+    public func getTripTimes(fromStop origin: Stop, toStop destination: Stop)->[(departureTime: Int, arrivalTime: Int)] {
+        let tripTimes = [(departureTime: Int, arrivalTime: Int)]()
+        // TODO: Fill in times for trip between origin and destination
+        return tripTimes
+    }
+    
     public func getNearestTrainLocation(with stop: Stop, north: Bool) -> ([Stop], [Int]){ // nearest north/southbound train in format ([stops along the way], array of departure times)
         // e.g.
         let current = Calendar.dateInMinutes
