@@ -18,12 +18,12 @@ protocol MapDetailAnimationManager {
     /// Respond to the user swiping on the view
     ///
     /// - Returns: Return true if the view was moved/animated as a result of the swipe.
-    func userSwipedUp(vc: MapDetailViewController)->Bool;
+    func userSwipedUp(vc: MapDetailViewController)->Bool
     
     /// Respond to the user swiping on the view
     ///
     /// - Returns: Return true if the view was moved/animated as a result of the swipe.
-    func userSwipedDown(vc: MapDetailViewController)->Bool;
+    func userSwipedDown(vc: MapDetailViewController)->Bool
 }
 
 class MapDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -67,7 +67,6 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     private var fromStop: Stop{ // when the user's current location changes we want to change the default from stop
         didSet {
-            print("change from stop")
             if (self.isViewLoaded && (self.view.window != nil)) && inRouteMode {
                 self.originStopButton.setTitle(fromStop.stopName.replacingOccurrences(of: "Northbound", with: ""), for: .normal)
             }
@@ -75,7 +74,6 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     private var destinationStop : Stop { // we want what the user taps to change the destination stop by default
         didSet {
-            print("change dest stop")
             if (self.isViewLoaded && (self.view.window != nil)) && inRouteMode {
                 self.destinationStopButton.setTitle(destinationStop.stopName.replacingOccurrences(of: "Northbound", with: ""), for: .normal)
             }
@@ -175,11 +173,6 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         self.swipeDown?.isEnabled = false
     }
     
-    private func retrieveDepartureTimes(){
-        self.northDepartures = self.sharedInstance.getDepartureTimesForStop(stop: northStop)
-        self.southDepartures = self.sharedInstance.getDepartureTimesForStop(stop: southStop)
-    }
-    
     public func updateStops(northStop: Stop, southStop: Stop) {
         self.northStop = northStop
         self.southStop = southStop
@@ -195,6 +188,11 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     public func updateDestinationStop(to stop: Stop) {
         self.destinationStop = stop
         retrieveTripTimes()
+    }
+    
+    private func retrieveDepartureTimes(){
+        self.northDepartures = self.sharedInstance.getDepartureTimesForStop(stop: northStop)
+        self.southDepartures = self.sharedInstance.getDepartureTimesForStop(stop: southStop)
     }
     
     private func retrieveTripTimes(){
