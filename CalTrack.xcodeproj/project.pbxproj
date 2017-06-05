@@ -110,9 +110,9 @@
 			children = (
 				06AA60421EDE4A9D00869688 /* CalTrack.entitlements */,
 				2F737A1A1EDA3302006628BF /* AppDelegate.swift */,
+				2F737A201EDA3302006628BF /* Main.storyboard */,
 				06CB05FF1EDA631D00354E4E /* RealmModels.swift */,
 				2F11D1981EDAD48C003BB09B /* MainScreenViewController.swift */,
-				2F737A201EDA3302006628BF /* Main.storyboard */,
 				2F11D18E1EDA80E0003BB09B /* ScheduleViewController.swift */,
 				2F11D1901EDA82BE003BB09B /* ScheduleFooterView.xib */,
 				2F11D1921EDA83B7003BB09B /* ScheduleFooterView.swift */,

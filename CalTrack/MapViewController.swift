@@ -157,6 +157,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             northTrain = GMSMarker(position: pos)
             northTrain?.icon = #imageLiteral(resourceName: "SpeedTrainSmall")
             northTrain?.map = mapView
+            //northTrain?.iconView?.isUserInteractionEnabled = false
             
                 self.trainAnimation(stops: northStops, times: northTimes, current: current, first: true, north: true, transactionID: unique!)
             
@@ -176,6 +177,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
                 southTrain = GMSMarker(position: pos)
                 southTrain?.icon = #imageLiteral(resourceName: "SpeedTrainSmall")
                 southTrain?.map = mapView
+                //southTrain.iconView?.isUserInteractionEnabled = false
                 
                 self.trainAnimation(stops: southStops, times: southTimes, current: current, first: true, north: false, transactionID: unique!)
                 
@@ -268,11 +270,11 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         self.tapActive = true
         print("You tapped at \(marker.position.latitude), \(marker.position.longitude)") */
         
+        print("looking for stop with location \(marker.position.latitude), \(marker.position.longitude)")
         if let stop = marker.position.stopWithExactPosition {
+        print("was stop", stop.stopName)
         detailVC?.stopTappedChanged(with: stop)
         }
-        
-        self.addAnimatedTrain()
         
         return false
     }
@@ -380,6 +382,7 @@ extension MapViewController: InformingDelegate {
     func valueChangedFromTap(with stop: Stop) -> Stop? {
         if stop != self.selectedStop {
             self.selectedStop = stop
+            self.addAnimatedTrain()
             return stop
         }
         else {
