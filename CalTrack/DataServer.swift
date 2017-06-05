@@ -62,8 +62,10 @@ class DataServer {
     }
     
     public func getTripTimes(fromStop origin: Stop, toStop destination: Stop)->[(departureTime: Int, arrivalTime: Int)] {
-        let tripTimes = [(departureTime: Int, arrivalTime: Int)]()
-        // TODO: Fill in times for trip between origin and destination
+        var tripTimes = [(departureTime: Int, arrivalTime: Int)]()
+        print("get trip times")
+        print("from stop", origin.stopName, "to stop", destination.stopName)
+        
         return tripTimes
     }
     

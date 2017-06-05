@@ -58,14 +58,30 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     private var northStop : Stop {
         didSet {
-            if (self.isViewLoaded && (self.view.window != nil)) {
+            if (self.isViewLoaded && (self.view.window != nil)) && !inRouteMode {
                 self.originStopButton.setTitle(northStop.stopName.replacingOccurrences(of: "Northbound", with: ""), for: .normal)
             }
         }
     }
     private var southStop : Stop
     
-    private var destinationStop : Stop?
+    private var fromStop: Stop{ // when the user's current location changes we want to change the default from stop
+        didSet {
+            print("change from stop")
+            if (self.isViewLoaded && (self.view.window != nil)) && inRouteMode {
+                self.originStopButton.setTitle(fromStop.stopName.replacingOccurrences(of: "Northbound", with: ""), for: .normal)
+            }
+        }
+    }
+    private var destinationStop : Stop { // we want what the user taps to change the destination stop by default
+        didSet {
+            print("change dest stop")
+            if (self.isViewLoaded && (self.view.window != nil)) && inRouteMode {
+                self.destinationStopButton.setTitle(destinationStop.stopName.replacingOccurrences(of: "Northbound", with: ""), for: .normal)
+            }
+        }
+    }
+    
     private var tripTimes : [(departureTime: Int, arrivalTime: Int)]?
     
     private let BORDER_WIDTH : CGFloat = 1.5
@@ -82,13 +98,20 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     required init?(coder aDecoder: NSCoder) {
         northStop = defaultNorthStop
+        fromStop = defaultNorthStop
+        
         southStop = defaultSouthStop
+        destinationStop = defaultSouthStop
+        
         super.init(coder: aDecoder)
     }
     
     init() {
         northStop = defaultNorthStop
+        fromStop = defaultNorthStop
+        
         southStop = defaultSouthStop
+        destinationStop = defaultSouthStop
         super.init(nibName: nil, bundle: nil)
         
     }
@@ -161,13 +184,23 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         self.northStop = northStop
         self.southStop = southStop
         retrieveDepartureTimes()
-        if (self.isViewLoaded && (self.view.window != nil)) {
-            self.originStopButton.setTitle(northStop.stopName.replacingOccurrences(of: "Northbound", with: ""), for: .normal)
-        }
+
+    }
+    
+    public func updateFromStop(from stop: Stop) {
+        self.fromStop = stop
+        retrieveTripTimes()
+    }
+    
+    public func updateDestinationStop(to stop: Stop) {
+        self.destinationStop = stop
+        retrieveTripTimes()
     }
     
     private func retrieveTripTimes(){
         // TODO: Get the trip times t
+        self.tripTimes = self.sharedInstance.getTripTimes(fromStop: self.fromStop, toStop: self.destinationStop) // wouldn't actually matter if we fed in north or south as from
+    
     }
     
     public func toggleRouteMode(){
@@ -299,40 +332,38 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     
-    // MARK: - Key-Value Observing
-    /*
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == #keyPath() {
-            //
-        }
-    } */
+    // MARK: - Delegation
     
     func closestStopChanged() {
         if let value = self.delegate?.valueChangedFromLoc() {
         print("closest stop changed", value)
+            
             let north = value.stopIsNorth ? value : value.stopPartner
             let south = value.stopIsNorth ? value.stopPartner : value
-            if north != nil && south != nil {
-                self.updateStops(northStop: north!, southStop: south!)
+            if let north = north, let south = south {
+                self.updateFromStop(from: north)
+                self.updateStops(northStop: north, southStop: south)
                 self.tableView.reloadData()
             }
             
         } else{
-            print("new location, same nearest stop")
+            print("new closest location, same nearest stop")
         }
     }
     
     func stopTappedChanged(with stop: Stop) {
         if let value = self.delegate?.valueChangedFromTap(with: stop) {
-            print("closest stop changed", value)
+            print("tapped stop changed", value)
+            
             let north = value.stopIsNorth ? value : value.stopPartner
             let south = value.stopIsNorth ? value.stopPartner : value
-            if north != nil && south != nil {
-                self.updateStops(northStop: north!, southStop: south!)
+            if let north = north, let south = south {
+                self.updateDestinationStop(to: north)
+                self.updateStops(northStop: north, southStop: south)
                 self.tableView.reloadData()
             }
         } else{
-            print("new location, same nearest stop")
+            print("new tapped location, same nearest stop")
         }
     }
     

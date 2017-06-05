@@ -48,6 +48,9 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         }
     }
     
+    var closestStop: Stop? // Need to retain this information because if you are moving and have tapped a stop you'll see it flip back to your closest stop because default behavior is to compare location to selectedStop
+    // in other words, we only want a refresh of selectedStop from the location manager when your nearest stop genuinely changes (as opposed to a comparison with selectedStop)
+    
     var tapActive = false
     
     var northTrain: GMSMarker?
@@ -275,21 +278,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     }
     
     func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
-        /*
-        if let coord = mapView.myLocation?.coordinate {
-        let camera = GMSCameraPosition.camera(withLatitude: coord.latitude,
-                                              longitude: coord.longitude,
-                                              zoom: zoomLevel)
-            print("zooming because location button was tapped")
-        
-        if mapView.isHidden {
-            mapView.isHidden = false
-            mapView.camera = camera
-        }  else {
-            
-            mapView.animate(to: camera)
-        }
-        } */
         
         detailVC?.closestStopChanged()
         
@@ -368,8 +356,9 @@ extension MapViewController: CLLocationManagerDelegate {
 extension MapViewController: InformingDelegate {
     func valueChangedFromLoc() -> Stop? {
         if let stop = self.currentLocation?.getClosestStop {
-            if stop != self.selectedStop {
+            if stop != self.closestStop && stop != self.selectedStop {
             self.selectedStop = stop
+            self.closestStop = stop 
                  self.addAnimatedTrain()
                 if !tapActive && !userHasInteracted {
                     print("zooming because location changed")
