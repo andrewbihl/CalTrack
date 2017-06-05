@@ -47,7 +47,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     var swipeDown : UIGestureRecognizer?
     var tapBanner : UIGestureRecognizer?
     
-    private let CELL_HEIGHT : CGFloat = 58
+    private let CELL_HEIGHT : CGFloat = 50
     
     public var northDepartures = [Int]()
     public var southDepartures = [Int]()
@@ -140,7 +140,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         //        swipeUp.delegate = self
         //        swipeDown.delegate = self
         //        self.view.addGestureRecognizer(tap)
-        self.originStopButton.addGestureRecognizer(tap)
+        self.stopsStackView.addGestureRecognizer(tap)
         self.view.addGestureRecognizer(swipeUp)
         self.view.addGestureRecognizer(swipeDown)
         self.tapBanner = tap
@@ -226,7 +226,9 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                 return cell
             }
         }
-        
+        else if inRouteMode {
+            
+        }
         if let cell : NorthSouthDeparturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "NorthSouthCell") as? NorthSouthDeparturesTableViewCell {
             
             if northDepartures.count > indexPath.row {
