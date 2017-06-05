@@ -32,10 +32,16 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     // Parent view exists just for separation in the Interface Builder
     @IBOutlet var tableParentView: UIView!
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var stopLabel: UILabel!
+    
+    @IBOutlet var stopsStackView: UIStackView!
+    @IBOutlet var toLabel: UILabel!
+    @IBOutlet var originStopButton: UIButton!
+    @IBOutlet var destinationStopButton: UIButton!
     
     @IBOutlet var northboundLabel: UILabel!
     @IBOutlet var southboundLabel: UILabel!
+    
+    private var inRouteMode = false
     
     var swipeUp : UIGestureRecognizer?
     var swipeDown : UIGestureRecognizer?
@@ -53,7 +59,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     private var northStop : Stop {
         didSet {
             if (self.isViewLoaded && (self.view.window != nil)) {
-            self.stopLabel.text = northStop.stopName.replacingOccurrences(of: "Northbound", with: "")
+                self.originStopButton.setTitle(northStop.stopName.replacingOccurrences(of: "Northbound", with: ""), for: .normal)
             }
         }
     }
@@ -91,6 +97,8 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.delegate = self
         tableView.dataSource = self
         tableParentView.addSubview(tableView)
+        self.originStopButton.isUserInteractionEnabled = false
+        self.destinationStopButton.isUserInteractionEnabled = false
         
 //        tableView.frame = tableParentView.frame
         
@@ -132,7 +140,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         //        swipeUp.delegate = self
         //        swipeDown.delegate = self
         //        self.view.addGestureRecognizer(tap)
-        self.stopLabel.addGestureRecognizer(tap)
+        self.originStopButton.addGestureRecognizer(tap)
         self.view.addGestureRecognizer(swipeUp)
         self.view.addGestureRecognizer(swipeDown)
         self.tapBanner = tap
@@ -151,8 +159,26 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         self.southStop = southStop
         retrieveDepartureTimes()
         if (self.isViewLoaded && (self.view.window != nil)) {
-        self.stopLabel.text = northStop.stopName.replacingOccurrences(of: "Northbound", with: "")
+            self.originStopButton.setTitle(northStop.stopName.replacingOccurrences(of: "Northbound", with: ""), for: .normal)
         }
+    }
+    
+    public func toggleRouteMode(){
+        if (!inRouteMode) {
+            self.stopsStackView.addArrangedSubview(toLabel)
+            self.stopsStackView.addArrangedSubview(destinationStopButton)
+            self.northboundLabel.text = "Depart time"
+            self.southboundLabel.text = "Arrival time"
+        }
+        else {
+            self.toLabel.removeFromSuperview()
+            self.destinationStopButton.removeFromSuperview()
+//            self.stopsStackView.removeArrangedSubview(toLabel)
+//            self.stopsStackView.removeArrangedSubview(destinationStopButton)
+            self.northboundLabel.text = "Northbound"
+            self.southboundLabel.text = "Southbound"
+        }
+        inRouteMode = !inRouteMode
     }
     
     // MARK: - User Actions
@@ -178,6 +204,15 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                 self.tableView.setContentOffset(CGPoint.zero, animated: false)
             }
         }
+    }
+    
+    
+    @IBAction func userTappedOriginStop(_ sender: Any) {
+        
+    }
+    
+    @IBAction func userTappedDestinationStop(_ sender: Any) {
+        
     }
     
     

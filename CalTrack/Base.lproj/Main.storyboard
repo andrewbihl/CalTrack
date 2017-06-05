@@ -178,12 +178,45 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2zW-G5-0P7">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
                                 <subviews>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="San Francisco" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7g1-Mz-B4C">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="OaM-wV-qJ8">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aho-mc-YSc">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="San Francisco">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="userTappedOriginStop:" destination="2gK-ey-41J" eventType="touchUpInside" id="jLN-5T-0yT"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="15.5" translatesAutoresizingMaskIntoConstraints="NO" id="Jc0-BD-9s6">
+                                                <rect key="frame" x="175" y="0.0" width="25" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="myE-0t-yjB">
+                                                <rect key="frame" x="187.5" y="0.0" width="187.5" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="San Francisco">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="userTappedDestinationStop:" destination="2gK-ey-41J" eventType="touchUpInside" id="6ib-dP-6OW"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="Jc0-BD-9s6"/>
+                                                <exclude reference="myE-0t-yjB"/>
+                                            </mask>
+                                        </variation>
+                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="h3n-5V-rmC">
                                         <rect key="frame" x="0.0" y="30" width="375" height="20.5"/>
                                         <subviews>
@@ -207,30 +240,24 @@
                                 </subviews>
                                 <gestureRecognizers/>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VFq-04-0EH">
-                                <rect key="frame" x="287" y="2" width="47" height="30"/>
-                                <state key="normal" title="Report"/>
-                                <connections>
-                                    <action selector="reportDelayTapped:" destination="2gK-ey-41J" eventType="touchUpInside" id="vuW-b3-eKA"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="2zW-G5-0P7" secondAttribute="trailing" id="Fu4-jI-9im"/>
-                            <constraint firstItem="VFq-04-0EH" firstAttribute="top" secondItem="1g4-ek-6HL" secondAttribute="bottom" constant="2" id="Ucz-wI-yLN"/>
                             <constraint firstItem="2zW-G5-0P7" firstAttribute="leading" secondItem="YUn-R9-9R9" secondAttribute="leading" id="dhG-hi-7ze"/>
                             <constraint firstItem="2zW-G5-0P7" firstAttribute="top" secondItem="1g4-ek-6HL" secondAttribute="bottom" id="eiM-lB-kZI"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="VFq-04-0EH" secondAttribute="trailing" constant="25" id="oFw-2j-jE0"/>
                             <constraint firstAttribute="bottom" secondItem="2zW-G5-0P7" secondAttribute="bottom" id="r8H-a6-3cX"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="destinationStopButton" destination="myE-0t-yjB" id="WqF-bL-Dbw"/>
                         <outlet property="northboundLabel" destination="mlK-N1-6xw" id="Ccc-Gc-aFi"/>
+                        <outlet property="originStopButton" destination="Aho-mc-YSc" id="djr-Z0-m7K"/>
                         <outlet property="southboundLabel" destination="Uji-af-I2Y" id="Te9-PD-PcU"/>
-                        <outlet property="stopLabel" destination="7g1-Mz-B4C" id="Nxb-9Q-JUo"/>
+                        <outlet property="stopsStackView" destination="OaM-wV-qJ8" id="sMS-Vy-Gse"/>
                         <outlet property="tableParentView" destination="43z-Kl-Kqb" id="HnA-uq-lPK"/>
                         <outlet property="tableView" destination="nEb-DA-UJS" id="KmD-aE-Qcw"/>
+                        <outlet property="toLabel" destination="Jc0-BD-9s6" id="B4D-qh-7GA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="86z-nX-9ze" userLabel="First Responder" sceneMemberID="firstResponder"/>

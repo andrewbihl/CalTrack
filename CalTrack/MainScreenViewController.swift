@@ -17,10 +17,18 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager {
     @IBOutlet var mapContainerView: UIView!
 
     @IBOutlet var detailContainerView: UIView!
+    
+    var mapDetailVC : MapDetailViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.detailViewHeightConstraint.constant = DETAIL_VIEW_HEIGHT
-        // Do any additional setup after loading the view.
+        for vc in self.childViewControllers {
+            if let detailVC = vc as? MapDetailViewController {
+                self.mapDetailVC = detailVC
+                return
+            }
+        }
     }
 
     func userSwipedUp(vc: MapDetailViewController) -> Bool {
@@ -40,6 +48,9 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager {
     }
     
     @IBAction func userPressedRouteButton(_ sender: Any) {
+        if let vc = self.mapDetailVC {
+            vc.toggleRouteMode()
+        }
     }
     
     
