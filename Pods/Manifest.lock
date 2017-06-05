@@ -58,17 +58,15 @@ PODS:
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.10)
-  - Instructions (0.5.0):
-    - Instructions/Core (= 0.5.0)
-  - Instructions/Core (0.5.0)
+  - Instructions (1.0.0-beta.1)
   - KeychainAccess (3.0.2)
   - NVActivityIndicatorView (3.6.1)
   - Protobuf (3.3.0)
-  - Realm (2.7.0):
-    - Realm/Headers (= 2.7.0)
-  - Realm/Headers (2.7.0)
-  - RealmSwift (2.7.0):
-    - Realm (= 2.7.0)
+  - Realm (2.8.0):
+    - Realm/Headers (= 2.8.0)
+  - Realm/Headers (2.8.0)
+  - RealmSwift (2.8.0):
+    - Realm (= 2.8.0)
   - Whisper (5.0.0)
 
 DEPENDENCIES:
@@ -97,7 +95,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Instructions:
-    :commit: e8b448d108908d9bb47f5d1b00f57fcc0d77e6f3
+    :commit: 2b80ed4ac51a82ea0de24267654e8f9b5da6de01
     :git: https://github.com/ephread/Instructions.git
   KeychainAccess:
     :commit: 906b0021b36d8bbd6c1a7cef68fa25b19a62c92e
@@ -121,12 +119,12 @@ SPEC CHECKSUMS:
   GooglePlaces: 74d322c74184ea4576184089b496d291cf0dcd38
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
-  Instructions: 6976f674ce788aefec475be6f18500572f1645d4
+  Instructions: ad680ceb4c7866fb9f3abd59ecb1de81546713aa
   KeychainAccess: 53275d79a7449d8adb71302c2e5a7cf6ecead088
   NVActivityIndicatorView: 9f52a7f84bf5c6a798722c450fe3c198e01c56ed
   Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
-  Realm: 07e5d3a9e0e41d65fd5f9f05150ed6295d0f093b
-  RealmSwift: 6d06425d3900c86473c4f323bf6949b43fca22bc
+  Realm: 929243ad2b618b3232e70658bedc61110e7563f1
+  RealmSwift: 5b7079b891f2833d1849294161ba3e092bbda3f6
   Whisper: 39b833d0f279912a7f38a19c4ba603435514a550
 
 PODFILE CHECKSUM: 2f5587788806214f8b33a6da709935077c747d5f
