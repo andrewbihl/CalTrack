@@ -61,14 +61,6 @@ class DataServer {
         print("data server initialization complete")
     }
     
-    public func getTripTimes(fromStop origin: Stop, toStop destination: Stop)->[(departureTime: Int, arrivalTime: Int)] {
-        var tripTimes = [(departureTime: Int, arrivalTime: Int)]()
-        print("get trip times")
-        print("from stop", origin.stopName, "to stop", destination.stopName)
-        
-        return tripTimes
-    }
-    
     public func getNearestTrainLocation(with stop: Stop, north: Bool) -> ([Stop], [Int]){ // nearest north/southbound train in format ([stops along the way], array of departure times)
         // e.g.
         let current = Calendar.dateInMinutes
@@ -117,6 +109,25 @@ class DataServer {
             return []
         }
         
+    }
+    
+    public func getTripTimes(fromStop origin: Stop, toStop destination: Stop)->[(departureTime: Int, arrivalTime: Int)] {
+        var tripTimes = [(departureTime: Int, arrivalTime: Int)]()
+        print("get trip times")
+        print("from stop", origin.stopName, origin.stopId, "to stop", destination.stopName, destination.stopId)
+        
+        let intDate = Calendar.dateInMinutes
+        if let stopTimes = stopTimes {
+            /*
+            let theseStops = Array(stopTimes.filter("stop_id == %@ AND departureTime > %@", stop.stopId, intDate).sorted(byKeyPath: "departureTime")).prefix(STOP_TIMES_SHOWN_COUNT)
+            let theseTimes = theseStops.map({ (stopTime) -> Int in
+                
+                return stopTime.departureTime
+            }) */
+            
+        }
+        
+        return tripTimes
     }
     
     public func addPotentialDelay(to stop: Stop) {

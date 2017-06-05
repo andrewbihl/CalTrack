@@ -73,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        GMSServices.provideAPIKey("AIzaSyBOYBoKP3VQvrD5ddO2q7gZXpwIgD1Bdik")
+        GMSServices.provideAPIKey(GMS_APIKEY)
         FirebaseApp.configure()
         Fabric.with([Crashlytics.self])
         

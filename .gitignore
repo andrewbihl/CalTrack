@@ -1,5 +1,7 @@
 # Xcode 8
-#
+# Sensitive Data
+CalTrack/SensitiveData.swift
+CalTrack/GoogleService-Info.plist
 
 ## OS X files
 .DS_Store
