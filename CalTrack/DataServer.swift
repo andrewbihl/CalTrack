@@ -197,7 +197,9 @@ extension Int {
         return (hourDifference, minuteDifference)
     }
     
-    var timeRemainingText: String {
+    
+    
+    var timeRemainingMessage: String {
         
         let (hourDifference, minuteDifference) = self.timeRemaining
         if hourDifference == 0 {
@@ -211,7 +213,19 @@ extension Int {
         }
     }
     
-    var timeOfDepartureText: String {
+    var timeRemainingText : String {
+        let (hourDifference, minuteDifference) = self.timeRemaining
+        if hourDifference == 0 {
+            return "\(String(minuteDifference)) minutes"
+        }
+        else if hourDifference > 0 {
+            return "\(String(hourDifference)) h \(String(minuteDifference)) m"
+        } else {
+            return "-\(String(60-minuteDifference))."
+        }
+    }
+    
+    var timeText: String {
         var hour = self / 60
         var am = "AM"
         

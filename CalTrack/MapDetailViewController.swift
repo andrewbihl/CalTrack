@@ -66,6 +66,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     private var southStop : Stop
     
     private var destinationStop : Stop?
+    private var tripTimes : [(departureTime: Int, arrivalTime: Int)]?
     
     private let BORDER_WIDTH : CGFloat = 1.5
     private let BORDER_COLOR : CGColor = appColor1.cgColor
@@ -228,8 +229,11 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                 return cell
             }
         }
+        
         else if inRouteMode {
-            
+            if let times = self.tripTimes, let cell : TripTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TripCell") as? TripTableViewCell {
+                
+            }
         }
         if let cell : NorthSouthDeparturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "NorthSouthCell") as? NorthSouthDeparturesTableViewCell {
             

@@ -47,8 +47,8 @@ class NorthSouthDeparturesTableViewCell: UITableViewCell {
         timeLabel.isHidden = false
         timeRemainingLabel.isHidden = false
         
-        timeLabel.text = time.timeOfDepartureText
-        timeRemainingLabel.text = time.timeRemainingText
+        timeLabel.text = time.timeText
+        timeRemainingLabel.text = time.timeRemainingMessage
 
 }
     override func prepareForReuse() {
