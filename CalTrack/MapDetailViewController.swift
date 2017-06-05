@@ -166,6 +166,10 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    private func retrieveTripTimes(){
+        // TODO: Get the trip times t
+    }
+    
     public func toggleRouteMode(){
         if (!inRouteMode) {
             self.stopsStackView.addArrangedSubview(toLabel)
@@ -182,6 +186,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             self.southboundLabel.text = "Southbound"
         }
         inRouteMode = !inRouteMode
+        tableView.reloadData()
     }
     
     // MARK: - User Actions
@@ -222,20 +227,29 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: - Table View Functions
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 && max(self.northDepartures.count, self.southDepartures.count) == 0 {
-            if let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "NoTimesCell") {
-                cell.contentView.layer.borderColor = BORDER_COLOR
-                cell.contentView.layer.borderWidth = BORDER_WIDTH
-                return cell
+        if indexPath.row == 0 {
+            let noRows = (inRouteMode && (tripTimes == nil || tripTimes!.count <= 0)) ||
+                (!inRouteMode && max(self.northDepartures.count, self.southDepartures.count)<=0)
+            if noRows {
+                if let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "NoTimesCell") {
+                    cell.contentView.layer.borderColor = BORDER_COLOR
+                    cell.contentView.layer.borderWidth = BORDER_WIDTH
+                    return cell
+                }
             }
         }
         
-        else if inRouteMode {
-            if let times = self.tripTimes, let cell : TripTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TripCell") as? TripTableViewCell {
-                
+        if inRouteMode {
+            if let times = self.tripTimes?[indexPath.row], let cell : TripTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TripCell") as? TripTableViewCell {
+                if times.arrivalTime.timeRemaining.hours < 0 || times.departureTime.timeRemaining.hours < 0 {
+                    retrieveTripTimes()
+                    tableView.reloadData()
+                }
+                cell.setTripTimes(departure: times.departureTime, arrival: times.arrivalTime)
+                return cell
             }
         }
-        if let cell : NorthSouthDeparturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "NorthSouthCell") as? NorthSouthDeparturesTableViewCell {
+        else if let cell : NorthSouthDeparturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "NorthSouthCell") as? NorthSouthDeparturesTableViewCell {
             
             if northDepartures.count > indexPath.row {
                 let departureTime = northDepartures[indexPath.row]
@@ -253,13 +267,9 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                 }
                 cell.setDepartureTime(time: departureTime, north: false)
             }
-            cell.contentView.layer.borderColor = BORDER_COLOR
-            cell.contentView.layer.borderWidth = BORDER_WIDTH
-            cell.contentView.backgroundColor = appColor1 //Same as BORDER_COLOR
             return cell
-        } else {
-            return UITableViewCell()
         }
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
