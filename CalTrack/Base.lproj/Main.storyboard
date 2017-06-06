@@ -58,6 +58,8 @@
                                 </constraints>
                                 <color key="tintColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="RouteIconWithShadow"/>
+                                <state key="selected" image="RouteIconWithShadowBlue"/>
+                                <state key="highlighted" image="RouteIconWithShadowBlue"/>
                                 <connections>
                                     <action selector="userPressedRouteButton:" destination="9pv-A4-QxB" eventType="touchUpInside" id="KTG-op-UkC"/>
                                 </connections>
@@ -500,5 +502,6 @@
         <image name="ListIcon" width="41" height="37"/>
         <image name="MapIcon" width="34" height="28"/>
         <image name="RouteIconWithShadow" width="109" height="109"/>
+        <image name="RouteIconWithShadowBlue" width="109" height="109"/>
     </resources>
 </document>

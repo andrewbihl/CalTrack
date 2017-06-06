@@ -49,7 +49,8 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager {
         return false
     }
     
-    @IBAction func userPressedRouteButton(_ sender: Any) {
+    @IBAction func userPressedRouteButton(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
         if let vc = self.mapDetailVC {
             vc.toggleRouteMode()
         }
