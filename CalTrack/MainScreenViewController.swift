@@ -57,7 +57,7 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager {
     public func animateDetailViewController(expand: Bool) {
         let height : CGFloat
         if expand {
-            height = (2.0/3)*self.view.frame.size.height
+            height = 0.4*self.view.frame.size.height
         } else {
             height = DETAIL_VIEW_HEIGHT
         }

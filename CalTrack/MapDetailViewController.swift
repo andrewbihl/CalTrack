@@ -48,6 +48,11 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     var swipeDown : UIGestureRecognizer?
     var tapBanner : UIGestureRecognizer?
     
+    let GENERAL_BACKGROUND_COLOR = #colorLiteral(red: 0.7960784314, green: 0.7960784314, blue: 0.7960784314, alpha: 0.9505038681)
+    let EVEN_ROW_BACKGROUND_COLOR = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.2544661034)
+    let LINE_COLOR = UIColor.darkGray
+    let LINE_THICKNESS : CGFloat = 0.5
+    
     private let CELL_HEIGHT : CGFloat = 50
     
     public var northDepartures = [Int]()
@@ -82,9 +87,6 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     private var tripTimes : [(departureTime: Int, arrivalTime: Int)]?
-    
-    private let BORDER_WIDTH : CGFloat = 1.5
-    private let BORDER_COLOR : CGColor = appColor1.cgColor
     
     public var isExpanded = false {
         didSet {
@@ -135,14 +137,10 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
 
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.frame = self.tableParentView.bounds
-        self.view.backgroundColor = appColor2
-        self.tableView.backgroundColor = appColor2
-        self.view.layer.borderWidth = 3
-        self.view.layer.borderColor = BORDER_COLOR
-        self.northboundLabel.layer.borderWidth = BORDER_WIDTH
-        self.southboundLabel.layer.borderWidth = BORDER_WIDTH
-        self.northboundLabel.layer.borderColor = BORDER_COLOR
-        self.southboundLabel.layer.borderColor = BORDER_COLOR
+        tableView.backgroundColor = GENERAL_BACKGROUND_COLOR
+        self.drawLineInView(view: self.view, startingPoint: CGPoint(x:0, y:0), length: self.view.frame.width, horizontal: true, thickness: LINE_THICKNESS, color: LINE_COLOR)
+        let midHeaderOrigin = CGPoint(x: 0.0, y: 0.0 + self.stopsStackView.frame.height - 2)
+        self.drawLineInView(view: self.view, startingPoint: midHeaderOrigin, length: self.view.frame.width, horizontal: true, thickness: LINE_THICKNESS, color: LINE_COLOR)
         self.tableView.reloadData()
     }
     
@@ -261,20 +259,28 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: - Table View Functions
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
+        let cell = self.cellTypeForRow(index: indexPath.row)
+        if indexPath.row % 2 == 0 {
+            cell.backgroundColor = EVEN_ROW_BACKGROUND_COLOR
+        } else {
+            cell.backgroundColor = UIColor.clear
+        }
+        return cell
+    }
+    
+    private func cellTypeForRow(index: Int)->UITableViewCell {
+        if index == 0 {
             let noRows = (inRouteMode && (tripTimes == nil || tripTimes!.count <= 0)) ||
                 (!inRouteMode && max(self.northDepartures.count, self.southDepartures.count)<=0)
             if noRows {
                 if let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "NoTimesCell") {
-                    cell.contentView.layer.borderColor = BORDER_COLOR
-                    cell.contentView.layer.borderWidth = BORDER_WIDTH
                     return cell
                 }
             }
         }
         
         if inRouteMode {
-            if let times = self.tripTimes?[indexPath.row], let cell : TripTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TripCell") as? TripTableViewCell {
+            if let times = self.tripTimes?[index], let cell : TripTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TripCell") as? TripTableViewCell {
                 if times.arrivalTime.timeRemaining.hours < 0 || times.departureTime.timeRemaining.hours < 0 {
                     retrieveTripTimes()
                     tableView.reloadData()
@@ -285,16 +291,16 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         else if let cell : NorthSouthDeparturesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "NorthSouthCell") as? NorthSouthDeparturesTableViewCell {
             
-            if northDepartures.count > indexPath.row {
-                let departureTime = northDepartures[indexPath.row]
+            if northDepartures.count > index {
+                let departureTime = northDepartures[index]
                 if departureTime.timeRemaining.hours < 0 {
                     self.retrieveDepartureTimes()
                     tableView.reloadData()
                 }
                 cell.setDepartureTime(time: departureTime, north: true)
             }
-            if southDepartures.count > indexPath.row {
-                let departureTime = southDepartures[indexPath.row]
+            if southDepartures.count > index {
+                let departureTime = southDepartures[index]
                 if departureTime.timeRemaining.hours < 0 {
                     self.retrieveDepartureTimes()
                     tableView.reloadData()
@@ -382,6 +388,19 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         let reportStop = self.northStop
         
         DataServer.sharedInstance.addPotentialDelay(to: reportStop)
+    }
+    
+    private func drawLineInView(view: UIView, startingPoint: CGPoint, length: CGFloat, horizontal: Bool, thickness: CGFloat, color: UIColor) {
+        let size: CGSize
+        if horizontal {
+            size = CGSize(width: length, height: thickness)
+        } else {
+            size = CGSize(width: thickness, height: length)
+        }
+        let line = CGRect(origin: startingPoint, size: size)
+        let lineView = UIView(frame: line)
+        lineView.backgroundColor = color
+        view.addSubview(lineView)
     }
     
     

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		069EA2131EDB725500A31BD6 /* caltrainTimes.realm in Resources */ = {isa = PBXBuildFile; fileRef = 069EA2121EDB71DE00A31BD6 /* caltrainTimes.realm */; };
-		06AA60401EDE219500869688 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 06AA603F1EDE219500869688 /* GoogleService-Info.plist */; };
 		06B40CD31EDA50A500BA4A0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F737A1A1EDA3302006628BF /* AppDelegate.swift */; };
 		06B40CD61EDA50B400BA4A0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F737A201EDA3302006628BF /* Main.storyboard */; };
 		06B40CD71EDA50B900BA4A0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F737A231EDA3302006628BF /* Assets.xcassets */; };
@@ -19,6 +18,7 @@
 		06CB06001EDA631D00354E4E /* RealmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CB05FF1EDA631D00354E4E /* RealmModels.swift */; };
 		06CB06021EDA666300354E4E /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CB06011EDA666300354E4E /* TabBarViewController.swift */; };
 		06F81E271EE61D2C00525C2D /* SensitiveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F81E261EE61D2C00525C2D /* SensitiveData.swift */; };
+		2F07A0DB1EE6611F00942646 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F07A0DA1EE6611F00942646 /* GoogleService-Info.plist */; };
 		2F11D18B1EDA5A3F003BB09B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11D18A1EDA5A3F003BB09B /* Constants.swift */; };
 		2F11D18D1EDA722F003BB09B /* DataServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11D18C1EDA722F003BB09B /* DataServer.swift */; };
 		2F11D18F1EDA80E0003BB09B /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11D18E1EDA80E0003BB09B /* ScheduleViewController.swift */; };
@@ -32,13 +32,13 @@
 
 /* Begin PBXFileReference section */
 		069EA2121EDB71DE00A31BD6 /* caltrainTimes.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = caltrainTimes.realm; sourceTree = "<group>"; };
-		06AA603F1EDE219500869688 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		06AA60421EDE4A9D00869688 /* CalTrack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CalTrack.entitlements; sourceTree = "<group>"; };
 		06CB05DC1EDA528A00354E4E /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		06CB05DE1EDA52A100354E4E /* MapDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailViewController.swift; sourceTree = "<group>"; };
 		06CB05FF1EDA631D00354E4E /* RealmModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmModels.swift; sourceTree = "<group>"; };
 		06CB06011EDA666300354E4E /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		06F81E261EE61D2C00525C2D /* SensitiveData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensitiveData.swift; sourceTree = "<group>"; };
+		2F07A0DA1EE6611F00942646 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2F11D18A1EDA5A3F003BB09B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2F11D18C1EDA722F003BB09B /* DataServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataServer.swift; sourceTree = "<group>"; };
 		2F11D18E1EDA80E0003BB09B /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
@@ -124,10 +124,10 @@
 				06CB05DC1EDA528A00354E4E /* MapViewController.swift */,
 				2F11D18C1EDA722F003BB09B /* DataServer.swift */,
 				06F81E261EE61D2C00525C2D /* SensitiveData.swift */,
+				2F07A0DA1EE6611F00942646 /* GoogleService-Info.plist */,
 				2F737A231EDA3302006628BF /* Assets.xcassets */,
 				2F737A251EDA3302006628BF /* LaunchScreen.storyboard */,
 				2F737A281EDA3302006628BF /* Info.plist */,
-				06AA603F1EDE219500869688 /* GoogleService-Info.plist */,
 				069EA2121EDB71DE00A31BD6 /* caltrainTimes.realm */,
 			);
 			path = CalTrack;
@@ -210,8 +210,8 @@
 				069EA2131EDB725500A31BD6 /* caltrainTimes.realm in Resources */,
 				06B40CD81EDA50BC00BA4A0F /* LaunchScreen.storyboard in Resources */,
 				06B40CD61EDA50B400BA4A0F /* Main.storyboard in Resources */,
-				06AA60401EDE219500869688 /* GoogleService-Info.plist in Resources */,
 				06B40CD71EDA50B900BA4A0F /* Assets.xcassets in Resources */,
+				2F07A0DB1EE6611F00942646 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

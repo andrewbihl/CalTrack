@@ -16,10 +16,6 @@ public let defaultNorthStop = Stop.sanFranciscoNorthbound
 public let defaultSouthStop = Stop.sanFranciscoSouthbound
 public let defaultDestinationStop = Stop.sanJose
 
-
-public let appColor1 = UIColor(red:0.31, green:0.75, blue:0.62, alpha:0.91)
-public let appColor2 = #colorLiteral(red: 0.7428558469, green: 0.895416677, blue: 0.8669404387, alpha: 1)
-
 public enum Stop: Int {
     case sanFranciscoNorthbound = 0, sanFranciscoSouthbound,
     twentySecondStreetNorthbound, twentySecondStreetSouthbound,
