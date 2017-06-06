@@ -14,6 +14,7 @@ public let defaultLatitude = 37.788153
 public let defaultLongitude = -122.406468
 public let defaultNorthStop = Stop.sanFranciscoNorthbound
 public let defaultSouthStop = Stop.sanFranciscoSouthbound
+public let defaultDestinationStop = Stop.sanJose
 
 
 public let appColor1 = UIColor(red:0.31, green:0.75, blue:0.62, alpha:0.91)

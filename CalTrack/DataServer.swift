@@ -111,6 +111,34 @@ class DataServer {
         
     }
     
+    public func getTripTimes(fromStop origin: Stop, toStop destination: Stop)->[(departureTime: Int, arrivalTime: Int)] {
+        var tripTimes = [(departureTime: Int, arrivalTime: Int)]()
+        print("get trip times")
+        print("from stop", origin.stopName, origin.stopId, origin.stopIsNorth, "to stop", destination.stopName, destination.stopId, destination.stopIsNorth)
+        
+        let intDate = Calendar.dateInMinutes
+        if let stopTimes = stopTimes {
+            // stops further north have stop IDs with smaller magnitudes. Hence we can use IDs to infer direction of travel
+            let headingNorth = origin.stopId > destination.stopId
+            // inputted origin & destination are always northbound stops so we'll **adjust** accordingly
+            if let trueOrigin = headingNorth ? origin : origin.stopPartner {
+                if let trueDest = headingNorth ? destination : destination.stopPartner {
+            
+            let fromStops = stopTimes.filter("stop_id == %@ AND departureTime > %@", trueOrigin.stopId, intDate).sorted(byKeyPath: "departureTime")
+            let toStops = stopTimes.filter("stop_id == %@ AND departureTime > %@", trueDest.stopId, intDate).sorted(byKeyPath: "departureTime")
+            
+            for stop in fromStops {
+                if let obj = toStops.filter("realTime == %@ AND departureTime > %@", stop.realTime, stop.departureTime).first {
+                    tripTimes.append((stop.departureTime, obj.departureTime))
+                }
+            }
+                }
+            }
+        }
+        
+        return tripTimes
+    }
+    
     public func addPotentialDelay(to stop: Stop) {
         print("add potential delay")
         
@@ -191,7 +219,9 @@ extension Int {
         return (hourDifference, minuteDifference)
     }
     
-    var timeRemainingText: String {
+    
+    
+    var timeRemainingMessage: String {
         
         let (hourDifference, minuteDifference) = self.timeRemaining
         if hourDifference == 0 {
@@ -205,7 +235,19 @@ extension Int {
         }
     }
     
-    var timeOfDepartureText: String {
+    var timeRemainingText : String {
+        let (hourDifference, minuteDifference) = self.timeRemaining
+        if hourDifference == 0 {
+            return "\(String(minuteDifference)) minutes"
+        }
+        else if hourDifference > 0 {
+            return "\(String(hourDifference)) h \(String(minuteDifference)) m"
+        } else {
+            return "-\(String(60-minuteDifference))."
+        }
+    }
+    
+    var timeText: String {
         var hour = self / 60
         var am = "AM"
         

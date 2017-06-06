@@ -11,15 +11,24 @@ import UIKit
 class MainScreenViewController: UIViewController, MapDetailAnimationManager {
     @IBOutlet var detailViewHeightConstraint: NSLayoutConstraint!
     
-    private let DETAIL_VIEW_HEIGHT : CGFloat = 125.0
+    private let DETAIL_VIEW_HEIGHT : CGFloat = 100.0
     
+    @IBOutlet var routeButton: UIButton!
     @IBOutlet var mapContainerView: UIView!
 
     @IBOutlet var detailContainerView: UIView!
+    
+    var mapDetailVC : MapDetailViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.detailViewHeightConstraint.constant = DETAIL_VIEW_HEIGHT
+        for vc in self.childViewControllers {
+            if let detailVC = vc as? MapDetailViewController {
+                self.mapDetailVC = detailVC
+                return
+            }
+        }
     }
 
     func userSwipedUp(vc: MapDetailViewController) -> Bool {
@@ -37,6 +46,13 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager {
         }
         return false
     }
+    
+    @IBAction func userPressedRouteButton(_ sender: Any) {
+        if let vc = self.mapDetailVC {
+            vc.toggleRouteMode()
+        }
+    }
+    
     
     public func animateDetailViewController(expand: Bool) {
         let height : CGFloat
@@ -56,7 +72,6 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager {
 //            self.view.layoutIfNeeded()
 //        })
     }
-    
 
     /*
     // MARK: - Navigation

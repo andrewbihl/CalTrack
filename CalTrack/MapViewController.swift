@@ -12,10 +12,12 @@ import CoreLocation
 
 class MapViewController: UIViewController, GMSMapViewDelegate {
 
+    let UNSELECTED_MARKER_OPACITY : Float = 0.55
     // location
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation?
     var mapView: GMSMapView!
+    var mapMarkers : [Stop : GMSMarker] = [Stop : GMSMarker]()
     var zoomLevel: Float = 15.0
     let defaultLocation = CLLocationCoordinate2D.defaultCoordinates
     var detailVC : MapDetailViewController?
@@ -23,7 +25,31 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     // Once the user has interacted with the map, don't refocus to his location + nearest stop again while the view is up.
     var userHasInteracted = false
     
-    var selectedStop: Stop?
+    var selectedStop: Stop? {
+        willSet {
+            if selectedStop != nil{
+                if let oldMarker = mapMarkers[selectedStop!] {
+                    oldMarker.opacity = UNSELECTED_MARKER_OPACITY
+                } else if let partner = selectedStop?.stopPartner {
+                    if let oldMarker = mapMarkers[partner] {
+                        oldMarker.opacity = UNSELECTED_MARKER_OPACITY
+                    }
+                }
+            }
+            if newValue != nil {
+                if let selectedMarker = mapMarkers[newValue!] {
+                    selectedMarker.opacity = 1.0
+                } else if let partner = newValue?.stopPartner {
+                    if let selectedMarker = mapMarkers[partner] {
+                        selectedMarker.opacity = 1.0
+                    }
+                }
+            }
+        }
+    }
+    
+    var closestStop: Stop? // Need to retain this information because if you are moving and have tapped a stop you'll see it flip back to your closest stop because default behavior is to compare location to selectedStop
+    // in other words, we only want a refresh of selectedStop from the location manager when your nearest stop genuinely changes (as opposed to a comparison with selectedStop)
     
     var tapActive = false
     
@@ -34,7 +60,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
         
         self.locationManager.requestWhenInUseAuthorization()
@@ -100,6 +125,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             marker.icon = #imageLiteral(resourceName: "TrainStop")
             marker.title = stop.stopName.replacingOccurrences(of: " Northbound", with: "")
             marker.map = mapView
+            marker.opacity = 0.55
+            mapMarkers[stop] = marker
         }
         
         let polyline = GMSPolyline(path: path)
@@ -130,6 +157,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             northTrain = GMSMarker(position: pos)
             northTrain?.icon = #imageLiteral(resourceName: "SpeedTrainSmall")
             northTrain?.map = mapView
+            //northTrain?.iconView?.isUserInteractionEnabled = false
             
                 self.trainAnimation(stops: northStops, times: northTimes, current: current, first: true, north: true, transactionID: unique!)
             
@@ -149,6 +177,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
                 southTrain = GMSMarker(position: pos)
                 southTrain?.icon = #imageLiteral(resourceName: "SpeedTrainSmall")
                 southTrain?.map = mapView
+                //southTrain.iconView?.isUserInteractionEnabled = false
                 
                 self.trainAnimation(stops: southStops, times: southTimes, current: current, first: true, north: false, transactionID: unique!)
                 
@@ -241,31 +270,16 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         self.tapActive = true
         print("You tapped at \(marker.position.latitude), \(marker.position.longitude)") */
         
+        print("looking for stop with location \(marker.position.latitude), \(marker.position.longitude)")
         if let stop = marker.position.stopWithExactPosition {
+        print("was stop", stop.stopName)
         detailVC?.stopTappedChanged(with: stop)
         }
-        
-        self.addAnimatedTrain()
         
         return false
     }
     
     func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
-        /*
-        if let coord = mapView.myLocation?.coordinate {
-        let camera = GMSCameraPosition.camera(withLatitude: coord.latitude,
-                                              longitude: coord.longitude,
-                                              zoom: zoomLevel)
-            print("zooming because location button was tapped")
-        
-        if mapView.isHidden {
-            mapView.isHidden = false
-            mapView.camera = camera
-        }  else {
-            
-            mapView.animate(to: camera)
-        }
-        } */
         
         detailVC?.closestStopChanged()
         
@@ -296,7 +310,7 @@ extension MapViewController: CLLocationManagerDelegate {
         }
         
         detailVC?.closestStopChanged() // this will take care of zoom if necessary
-
+        self.selectedStop = self.currentLocation?.getClosestStop
     }
     
     func zoomToIncludeStop(_ stop: Stop?) {
@@ -304,7 +318,7 @@ extension MapViewController: CLLocationManagerDelegate {
             if let stop = stop{
                 print("zooming to include me \(myCoordinates) and nearest stop \(stop.stopCoordinates)")
                 let bounds = GMSCoordinateBounds(coordinate: myCoordinates, coordinate: stop.stopCoordinates)
-                let cameraUpdate = GMSCameraUpdate.fit(bounds, withPadding: 50)
+                let cameraUpdate = GMSCameraUpdate.fit(bounds, withPadding: 60)
                 mapView.animate(with: cameraUpdate)
             }
             else {
@@ -344,12 +358,14 @@ extension MapViewController: CLLocationManagerDelegate {
 extension MapViewController: InformingDelegate {
     func valueChangedFromLoc() -> Stop? {
         if let stop = self.currentLocation?.getClosestStop {
-            if stop != self.selectedStop {
+            if stop != self.closestStop && stop != self.selectedStop {
             self.selectedStop = stop
+            self.closestStop = stop 
                  self.addAnimatedTrain()
                 if !tapActive && !userHasInteracted {
                     print("zooming because location changed")
                     zoomToIncludeStop(stop)
+                    mapMarkers[stop]?.opacity = 1.0
                 }
             return stop
                
@@ -366,6 +382,7 @@ extension MapViewController: InformingDelegate {
     func valueChangedFromTap(with stop: Stop) -> Stop? {
         if stop != self.selectedStop {
             self.selectedStop = stop
+            self.addAnimatedTrain()
             return stop
         }
         else {
