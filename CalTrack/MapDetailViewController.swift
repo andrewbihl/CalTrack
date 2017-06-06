@@ -321,7 +321,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return inRouteMode ? self.tripTimes?.count ?? 0 : max(northDepartures.count, southDepartures.count, 1)
+        return inRouteMode ? max(self.tripTimes?.count ?? 1, 1) : max(northDepartures.count, southDepartures.count, 1)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
