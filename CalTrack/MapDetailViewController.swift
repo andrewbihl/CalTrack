@@ -207,6 +207,8 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             self.stopsStackView.addArrangedSubview(destinationStopButton)
             self.northboundLabel.text = "Depart time"
             self.southboundLabel.text = "Arrival time"
+            self.updateFromStop(from: self.fromStop)
+            self.updateDestinationStop(to: self.destinationStop)
         }
         else {
             self.toLabel.removeFromSuperview()
