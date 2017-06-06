@@ -114,17 +114,26 @@ class DataServer {
     public func getTripTimes(fromStop origin: Stop, toStop destination: Stop)->[(departureTime: Int, arrivalTime: Int)] {
         var tripTimes = [(departureTime: Int, arrivalTime: Int)]()
         print("get trip times")
-        print("from stop", origin.stopName, origin.stopId, "to stop", destination.stopName, destination.stopId)
+        print("from stop", origin.stopName, origin.stopId, origin.stopIsNorth, "to stop", destination.stopName, destination.stopId, destination.stopIsNorth)
         
         let intDate = Calendar.dateInMinutes
         if let stopTimes = stopTimes {
-            /*
-            let theseStops = Array(stopTimes.filter("stop_id == %@ AND departureTime > %@", stop.stopId, intDate).sorted(byKeyPath: "departureTime")).prefix(STOP_TIMES_SHOWN_COUNT)
-            let theseTimes = theseStops.map({ (stopTime) -> Int in
-                
-                return stopTime.departureTime
-            }) */
+            // stops further north have stop IDs with smaller magnitudes. Hence we can use IDs to infer direction of travel
+            let headingNorth = origin.stopId > destination.stopId
+            // inputted origin & destination are always northbound stops so we'll **adjust** accordingly
+            if let trueOrigin = headingNorth ? origin : origin.stopPartner {
+                if let trueDest = headingNorth ? destination : destination.stopPartner {
             
+            let fromStops = stopTimes.filter("stop_id == %@ AND departureTime > %@", trueOrigin.stopId, intDate).sorted(byKeyPath: "departureTime")
+            let toStops = stopTimes.filter("stop_id == %@ AND departureTime > %@", trueDest.stopId, intDate).sorted(byKeyPath: "departureTime")
+            
+            for stop in fromStops {
+                if let obj = toStops.filter("realTime == %@ AND departureTime > %@", stop.realTime, stop.departureTime).first {
+                    tripTimes.append((stop.departureTime, obj.departureTime))
+                }
+            }
+                }
+            }
         }
         
         return tripTimes
