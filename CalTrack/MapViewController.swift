@@ -100,8 +100,11 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         // delegate value sharing
         self.userHasInteracted = false
         let parent = self.parent!
-        detailVC = parent.childViewControllers[0] as? MapDetailViewController
+        detailVC = parent.childViewControllers[1] as? MapDetailViewController
         detailVC?.delegate = self
+        
+        detailVC?.getHeight()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -356,6 +359,7 @@ extension MapViewController: CLLocationManagerDelegate {
 }
 
 extension MapViewController: InformingDelegate {
+    
     func valueChangedFromLoc() -> Stop? {
         if let stop = self.currentLocation?.getClosestStop {
             if stop != self.closestStop && stop != self.selectedStop {
@@ -388,6 +392,12 @@ extension MapViewController: InformingDelegate {
         else {
             return nil
         }
+    }
+    
+    func addPadding(with height: CGFloat) {
+        // add padding
+        let mapInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: height + 25.0, right: 0.0)
+        mapView.padding = mapInsets
     }
 }
 

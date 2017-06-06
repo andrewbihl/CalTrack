@@ -11,6 +11,7 @@ import UIKit
 protocol InformingDelegate {
     func valueChangedFromLoc() -> Stop?
     func valueChangedFromTap(with stop: Stop) -> Stop?
+    func addPadding(with height: CGFloat)
 }
 
 protocol MapDetailAnimationManager {
@@ -334,6 +335,10 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     
     // MARK: - Delegation
+    
+    func getHeight() {
+        self.delegate?.addPadding(with: self.view.frame.height)
+    }
     
     func closestStopChanged() {
         if let value = self.delegate?.valueChangedFromLoc() {
