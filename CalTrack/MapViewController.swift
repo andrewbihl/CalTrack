@@ -394,9 +394,9 @@ extension MapViewController: InformingDelegate {
         }
     }
     
-    func addPadding(with height: CGFloat) {
+    public func setPadding(with height: CGFloat) {
         // add padding
-        let mapInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: height + 25.0, right: 0.0)
+        let mapInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: height + 0.0, right: 0.0)
         mapView.padding = mapInsets
     }
 }

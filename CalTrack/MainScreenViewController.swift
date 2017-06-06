@@ -18,6 +18,7 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager {
 
     @IBOutlet var detailContainerView: UIView!
     
+    var mapVC : MapViewController?
     var mapDetailVC : MapDetailViewController?
     
     override func viewDidLoad() {
@@ -26,7 +27,8 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager {
         for vc in self.childViewControllers {
             if let detailVC = vc as? MapDetailViewController {
                 self.mapDetailVC = detailVC
-                return
+            } else if let mapVC = vc as? MapViewController {
+                self.mapVC = mapVC
             }
         }
     }
@@ -63,8 +65,10 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager {
         }
         self.detailViewHeightConstraint.constant = height
         UIView.animate(withDuration: 0.25, animations: {
+            self.mapVC?.setPadding(with: height)
             self.view.layoutIfNeeded()
             self.detailContainerView.layoutIfNeeded()
+            self.mapContainerView.layoutIfNeeded()
         }) { (finished) in
             
         }

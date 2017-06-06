@@ -11,7 +11,7 @@ import UIKit
 protocol InformingDelegate {
     func valueChangedFromLoc() -> Stop?
     func valueChangedFromTap(with stop: Stop) -> Stop?
-    func addPadding(with height: CGFloat)
+    func setPadding(with height: CGFloat)
 }
 
 protocol MapDetailAnimationManager {
@@ -48,7 +48,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     var swipeDown : UIGestureRecognizer?
     var tapBanner : UIGestureRecognizer?
     
-    let GENERAL_BACKGROUND_COLOR = #colorLiteral(red: 0.7960784314, green: 0.7960784314, blue: 0.7960784314, alpha: 0.9505038681)
+    let GENERAL_BACKGROUND_COLOR = #colorLiteral(red: 0.7960784314, green: 0.7960784314, blue: 0.7960784314, alpha: 0.898870114)
     let EVEN_ROW_BACKGROUND_COLOR = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.2544661034)
     let LINE_COLOR = UIColor.darkGray
     let LINE_THICKNESS : CGFloat = 0.5
@@ -343,7 +343,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: - Delegation
     
     func getHeight() {
-        self.delegate?.addPadding(with: self.view.frame.height)
+        self.delegate?.setPadding(with: self.view.frame.height)
     }
     
     func closestStopChanged() {
