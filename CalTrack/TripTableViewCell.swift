@@ -35,7 +35,7 @@ class TripTableViewCell: UITableViewCell {
         
         totalTripTimeLabel.text = "\(arrival - departure) m travel time"
         
-        fareLabel.text = "Fare: \((origin.stopZone - destination.stopZone).farePrice)"
+        fareLabel.text = "Fare: \(abs(origin.stopZone - destination.stopZone).farePrice)"
         
     }
 
