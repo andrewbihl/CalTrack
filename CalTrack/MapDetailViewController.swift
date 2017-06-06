@@ -276,7 +276,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                     retrieveTripTimes()
                     tableView.reloadData()
                 }
-                cell.setTripTimes(departure: times.departureTime, arrival: times.arrivalTime)
+                cell.setTripTimes(departure: times.departureTime, arrival: times.arrivalTime, origin: self.fromStop, destination: self.destinationStop)
                 return cell
             }
         }

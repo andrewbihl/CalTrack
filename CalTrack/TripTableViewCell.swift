@@ -27,12 +27,37 @@ class TripTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    public func setTripTimes(departure: Int, arrival: Int) {
+    public func setTripTimes(departure: Int, arrival: Int, origin: Stop, destination: Stop) {
         departureTimeLabel.text = departure.timeText
         timeToDepartureLabel.text = "Leaves in \(departure.timeRemainingText)"
         arrivalTimeLabel.text = arrival.timeText
         timeToArrivalLabel.text = "Arrives in \(arrival.timeRemainingText)"
         
+        totalTripTimeLabel.text = "\(arrival - departure) m travel time"
+        
+        fareLabel.text = "Fare: \((origin.stopZone - destination.stopZone).farePrice)"
+        
     }
 
+}
+
+extension Int {
+    public var farePrice: String {
+        switch self {
+        case 0:
+            return "$3.75"
+        case 1:
+            return "$5.75"
+        case 2:
+            return "$7.75"
+        case 3:
+            return "$9.75"
+        case 4:
+            return "$11.75"
+        case 5:
+            return "$13.75"
+        default:
+            return "invalid"
+        }
+    }
 }
