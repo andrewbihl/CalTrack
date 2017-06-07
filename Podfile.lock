@@ -2,19 +2,19 @@ PODS:
   - Crashlytics (3.8.4):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.11)
-  - Firebase/AdMob (4.0.0):
+  - Firebase/AdMob (4.0.1):
     - Firebase/Core
     - Google-Mobile-Ads-SDK (= 7.20.0)
-  - Firebase/Auth (4.0.0):
+  - Firebase/Auth (4.0.1):
     - Firebase/Core
     - FirebaseAuth (= 4.0.0)
-  - Firebase/Core (4.0.0):
+  - Firebase/Core (4.0.1):
     - FirebaseAnalytics (= 4.0.0)
-    - FirebaseCore (= 4.0.0)
-  - Firebase/Database (4.0.0):
+    - FirebaseCore (= 4.0.1)
+  - Firebase/Database (4.0.1):
     - Firebase/Core
     - FirebaseDatabase (= 4.0.0)
-  - Firebase/Messaging (4.0.0):
+  - Firebase/Messaging (4.0.1):
     - Firebase/Core
     - FirebaseMessaging (= 2.0.0)
   - FirebaseAnalytics (4.0.0):
@@ -25,7 +25,7 @@ PODS:
     - FirebaseAnalytics (~> 4.0)
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (4.0.0):
+  - FirebaseCore (4.0.1):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseDatabase (4.0.0):
     - FirebaseAnalytics (~> 4.0)
@@ -77,6 +77,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Messaging
+  - Google-Mobile-Ads-SDK
   - GoogleMaps
   - GooglePlaces
   - Instructions (from `https://github.com/ephread/Instructions.git`)
@@ -95,7 +96,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Instructions:
-    :commit: 2b80ed4ac51a82ea0de24267654e8f9b5da6de01
+    :commit: 03a9aad9d945eb1231d359c42cc2a7d8bc142e24
     :git: https://github.com/ephread/Instructions.git
   KeychainAccess:
     :commit: 906b0021b36d8bbd6c1a7cef68fa25b19a62c92e
@@ -107,10 +108,10 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
-  Firebase: 284eea779b73fdff309791817da7c68bff8dd572
+  Firebase: f984cd44a160be77ad0590f432e574562bfd4083
   FirebaseAnalytics: 6f08e746f7d66f5452931bc2e822b5df9c66b64a
   FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
-  FirebaseCore: 85ad466044c2f013cdb167f85d426d15b128114a
+  FirebaseCore: 06172c5a0744ab3dd14f778fd666c22855e20098
   FirebaseDatabase: d829b3a8c3e2ac7a16773c5df226966b0805dfc2
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
   FirebaseMessaging: 227406c05b0dc9290702d2e9f18ab5528f0c2cf2
@@ -127,6 +128,6 @@ SPEC CHECKSUMS:
   RealmSwift: 5b7079b891f2833d1849294161ba3e092bbda3f6
   Whisper: 39b833d0f279912a7f38a19c4ba603435514a550
 
-PODFILE CHECKSUM: 2f5587788806214f8b33a6da709935077c747d5f
+PODFILE CHECKSUM: d715efb2d381ad82eca5e44eadb6b1d67c9e6414
 
-COCOAPODS: 1.2.0.beta.3
+COCOAPODS: 1.2.1

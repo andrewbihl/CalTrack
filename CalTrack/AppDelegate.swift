@@ -13,6 +13,7 @@ import Firebase
 import Fabric
 import Crashlytics
 import UserNotifications
+import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -74,6 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         GMSServices.provideAPIKey(GMS_APIKEY)
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-3104334766866306~1150489874")
         FirebaseApp.configure()
         Fabric.with([Crashlytics.self])
         

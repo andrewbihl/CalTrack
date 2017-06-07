@@ -16,6 +16,7 @@ pod 'Firebase/Auth'
 pod 'Firebase/Messaging'
 pod 'Fabric'
 pod 'Crashlytics'
+pod 'Google-Mobile-Ads-SDK'
 end
 
 post_install do |installer|
