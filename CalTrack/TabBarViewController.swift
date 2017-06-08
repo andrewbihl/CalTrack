@@ -25,7 +25,11 @@ class TabBarViewController: UITabBarController, GADBannerViewDelegate {
             self.bannerView.adUnitID = "ca-app-pub-3104334766866306/4572484271"// "ca-app-pub-3940256099942544/2934735716"
             self.bannerView.rootViewController = self
             self.bannerView.delegate = self
-            self.bannerView.load(GADRequest())
+            let request = GADRequest()
+            #if DEBUG
+            request.testDevices = [ kGADSimulatorID, "7a469c1981e8bca25f9c3f11270f66ec" ] // in debug mode set your device as a test device so AdMob doesn't suspend our account (each dev needs to add their device ID)
+            #endif
+            self.bannerView.load(request)
         }
         
         
