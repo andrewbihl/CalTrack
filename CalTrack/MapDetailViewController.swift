@@ -400,12 +400,15 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let northStop = Stop.getStops(headingNorth: true)[row]
         if !inRouteMode {
-            self.updateStops(northStop: Stop.getStops(headingNorth: true)[row], southStop: Stop.getStops(headingNorth: false)[row])
+            self.updateStops(northStop: northStop, southStop: Stop.getStops(headingNorth: false)[row])
+            self.delegate?.valueChangedFromTap(with: northStop)
         }
         else {
             if lastSelectedStopButton == self.originStopButton {
-                self.updateOriginStop(from: Stop.getStops(headingNorth: true)[row])
+                self.updateOriginStop(from: northStop)
+                self.delegate?.valueChangedFromTap(with: northStop)
             } else if lastSelectedStopButton == self.destinationStopButton {
                 self.updateDestinationStop(to: Stop.getStops(headingNorth: true)[row])
             } else {
