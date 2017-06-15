@@ -387,10 +387,13 @@ extension MapViewController: InformingDelegate {
 
     }
     
-    func valueChangedFromTap(with stop: Stop) -> Stop? {
+    func valueChangedFromUserSelection(with stop: Stop, didTapStopOnMap shouldNotZoom: Bool) -> Stop? {
         if stop != self.selectedStop {
             self.selectedStop = stop
             self.addAnimatedTrain()
+            if !shouldNotZoom {
+                self.zoomToIncludeStop(stop)
+            }
             return stop
         }
         else {

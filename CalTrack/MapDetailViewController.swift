@@ -10,7 +10,7 @@ import UIKit
 
 protocol InformingDelegate {
     func valueChangedFromLoc() -> Stop?
-    func valueChangedFromTap(with stop: Stop) -> Stop?
+    func valueChangedFromUserSelection(with stop: Stop, didTapStopOnMap: Bool) -> Stop?
     func setPadding(with height: CGFloat)
 }
 
@@ -403,12 +403,12 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         let northStop = Stop.getStops(headingNorth: true)[row]
         if !inRouteMode {
             self.updateStops(northStop: northStop, southStop: Stop.getStops(headingNorth: false)[row])
-            self.delegate?.valueChangedFromTap(with: northStop)
+            self.delegate?.valueChangedFromUserSelection(with: northStop, didTapStopOnMap: false)
         }
         else {
             if lastSelectedStopButton == self.originStopButton {
                 self.updateOriginStop(from: northStop)
-                self.delegate?.valueChangedFromTap(with: northStop)
+                self.delegate?.valueChangedFromUserSelection(with: northStop, didTapStopOnMap: false)
             } else if lastSelectedStopButton == self.destinationStopButton {
                 self.updateDestinationStop(to: Stop.getStops(headingNorth: true)[row])
             } else {
@@ -441,7 +441,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func stopTappedChanged(with stop: Stop) {
-        if let value = self.delegate?.valueChangedFromTap(with: stop) {
+        if let value = self.delegate?.valueChangedFromUserSelection(with: stop, didTapStopOnMap: true) {
             print("tapped stop changed", value)
             
             let north = value.stopIsNorth ? value : value.stopPartner
