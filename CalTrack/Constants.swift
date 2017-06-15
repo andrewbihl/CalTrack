@@ -150,6 +150,39 @@ public extension Stop {
     }
      */
     
+    func stopsUntil(inclusive destination: Stop) -> [Stop] {
+        let headingNorth = self.stopId > destination.stopId
+        print("heading north", headingNorth, "origin index", self.rawValue, "destination index", destination.rawValue)
+        
+        var stops = [Stop]()
+        
+        var ind = self.rawValue
+        
+        if headingNorth {
+            stops.append(self)
+            while destination.rawValue + 1 < ind {
+                ind -= 2
+                if let stop = Stop(rawValue: ind) {
+                stops.append(stop)
+                }
+                
+            }
+            stops.append(destination)
+        } else {
+            stops.append(destination)
+            while self.rawValue - 1 > ind {
+                ind += 2
+                if let stop = Stop(rawValue: ind) {
+                    stops.append(stop)
+                }
+                
+            }
+            stops.append(self)
+        }
+        
+        return stops
+    }
+    
 }
 
 extension Sequence where Iterator.Element == Stop {

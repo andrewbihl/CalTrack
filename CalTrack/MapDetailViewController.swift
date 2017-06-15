@@ -12,6 +12,7 @@ protocol InformingDelegate {
     func valueChangedFromLoc() -> Stop?
     func valueChangedFromUserSelection(with stop: Stop, didTapStopOnMap: Bool) -> Stop?
     func setPadding(with height: CGFloat)
+    func drawPathWithStops(origin: Stop, destination: Stop)
 }
 
 protocol MapDetailAnimationManager {
@@ -225,6 +226,8 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             self.southboundLabel.text = "Arrival time"
             self.updateOriginStop(from: self.originStop)
             self.updateDestinationStop(to: self.destinationStop)
+            
+            self.delegate?.drawPathWithStops(origin: self.originStop, destination: self.destinationStop)
         }
         else {
             self.toLabel.removeFromSuperview()
@@ -416,11 +419,13 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             if lastSelectedStopButton == self.originStopButton {
                 self.updateOriginStop(from: northStop)
                 self.delegate?.valueChangedFromUserSelection(with: northStop, didTapStopOnMap: false)
+                
             } else if lastSelectedStopButton == self.destinationStopButton {
                 self.updateDestinationStop(to: Stop.getStops(headingNorth: true)[row])
             } else {
                 print("LastSelectedStop is not set. Not sure how this happen.")
             }
+            self.delegate?.drawPathWithStops(origin: self.originStop, destination: self.destinationStop)
         }
     }
     
@@ -444,6 +449,9 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                 self.updateOriginStop(from: north)
                 self.updateStops(northStop: north, southStop: south)
                 self.tableView.reloadData()
+                if inRouteMode {
+                    self.delegate?.drawPathWithStops(origin: self.originStop, destination: self.destinationStop)
+                }
             }
             
         } else{
@@ -461,6 +469,10 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                 self.updateDestinationStop(to: north)
                 self.updateStops(northStop: north, southStop: south)
                 self.tableView.reloadData()
+                
+                if inRouteMode {
+                    self.delegate?.drawPathWithStops(origin: self.originStop, destination: self.destinationStop)
+                }
             }
         } else{
             print("new tapped location, same nearest stop")
