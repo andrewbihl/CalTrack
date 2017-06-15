@@ -152,14 +152,13 @@ public extension Stop {
     
     func stopsUntil(inclusive destination: Stop) -> [Stop] {
         let headingNorth = self.stopId > destination.stopId
-        print("heading north", headingNorth, "origin index", self.rawValue, "destination index", destination.rawValue)
         
         var stops = [Stop]()
         
         var upper = headingNorth ? self.rawValue : destination.rawValue
         let lower = headingNorth ? destination.rawValue : self.rawValue
         
-            while lower + 1 < upper {
+            while lower - 2 <= upper {
                 
                 if let stop = Stop(rawValue: upper) {
                 stops.append(stop)
@@ -167,10 +166,6 @@ public extension Stop {
                 
                 upper -= 2
             }
-        
-        if let stop = Stop(rawValue: lower) {
-        stops.append(stop)
-        }
         
         return stops
     }
