@@ -39,8 +39,15 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet var toLabel: UILabel!
     @IBOutlet var originStopButton: UIButton!
     @IBOutlet var destinationStopButton: UIButton!
-    var lastSelectedStopButton : UIButton? // To indicate which stop label was selected. May be nil.
-    
+    // To indicate which stop label was selected. May be nil.
+    var lastSelectedStopButton : UIButton? {
+        didSet {
+            oldValue?.setTitleColor(oldValue?.tintColor, for: .normal)
+            if let button = lastSelectedStopButton {
+                button.setTitleColor(STOP_BUTTON_SELECTED_COLOR, for: .normal)
+            }
+        }
+    }
     @IBOutlet var northboundLabel: UILabel!
     @IBOutlet var southboundLabel: UILabel!
     
@@ -52,6 +59,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     let GENERAL_BACKGROUND_COLOR = #colorLiteral(red: 0.7960784314, green: 0.7960784314, blue: 0.7960784314, alpha: 0.898870114)
     let EVEN_ROW_BACKGROUND_COLOR = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.2544661034)
+    let STOP_BUTTON_SELECTED_COLOR = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
     let LINE_COLOR = UIColor.darkGray
     let LINE_THICKNESS : CGFloat = 0.5
     
@@ -258,6 +266,12 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     
     @IBAction func userTappedOriginStop(_ sender: UIButton) {
+        if self.lastSelectedStopButton == sender {
+            self.stopPickerView.isHidden = true
+            self.tableView.isHidden = false
+            self.lastSelectedStopButton = nil
+            return
+        }
         self.tableView.isHidden = true
         self.stopPickerView.isHidden = false
         self.lastSelectedStopButton = sender
@@ -265,6 +279,12 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     @IBAction func userTappedDestinationStop(_ sender: UIButton) {
+        if self.lastSelectedStopButton == sender {
+            self.stopPickerView.isHidden = true
+            self.tableView.isHidden = false
+            self.lastSelectedStopButton = sender
+            return
+        }
         self.tableView.isHidden = true
         self.stopPickerView.isHidden = false
         self.lastSelectedStopButton = sender
