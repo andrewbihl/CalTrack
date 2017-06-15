@@ -260,36 +260,26 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                 isExpanded = !isExpanded
                 self.tableView.setContentOffset(CGPoint.zero, animated: false)
             }
-            self.tableView.isHidden = false
-            self.stopPickerView.isHidden = true
-            self.lastSelectedStopButton = nil
+            self.dismissPickerView()
         }
     }
     
     
     @IBAction func userTappedOriginStop(_ sender: UIButton) {
         if self.lastSelectedStopButton == sender {
-            self.stopPickerView.isHidden = true
-            self.tableView.isHidden = false
-            self.lastSelectedStopButton = nil
+            dismissPickerView()
             return
         }
-        self.tableView.isHidden = true
-        self.stopPickerView.isHidden = false
-        self.lastSelectedStopButton = sender
+        presentPickerView(selectedButton: sender)
         self.userSwipedUp()
     }
     
     @IBAction func userTappedDestinationStop(_ sender: UIButton) {
         if self.lastSelectedStopButton == sender {
-            self.stopPickerView.isHidden = true
-            self.tableView.isHidden = false
-            self.lastSelectedStopButton = nil
+            dismissPickerView()
             return
         }
-        self.tableView.isHidden = true
-        self.stopPickerView.isHidden = false
-        self.lastSelectedStopButton = sender
+        presentPickerView(selectedButton: sender)
         self.userSwipedUp()
     }
     
@@ -390,6 +380,28 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     
     // MARK: - UIPickerView
+    private func presentPickerView(selectedButton sender: UIButton?) {
+        if let selectedButton = sender {
+            self.lastSelectedStopButton = selectedButton
+        }
+        self.stopPickerView.isHidden = false
+        self.tableView.isHidden = true
+        let stopToModify : Stop
+        if lastSelectedStopButton == self.originStopButton {
+            stopToModify = inRouteMode ? self.originStop : self.northStop
+        } else {
+            stopToModify = self.destinationStop
+        }
+        let row = stopToModify.rawValue / 2
+        self.stopPickerView.selectRow(row, inComponent: 0, animated: false)
+    }
+    
+    private func dismissPickerView() {
+        self.tableView.isHidden = false
+        self.stopPickerView.isHidden = true
+        self.lastSelectedStopButton = nil
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -425,7 +437,16 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
+        let stopDisplayed : Stop
+        if lastSelectedStopButton == originStopButton {
+            stopDisplayed = inRouteMode ? self.originStop : self.northStop
+        } else {
+            stopDisplayed = destinationStop
+        }
+        let stopSelected : Stop = Stop.getStops(headingNorth: true)[stopPickerView.selectedRow(inComponent: 0)]
+        print("Displayed stop: \(stopDisplayed) (\(stopDisplayed.rawValue))")
+        print("Selected stop: \(stopSelected) (\(stopSelected.rawValue))")
+        return stopSelected == stopDisplayed
     }
     
     // MARK: - Delegation
