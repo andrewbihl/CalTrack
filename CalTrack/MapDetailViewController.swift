@@ -27,7 +27,7 @@ protocol MapDetailAnimationManager {
     func userSwipedDown(vc: MapDetailViewController)->Bool
 }
 
-class MapDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+class MapDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UIGestureRecognizerDelegate {
     var delegate: InformingDelegate?
     
     // Parent view exists just for separation in the Interface Builder
@@ -35,6 +35,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet var tableView: UITableView!
     @IBOutlet var stopPickerView: UIPickerView!
     
+    @IBOutlet var pickerViewTapRecognizer: UITapGestureRecognizer!
     @IBOutlet var stopsStackView: UIStackView!
     @IBOutlet var toLabel: UILabel!
     @IBOutlet var originStopButton: UIButton!
@@ -136,6 +137,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.dataSource = self
         stopPickerView.dataSource = self
         stopPickerView.delegate = self
+        pickerViewTapRecognizer.delegate = self
         tableParentView.addSubview(tableView)
         tableParentView.addSubview(stopPickerView)
 //        self.originStopButton.isUserInteractionEnabled = false
@@ -297,6 +299,11 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    @IBAction func userTappedPickerView(_ sender: UITapGestureRecognizer) {
+        self.userSwipedDown()
+    }
+    
+    
     // MARK: - Table View Functions
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -415,6 +422,10 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                 print("LastSelectedStop is not set. Not sure how this happen.")
             }
         }
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     // MARK: - Delegation
