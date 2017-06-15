@@ -405,13 +405,11 @@ extension MapViewController: InformingDelegate {
     }
     
     func drawPathWithStops(origin: Stop, destination: Stop) {
-        print("draw path")
         let path = GMSMutablePath()
         
         let stops = origin.stopsUntil(inclusive: destination)
         
         for stop in stops {
-            print("adding stop \(stop.stopName) to path")
             path.add(stop.stopCoordinates)
         }
         
