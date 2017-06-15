@@ -437,6 +437,10 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // A tap and a slight drag can be mixed up, so if the user picks the nearest stop in the
+        // picker view it can be misconstrued as a tap (which dismisses the picker). The following 
+        // logic will in most cases recognize if the picker has been moved to select a new stop 
+        // and if so will disregard the tap to dismiss.
         let stopDisplayed : Stop
         if lastSelectedStopButton == originStopButton {
             stopDisplayed = inRouteMode ? self.originStop : self.northStop
