@@ -53,7 +53,8 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     let LINE_COLOR = UIColor.darkGray
     let LINE_THICKNESS : CGFloat = 0.5
     
-    private let CELL_HEIGHT : CGFloat = 50
+    private let NORTH_SOUTH_CELL_HEIGHT : CGFloat = 50
+    private let ROUTE_CELL_HEIGHT : CGFloat = 60
     
     public var northDepartures = [Int]()
     public var southDepartures = [Int]()
@@ -316,7 +317,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         if (!isExpanded) {
             return tableView.frame.height
         }
-        return CELL_HEIGHT
+        return inRouteMode ? ROUTE_CELL_HEIGHT : NORTH_SOUTH_CELL_HEIGHT
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
