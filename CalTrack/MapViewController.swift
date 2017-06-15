@@ -249,6 +249,10 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
   
     // MARK: GMSMapViewDelegate
     
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+        self.detailVC?.userDidTapMap()
+    }
+    
     func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
         if gesture {
             userHasInteracted = true

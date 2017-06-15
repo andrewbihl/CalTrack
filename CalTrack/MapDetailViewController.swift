@@ -56,7 +56,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     let LINE_THICKNESS : CGFloat = 0.5
     
     private let NORTH_SOUTH_CELL_HEIGHT : CGFloat = 50
-    private let ROUTE_CELL_HEIGHT : CGFloat = 60
+    private let ROUTE_CELL_HEIGHT : CGFloat = 65
     
     public var northDepartures = [Int]()
     public var southDepartures = [Int]()
@@ -271,6 +271,11 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         self.userSwipedUp()
     }
     
+    func userDidTapMap() {
+        if !self.stopPickerView.isHidden {
+            self.userSwipedDown()
+        }
+    }
     
     // MARK: - Table View Functions
     
