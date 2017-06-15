@@ -143,7 +143,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         if let stop = self.selectedStop {
             let current = Calendar.dateInMinutes
             
-        let (northStops, northTimes) = DataServer.sharedInstance.getNearestTrainLocation(with: stop, north: true)
+            let (northStops, northTimes) = DataServer.sharedInstance.getNearestTrainLocation(with: stop, north: true)
             
             print("added animated train")
             
@@ -151,43 +151,45 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             let unique = self.transactionID
             
             if northStops.count > 1 && northTimes.count > 1 {
-            northTrain?.map = nil
-            let northTrainLess = northStops[0].stopCoordinates
-            let northTrainMore = northStops[0].stopCoordinates
+                northTrain?.map = nil
+                let northTrainLess = northStops[0].stopCoordinates
+                let northTrainMore = northStops[0].stopCoordinates
                 let (latDiff, longDiff)  = (northTrainMore.latitude - northTrainLess.latitude, northTrainMore.longitude - northTrainLess.longitude)
                 let timeProp: Double = Double((current - northTimes[0]) / (northTimes[1] - northTimes[0]))
                 let pos = CLLocationCoordinate2DMake(northTrainLess.latitude + timeProp * latDiff, northTrainLess.longitude + timeProp * longDiff)
-            northTrain = GMSMarker(position: pos)
-            northTrain?.icon = #imageLiteral(resourceName: "SpeedTrainSmall")
-            northTrain?.map = mapView
-            //northTrain?.iconView?.isUserInteractionEnabled = false
-            
+                
+                
+                northTrain = GMSMarker(position: pos)
+                northTrain?.icon = #imageLiteral(resourceName: "SpeedTrainSmall")
+                northTrain?.map = mapView
+                //northTrain?.iconView?.isUserInteractionEnabled = false
+                
                 self.trainAnimation(stops: northStops, times: northTimes, current: current, first: true, north: true, transactionID: unique!)
-            
+                
             }
             
             
             if let stopPart = stop.stopPartner {
-            let (southStops, southTimes) = DataServer.sharedInstance.getNearestTrainLocation(with: stopPart, north: false)
-            
-            if southStops.count > 1 && southTimes.count > 1 {
-                southTrain?.map = nil
-                let southTrainLess = southStops[0].stopCoordinates
-                let southTrainMore = southStops[0].stopCoordinates
-                let (latDiff, longDiff)  = (southTrainMore.latitude - southTrainLess.latitude, southTrainMore.longitude - southTrainLess.longitude)
-                let timeProp: Double = Double((current - southTimes[0]) / (southTimes[1] - southTimes[0]))
-                let pos = CLLocationCoordinate2DMake(southTrainLess.latitude + timeProp * latDiff, southTrainLess.longitude + timeProp * longDiff)
-                southTrain = GMSMarker(position: pos)
-                southTrain?.icon = #imageLiteral(resourceName: "SpeedTrainSmall")
-                southTrain?.map = mapView
-                //southTrain.iconView?.isUserInteractionEnabled = false
+                let (southStops, southTimes) = DataServer.sharedInstance.getNearestTrainLocation(with: stopPart, north: false)
                 
-                self.trainAnimation(stops: southStops, times: southTimes, current: current, first: true, north: false, transactionID: unique!)
-                
-            }
+                if southStops.count > 1 && southTimes.count > 1 {
+                    southTrain?.map = nil
+                    let southTrainLess = southStops[0].stopCoordinates
+                    let southTrainMore = southStops[0].stopCoordinates
+                    let (latDiff, longDiff)  = (southTrainMore.latitude - southTrainLess.latitude, southTrainMore.longitude - southTrainLess.longitude)
+                    let timeProp: Double = Double((current - southTimes[0]) / (southTimes[1] - southTimes[0]))
+                    let pos = CLLocationCoordinate2DMake(southTrainLess.latitude + timeProp * latDiff, southTrainLess.longitude + timeProp * longDiff)
+                    southTrain = GMSMarker(position: pos)
+                    southTrain?.icon = #imageLiteral(resourceName: "SpeedTrainSmall")
+                    southTrain?.map = mapView
+                    //southTrain.iconView?.isUserInteractionEnabled = false
+                    
+                    self.trainAnimation(stops: southStops, times: southTimes, current: current, first: true, north: false, transactionID: unique!)
+                    
+                }
             }
             
-    }
+        }
         
     }
         
