@@ -22,6 +22,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     let defaultLocation = CLLocationCoordinate2D.defaultCoordinates
     var detailVC : MapDetailViewController?
     
+    var redRouteLine = GMSPolyline()
+    
     // Once the user has interacted with the map, don't refocus to his location + nearest stop again while the view is up.
     var userHasInteracted = false
     
@@ -400,6 +402,29 @@ extension MapViewController: InformingDelegate {
         else {
             return nil
         }
+    }
+    
+    func drawPathWithStops(origin: Stop, destination: Stop) {
+        print("draw path")
+        let path = GMSMutablePath()
+        
+        let stops = origin.stopsUntil(inclusive: destination)
+        
+        for stop in stops {
+            print("adding stop \(stop.stopName) to path")
+            path.add(stop.stopCoordinates)
+        }
+        
+        redRouteLine.map = nil
+        redRouteLine.path = path
+        
+        redRouteLine.strokeColor = .red
+        redRouteLine.strokeWidth = 3
+        redRouteLine.map = mapView
+    }
+    
+    func switchedOutOfRouteMode() {
+        redRouteLine.map = nil
     }
     
     public func setPadding(with height: CGFloat) {
