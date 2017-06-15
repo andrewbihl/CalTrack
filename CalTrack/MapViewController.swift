@@ -153,11 +153,10 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             if northStops.count > 1 && northTimes.count > 1 {
                 northTrain?.map = nil
                 let northTrainLess = northStops[0].stopCoordinates
-                let northTrainMore = northStops[0].stopCoordinates
+                let northTrainMore = northStops[1].stopCoordinates
                 let (latDiff, longDiff)  = (northTrainMore.latitude - northTrainLess.latitude, northTrainMore.longitude - northTrainLess.longitude)
-                let timeProp: Double = Double((current - northTimes[0]) / (northTimes[1] - northTimes[0]))
+                let timeProp = (Double(current - northTimes[0]) / Double(northTimes[1] - northTimes[0]))
                 let pos = CLLocationCoordinate2DMake(northTrainLess.latitude + timeProp * latDiff, northTrainLess.longitude + timeProp * longDiff)
-                
                 
                 northTrain = GMSMarker(position: pos)
                 northTrain?.icon = #imageLiteral(resourceName: "SpeedTrainSmall")
@@ -175,9 +174,9 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
                 if southStops.count > 1 && southTimes.count > 1 {
                     southTrain?.map = nil
                     let southTrainLess = southStops[0].stopCoordinates
-                    let southTrainMore = southStops[0].stopCoordinates
+                    let southTrainMore = southStops[1].stopCoordinates
                     let (latDiff, longDiff)  = (southTrainMore.latitude - southTrainLess.latitude, southTrainMore.longitude - southTrainLess.longitude)
-                    let timeProp: Double = Double((current - southTimes[0]) / (southTimes[1] - southTimes[0]))
+                    let timeProp = (Double(current - southTimes[0]) / Double(southTimes[1] - southTimes[0]))
                     let pos = CLLocationCoordinate2DMake(southTrainLess.latitude + timeProp * latDiff, southTrainLess.longitude + timeProp * longDiff)
                     southTrain = GMSMarker(position: pos)
                     southTrain?.icon = #imageLiteral(resourceName: "SpeedTrainSmall")
