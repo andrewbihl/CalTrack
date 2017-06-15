@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
-class MainScreenViewController: UIViewController, MapDetailAnimationManager {
+class MainScreenViewController: UIViewController, MapDetailAnimationManager, GADBannerViewDelegate {
     @IBOutlet var detailViewHeightConstraint: NSLayoutConstraint!
     
     private let DETAIL_VIEW_HEIGHT : CGFloat = 100.0
@@ -21,6 +22,8 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager {
     var mapVC : MapViewController?
     var mapDetailVC : MapDetailViewController?
     
+    var bannerView: GADBannerView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.detailViewHeightConstraint.constant = DETAIL_VIEW_HEIGHT
@@ -30,6 +33,23 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager {
             } else if let mapVC = vc as? MapViewController {
                 self.mapVC = mapVC
             }
+        }
+        
+        self.configureAd()
+    }
+    
+    func configureAd() {
+        DispatchQueue.main.async {
+            self.bannerView = GADBannerView(adSize: kGADAdSizeFullBanner)
+            self.view.addSubview(self.bannerView)
+            self.bannerView.adUnitID = "ca-app-pub-3104334766866306/4572484271"// "ca-app-pub-3940256099942544/2934735716"
+            self.bannerView.rootViewController = self
+            self.bannerView.delegate = self
+            let request = GADRequest()
+            #if DEBUG
+                request.testDevices = [ kGADSimulatorID, "7a469c1981e8bca25f9c3f11270f66ec" ] // in debug mode set your device as a test device so AdMob doesn't suspend our account (each dev needs to add their device ID)
+            #endif
+            self.bannerView.load(request)
         }
     }
 
@@ -87,5 +107,16 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: - GADBannerViewDelegate
+    
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("banner received ad")
+    }
+    
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        print("Fail to receive ads")
+        print(error)
+    }
 
 }
