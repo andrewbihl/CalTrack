@@ -19,6 +19,8 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager, GAD
 
     @IBOutlet var detailContainerView: UIView!
     
+    @IBOutlet weak var detailContainerBottom: NSLayoutConstraint!
+    
     var mapVC : MapViewController?
     var mapDetailVC : MapDetailViewController?
     
@@ -40,6 +42,8 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager, GAD
     
     func moveAdToBottom() {
         bannerView.frame.origin.y = self.view.frame.height - bannerView.frame.height
+        
+        self.detailContainerBottom.constant = bannerView.frame.height
     }
     
     func configureAd() {
