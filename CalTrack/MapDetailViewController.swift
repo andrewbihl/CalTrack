@@ -282,7 +282,7 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         if self.lastSelectedStopButton == sender {
             self.stopPickerView.isHidden = true
             self.tableView.isHidden = false
-            self.lastSelectedStopButton = sender
+            self.lastSelectedStopButton = nil
             return
         }
         self.tableView.isHidden = true
