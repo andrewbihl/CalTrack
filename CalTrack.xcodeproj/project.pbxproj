@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0671E03F1EE86F81003343BD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0671E03E1EE86F81003343BD /* GoogleService-Info.plist */; };
 		069EA2131EDB725500A31BD6 /* caltrainTimes.realm in Resources */ = {isa = PBXBuildFile; fileRef = 069EA2121EDB71DE00A31BD6 /* caltrainTimes.realm */; };
 		06B40CD31EDA50A500BA4A0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F737A1A1EDA3302006628BF /* AppDelegate.swift */; };
 		06B40CD61EDA50B400BA4A0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F737A201EDA3302006628BF /* Main.storyboard */; };
@@ -26,11 +25,11 @@
 		2F11D1951EDAA5EE003BB09B /* NorthSouthDeparturesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11D1941EDAA5EE003BB09B /* NorthSouthDeparturesTableViewCell.swift */; };
 		2F11D1991EDAD48C003BB09B /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11D1981EDAD48C003BB09B /* MainScreenViewController.swift */; };
 		2FCF76541EE4F7DF0026B1E9 /* TripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCF76531EE4F7DF0026B1E9 /* TripTableViewCell.swift */; };
+		33AC3B911EF22DF000B6221C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33AC3B901EF22DF000B6221C /* GoogleService-Info.plist */; };
 		F79832341109B29D64A0C3AB /* Pods_CalTrack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0A5EEC30AD58DFAC4FEE13 /* Pods_CalTrack.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0671E03E1EE86F81003343BD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		069EA2121EDB71DE00A31BD6 /* caltrainTimes.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = caltrainTimes.realm; sourceTree = "<group>"; };
 		06AA60421EDE4A9D00869688 /* CalTrack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CalTrack.entitlements; sourceTree = "<group>"; };
 		06CB05DC1EDA528A00354E4E /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +52,7 @@
 		2F737A281EDA3302006628BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FCF76531EE4F7DF0026B1E9 /* TripTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripTableViewCell.swift; sourceTree = "<group>"; };
 		326761B2A9492146E1CCE6F2 /* Pods-CalTrack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalTrack.release.xcconfig"; path = "Pods/Target Support Files/Pods-CalTrack/Pods-CalTrack.release.xcconfig"; sourceTree = "<group>"; };
+		33AC3B901EF22DF000B6221C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D8EDB87EA409300049CCA0E1 /* Pods-CalTrack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalTrack.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CalTrack/Pods-CalTrack.debug.xcconfig"; sourceTree = "<group>"; };
 		FE0A5EEC30AD58DFAC4FEE13 /* Pods_CalTrack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CalTrack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -117,15 +117,15 @@
 				2F11D1921EDA83B7003BB09B /* ScheduleFooterView.swift */,
 				2F11D18A1EDA5A3F003BB09B /* Constants.swift */,
 				06CB06011EDA666300354E4E /* TabBarViewController.swift */,
-				06CB05DE1EDA52A100354E4E /* MapDetailViewController.swift */,
 				2FCF76531EE4F7DF0026B1E9 /* TripTableViewCell.swift */,
+				06CB05DE1EDA52A100354E4E /* MapDetailViewController.swift */,
 				2F11D1941EDAA5EE003BB09B /* NorthSouthDeparturesTableViewCell.swift */,
 				06CB05DC1EDA528A00354E4E /* MapViewController.swift */,
 				2F11D18C1EDA722F003BB09B /* DataServer.swift */,
 				06F81E261EE61D2C00525C2D /* SensitiveData.swift */,
 				2F737A231EDA3302006628BF /* Assets.xcassets */,
 				2F737A251EDA3302006628BF /* LaunchScreen.storyboard */,
-				0671E03E1EE86F81003343BD /* GoogleService-Info.plist */,
+				33AC3B901EF22DF000B6221C /* GoogleService-Info.plist */,
 				2F737A281EDA3302006628BF /* Info.plist */,
 				069EA2121EDB71DE00A31BD6 /* caltrainTimes.realm */,
 			);
@@ -209,7 +209,7 @@
 				06B40CD81EDA50BC00BA4A0F /* LaunchScreen.storyboard in Resources */,
 				06B40CD61EDA50B400BA4A0F /* Main.storyboard in Resources */,
 				06B40CD71EDA50B900BA4A0F /* Assets.xcassets in Resources */,
-				0671E03F1EE86F81003343BD /* GoogleService-Info.plist in Resources */,
+				33AC3B911EF22DF000B6221C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

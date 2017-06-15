@@ -35,7 +35,7 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager, GAD
             }
         }
         
-        self.configureAd()
+//        self.configureAd()
     }
     
     func moveAdToBottom() {

@@ -124,10 +124,10 @@ class DataServer {
             if let trueOrigin = headingNorth ? origin : origin.stopPartner {
                 if let trueDest = headingNorth ? destination : destination.stopPartner {
             
-            let fromStops = stopTimes.filter("stop_id == %@ AND departureTime > %@", trueOrigin.stopId, intDate).sorted(byKeyPath: "departureTime")
+            let originStops = stopTimes.filter("stop_id == %@ AND departureTime > %@", trueOrigin.stopId, intDate).sorted(byKeyPath: "departureTime")
             let toStops = stopTimes.filter("stop_id == %@ AND departureTime > %@", trueDest.stopId, intDate).sorted(byKeyPath: "departureTime")
             
-            for stop in fromStops {
+            for stop in originStops {
                 if let obj = toStops.filter("realTime == %@ AND departureTime > %@", stop.realTime, stop.departureTime).first {
                     tripTimes.append((stop.departureTime, obj.departureTime))
                 }

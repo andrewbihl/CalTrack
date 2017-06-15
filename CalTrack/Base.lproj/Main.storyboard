@@ -24,13 +24,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cJf-cL-ewm">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
                                     <segue destination="cTP-Li-AbQ" kind="embed" id="Qlu-ew-bBe"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ukJ-VS-0bT">
-                                <rect key="frame" x="0.0" y="493" width="375" height="125"/>
+                                <rect key="frame" x="0.0" y="542" width="375" height="125"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="Hvq-vp-rrh"/>
                                     <constraint firstAttribute="height" constant="125" id="Zz0-zs-crK"/>
@@ -51,7 +51,7 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="05C-sm-GZC">
-                                <rect key="frame" x="237" y="427" width="62" height="62"/>
+                                <rect key="frame" x="237" y="476" width="62" height="62"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="05C-sm-GZC" secondAttribute="height" multiplier="1:1" id="UZI-QW-57D"/>
                                     <constraint firstAttribute="width" constant="62" id="aO9-di-0nc"/>
@@ -185,6 +185,7 @@
                         <outlet property="northboundLabel" destination="mlK-N1-6xw" id="Ccc-Gc-aFi"/>
                         <outlet property="originStopButton" destination="Aho-mc-YSc" id="djr-Z0-m7K"/>
                         <outlet property="southboundLabel" destination="Uji-af-I2Y" id="Te9-PD-PcU"/>
+                        <outlet property="stopPickerView" destination="6nA-DP-5E5" id="w2Q-Ce-F1w"/>
                         <outlet property="stopsStackView" destination="OaM-wV-qJ8" id="sMS-Vy-Gse"/>
                         <outlet property="tableParentView" destination="43z-Kl-Kqb" id="HnA-uq-lPK"/>
                         <outlet property="tableView" destination="nEb-DA-UJS" id="KmD-aE-Qcw"/>
@@ -192,6 +193,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="86z-nX-9ze" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pickerView contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="6nA-DP-5E5">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </pickerView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="nEb-DA-UJS">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="203"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -405,7 +411,7 @@
                     </prototypes>
                 </tableView>
             </objects>
-            <point key="canvasLocation" x="2304.8000000000002" y="56.221889055472268"/>
+            <point key="canvasLocation" x="2614" y="224"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="cGM-rd-LfE">
@@ -416,7 +422,7 @@
                         <viewControllerLayoutGuide type="bottom" id="WNu-T5-07D"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="FB4-11-4bS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
