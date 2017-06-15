@@ -38,6 +38,10 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager, GAD
         self.configureAd()
     }
     
+    func moveAdToBottom() {
+        bannerView.frame.origin.y = self.view.frame.height - bannerView.frame.height
+    }
+    
     func configureAd() {
         DispatchQueue.main.async {
             self.bannerView = GADBannerView(adSize: kGADAdSizeFullBanner)
@@ -112,6 +116,7 @@ class MainScreenViewController: UIViewController, MapDetailAnimationManager, GAD
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         print("banner received ad")
+        self.moveAdToBottom()
     }
     
     func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
