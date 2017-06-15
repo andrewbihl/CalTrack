@@ -458,7 +458,15 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         let stopSelected : Stop = Stop.getStops(headingNorth: true)[stopPickerView.selectedRow(inComponent: 0)]
         print("Displayed stop: \(stopDisplayed) (\(stopDisplayed.rawValue))")
         print("Selected stop: \(stopSelected) (\(stopSelected.rawValue))")
-        return stopSelected == stopDisplayed
+        var isSameStop = stopSelected == stopDisplayed
+        if !isSameStop {
+            if let partner = stopSelected.stopPartner {
+                if partner == stopDisplayed {
+                    isSameStop = true
+                }
+            }
+        }
+        return isSameStop
     }
     
     // MARK: - Delegation
