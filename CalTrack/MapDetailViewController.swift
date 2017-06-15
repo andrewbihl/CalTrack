@@ -13,6 +13,7 @@ protocol InformingDelegate {
     func valueChangedFromUserSelection(with stop: Stop, didTapStopOnMap: Bool) -> Stop?
     func setPadding(with height: CGFloat)
     func drawPathWithStops(origin: Stop, destination: Stop)
+    func switchedOutOfRouteMode()
 }
 
 protocol MapDetailAnimationManager {
@@ -236,6 +237,8 @@ class MapDetailViewController: UIViewController, UITableViewDelegate, UITableVie
 //            self.stopsStackView.removeArrangedSubview(destinationStopButton)
             self.northboundLabel.text = "Northbound"
             self.southboundLabel.text = "Southbound"
+            
+            self.delegate?.switchedOutOfRouteMode()
         }
         inRouteMode = !inRouteMode
         tableView.reloadData()

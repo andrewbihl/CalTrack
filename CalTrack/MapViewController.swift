@@ -423,6 +423,10 @@ extension MapViewController: InformingDelegate {
         redRouteLine.map = mapView
     }
     
+    func switchedOutOfRouteMode() {
+        redRouteLine.map = nil
+    }
+    
     public func setPadding(with height: CGFloat) {
         // add padding
         let mapInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: height + 0.0, right: 0.0)
