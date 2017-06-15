@@ -156,28 +156,20 @@ public extension Stop {
         
         var stops = [Stop]()
         
-        var ind = self.rawValue
+        var upper = headingNorth ? self.rawValue : destination.rawValue
+        let lower = headingNorth ? destination.rawValue : self.rawValue
         
-        if headingNorth {
-            stops.append(self)
-            while destination.rawValue + 1 < ind {
-                ind -= 2
-                if let stop = Stop(rawValue: ind) {
+            while lower + 1 < upper {
+                
+                if let stop = Stop(rawValue: upper) {
                 stops.append(stop)
                 }
                 
+                upper -= 2
             }
-            stops.append(destination)
-        } else {
-            stops.append(destination)
-            while self.rawValue - 1 > ind {
-                ind += 2
-                if let stop = Stop(rawValue: ind) {
-                    stops.append(stop)
-                }
-                
-            }
-            stops.append(self)
+        
+        if let stop = Stop(rawValue: lower) {
+        stops.append(stop)
         }
         
         return stops
