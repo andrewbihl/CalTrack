@@ -1,0 +1,131 @@
+# More documentation about how to customize your build
+# can be found here:
+# https://docs.fastlane.tools
+fastlane_version "1.109.0"
+
+# This value helps us track success metrics for Fastfiles
+# we automatically generate. Feel free to remove this line
+# once you get things running smoothly!
+generated_fastfile_id "a9aea4d5-fb1a-48ab-8482-2d02d045f76f"
+
+default_platform :ios
+
+# Fastfile actions accept additional configuration, but
+# don't worry, fastlane will prompt you for required
+# info which you can add here later
+
+#before_all do
+#  ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
+#end
+
+lane :beta do
+  cocoapods
+
+  # Ensure that there that your git status is not dirty
+  ensure_git_status_clean
+
+  # Increment the build number (not the version number)
+  increment_build_number
+
+  # Commit the version bump
+  commit_version_bump(xcodeproj: "CalTrack.xcodeproj")
+
+  # Add a git tag for this build. This will automatically
+  # use an appropriate git tag name
+  add_git_tag
+
+  # Push the new commit and tag back to your git remote
+  push_to_git_remote
+
+  # build your iOS app
+  gym(
+    scheme: "CalTrack"
+  )
+
+  # upload to Testflight
+#  changelog = prompt(text: "General fixes and improvements.", multi_line_end_keyword: "END")
+
+  pilot(
+#    changelog: changelog,
+    username: "faris.freecola@me.com"
+  )
+
+  #dsyms
+
+#  download_dsyms
+
+# instabug(api_token: 'c60e6095d9bcda332cc7f54b2a053236')
+
+end
+
+after_all do |lane|
+  say "Successfully finished deployment (#{lane})!"
+  slack(
+    message: "New version successfully submitted to app store"
+  )
+
+end
+
+error do |lane, exception|
+  slack(
+    message: exception.message,
+    success: false
+  )
+end
+
+lane :prod do
+  cocoapods
+
+  # Ensure that there that your git status is not dirty
+  ensure_git_status_clean
+
+  # Increment the build number (not the version number)
+  increment_build_number
+
+  # Commit the version bump
+  commit_version_bump(xcodeproj: "CalTrack.xcodeproj")
+
+  # Add a git tag for this build. This will automatically
+  # use an appropriate git tag name
+  add_git_tag
+
+  # Push the new commit and tag back to your git remote
+  push_to_git_remote
+
+  # build your iOS app
+  gym(
+    scheme: "CalTrack"
+  )
+
+  # upload to Testflight
+#  changelog = prompt(text: "General fixes and improvements.", multi_line_end_keyword: "END")
+
+  # Upload the build to iTunes Connect.
+  deliver(
+    force: true,
+    username: "faris.freecola@me.com”,
+    skip_screenshots: true
+  )
+
+  #dsyms
+
+#  download_dsyms
+
+# instabug(api_token: 'c60e6095d9bcda332cc7f54b2a053236')
+
+end
+
+after_all do |lane|
+  say "Successfully finished deployment (#{lane})!"
+#  slack(
+#    message: "New version successfully submitted to app store"
+#  )
+
+end
+
+error do |lane, exception|
+#  slack(
+#    message: exception.message,
+#    success: false
+#  )
+end
