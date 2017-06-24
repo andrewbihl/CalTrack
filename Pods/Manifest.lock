@@ -58,7 +58,6 @@ PODS:
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.10)
-  - Instructions (1.0.0-beta.1)
   - KeychainAccess (3.0.2)
   - NVActivityIndicatorView (3.6.1)
   - Protobuf (3.3.0)
@@ -80,24 +79,18 @@ DEPENDENCIES:
   - Google-Mobile-Ads-SDK
   - GoogleMaps
   - GooglePlaces
-  - Instructions (from `https://github.com/ephread/Instructions.git`)
   - KeychainAccess (from `https://github.com/kishikawakatsumi/KeychainAccess.git`)
   - NVActivityIndicatorView
   - RealmSwift
   - Whisper (from `https://github.com/hyperoslo/Whisper.git`)
 
 EXTERNAL SOURCES:
-  Instructions:
-    :git: https://github.com/ephread/Instructions.git
   KeychainAccess:
     :git: https://github.com/kishikawakatsumi/KeychainAccess.git
   Whisper:
     :git: https://github.com/hyperoslo/Whisper.git
 
 CHECKOUT OPTIONS:
-  Instructions:
-    :commit: 400ad28b1e9c722ae8c434dff2d443aa54239f62
-    :git: https://github.com/ephread/Instructions.git
   KeychainAccess:
     :commit: 906b0021b36d8bbd6c1a7cef68fa25b19a62c92e
     :git: https://github.com/kishikawakatsumi/KeychainAccess.git
@@ -120,7 +113,6 @@ SPEC CHECKSUMS:
   GooglePlaces: 4a7b22debfa1af65017b82943431822607e45201
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
-  Instructions: ad680ceb4c7866fb9f3abd59ecb1de81546713aa
   KeychainAccess: 53275d79a7449d8adb71302c2e5a7cf6ecead088
   NVActivityIndicatorView: 9f52a7f84bf5c6a798722c450fe3c198e01c56ed
   Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
@@ -128,6 +120,6 @@ SPEC CHECKSUMS:
   RealmSwift: 8183818515471b01a99abdd2970f8e4fd52b6f4a
   Whisper: 39b833d0f279912a7f38a19c4ba603435514a550
 
-PODFILE CHECKSUM: d715efb2d381ad82eca5e44eadb6b1d67c9e6414
+PODFILE CHECKSUM: f4495b667bd71e220a36b989538c1da0c93075ba
 
 COCOAPODS: 1.2.1

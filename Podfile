@@ -6,7 +6,6 @@ pod 'KeychainAccess', :git => 'https://github.com/kishikawakatsumi/KeychainAcces
 pod 'RealmSwift'
 pod 'Whisper', :git => 'https://github.com/hyperoslo/Whisper.git'
 pod 'NVActivityIndicatorView'
-pod 'Instructions', :git => 'https://github.com/ephread/Instructions.git'
 pod 'GoogleMaps'
 pod 'GooglePlaces'
 pod 'Firebase/Core'
