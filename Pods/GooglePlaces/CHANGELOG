@@ -1,3 +1,9 @@
+Version 2.3.1 - June 2017
+========================
+Resolved Issues:
+  - Fixed an issue resulting in a crash when receiving photos for certain
+    places.
+
 Version 2.3.0 - May 2017
 ========================
 Notes:

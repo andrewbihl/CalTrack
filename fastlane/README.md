@@ -29,11 +29,6 @@ xcode-select --install
 </table>
 
 # Available Actions
-### beta
-```
-fastlane beta
-```
-
 ### prod
 ```
 fastlane prod

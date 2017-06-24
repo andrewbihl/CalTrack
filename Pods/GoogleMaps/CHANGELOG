@@ -1,3 +1,12 @@
+Version 2.3.1 - June 2017
+========================
+Resolved Issues:
+  - Fixed an issue where navigating between panoramas did not consistently raise
+    GMSPanoramaView delegate events.
+  - Fixed an issue resulting in a crash when UIWebView and GMSPanoramaView are
+    both in the view hierarchy at the same time.
+  - Reinstated the tap-drag zoom gesture for GMSPanoramaView.
+
 Version 2.3.0 - May 2017
 ========================
 Improvements:

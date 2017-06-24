@@ -38,14 +38,14 @@ typedef NS_ENUM(NSInteger, GMSPlacesErrorCode) {
    * The Places API server returned a response that we couldn't understand.
    * <p>
    * If you believe this error represents a bug, please file a report using the instructions on our
-   * <a href=https://developers.google.com/places/support">community and support page</a>.
+   * <a href="https://developers.google.com/places/support">community and support page</a>.
    */
   kGMSPlacesServerError = -2,
   /**
    * An internal error occurred in the Places API library.
    * <p>
    * If you believe this error represents a bug, please file a report using the instructions on our
-   * <a href=https://developers.google.com/places/support">community and support page</a>.
+   * <a href="https://developers.google.com/places/support">community and support page</a>.
    */
   kGMSPlacesInternalError = -3,
   /**
