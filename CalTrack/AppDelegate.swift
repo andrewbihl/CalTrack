@@ -22,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func copyRealmData() {
         if let bUrl = bundleURL("caltrainTimes") {
-
             let defaultRealmPath = Realm.Configuration.defaultConfiguration.fileURL!
             
                 if !FileManager.default.fileExists(atPath: defaultRealmPath.path) {
@@ -33,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     print("error copying seeds: \(error)")
                 }
             }
+
         }
      
     }

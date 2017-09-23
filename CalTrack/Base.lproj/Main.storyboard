@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9pv-A4-QxB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9pv-A4-QxB">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -176,8 +176,8 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="2zW-G5-0P7" secondAttribute="trailing" id="Fu4-jI-9im"/>
+                            <constraint firstItem="2zW-G5-0P7" firstAttribute="top" secondItem="1g4-ek-6HL" secondAttribute="bottom" id="aWd-px-R3z"/>
                             <constraint firstItem="2zW-G5-0P7" firstAttribute="leading" secondItem="YUn-R9-9R9" secondAttribute="leading" id="dhG-hi-7ze"/>
-                            <constraint firstItem="2zW-G5-0P7" firstAttribute="top" secondItem="1g4-ek-6HL" secondAttribute="bottom" id="eiM-lB-kZI"/>
                             <constraint firstAttribute="bottom" secondItem="2zW-G5-0P7" secondAttribute="bottom" id="r8H-a6-3cX"/>
                         </constraints>
                     </view>
@@ -351,16 +351,16 @@
                                                         <rect key="frame" x="189" y="0.0" width="186" height="58"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Kp0-Cj-jNf">
-                                                                <rect key="frame" x="38" y="7" width="110.5" height="44.5"/>
+                                                                <rect key="frame" x="38.5" y="7" width="110" height="44.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zC-8p-dp1">
-                                                                        <rect key="frame" x="23.5" y="0.0" width="64" height="30"/>
+                                                                        <rect key="frame" x="23" y="0.0" width="64" height="30"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arrives in _ minutes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veN-08-W4a">
-                                                                        <rect key="frame" x="0.0" y="30" width="110.5" height="14.5"/>
+                                                                        <rect key="frame" x="0.0" y="30" width="110" height="14.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
